@@ -1,0 +1,114 @@
+@font-face {
+  font-family: "Protonet Text";
+  src: url("../fonts/proxima_nova_cond_reg.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Protonet Text";
+  src: url("../fonts/proxima_nova_cond_light.woff") format("woff");
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: "Protonet Text";
+  src: url("../fonts/proxima_nova_cond_bold.woff") format("woff");
+  font-weight: bold;
+}
+
+html, input, button, select, textarea {
+  font-family: "Protonet Text", sans-serif;
+}
+
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  overflow: auto;
+  height: 100%;
+  font-size: 100%;
+  -webkit-overflow-scrolling: touch;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.25;
+}
+
+h1 {
+  box-sizing: border-box;
+}
+
+.asphalt {
+  background: #f3f3f3 url(../img/bg_pattern.jpg);
+}
+
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+
+.login form {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 320px;
+  background-size: 200px auto;
+  padding: 20px;
+}
+
+.login h1 {
+  font-size: 4em;
+  font-weight: 100;
+  margin: 0;
+  color: #000;
+  text-indent: -9999px;
+  background-image: url(../img/logo.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: auto 100%;
+  margin-bottom: 25px;
+}
+
+.login input,
+.login button {
+  width: 100%;
+  display: block;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+input[type=text],
+input[type=password] {
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.9);
+  border: 0;
+  font-size: 1.1em;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 8px;
+}
+
+input[type=text]:focus,
+input[type=password]:focus {
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  outline: 0;
+}
+
+button {
+  font-size: 1em;
+  text-transform: uppercase;
+  background-color: rgba(0, 0, 0, 0.25);
+  padding: 9px;
+  color: #fff;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+}
