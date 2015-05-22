@@ -1,0 +1,17 @@
+html,body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+body{
+  background-color: #F3F3F3;
+  font-size: 100%;
+  font-family: "Protonet Text", Verdana, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+   
+h1{
+  font-size: 34px;
+  color: $text-black;
+}
