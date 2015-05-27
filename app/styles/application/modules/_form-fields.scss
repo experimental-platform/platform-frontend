@@ -1,0 +1,23 @@
+input, textarea{
+  border: none;
+  border-bottom: 1px solid #9E9E9E;
+  background-color: transparent;
+  font-size: 18px;
+  color: #9E9E9E;
+  &:focus{
+    outline: none;
+    border-bottom: 1px solid $cta-orange;
+    color: #333;
+  }
+}
+input{
+  height: 30px;
+  line-height: 30px;
+  &.text-right{
+    text-align: right;
+  }
+}
+
+textarea{
+  height: 65px;
+}

@@ -1,0 +1,63 @@
+.app{
+  width: 550px;
+  padding: 5px 15px;
+  cursor: default;
+  @include flexbox();
+  @include align-items(center);
+  @include transition(box-shadow,ease-out,0.2s);
+  
+  figure{
+    width: 46px;
+    height: 46px;
+    margin: 0 15px 0 0;
+    padding: 0;
+    img{
+      width: 100%;
+      height: auto;
+    }
+  }
+  p{
+    @include flex(5 0);
+    font-weight: bold;
+    font-size: 20px;
+    span{
+      font-weight: normal;
+      font-size: 14px;
+    }
+  }
+  .right-bar{
+    span{
+      font-size: 14px;
+      &.green{
+        color: #44AF47;
+      }
+      &.orange{
+        color: #FF980E;
+      }
+      &.red{
+        color: #FF1A0E;
+      }
+    }
+    .action-bar{
+      display: none;
+      margin-bottom: -5px;
+      a{
+        margin-left: 4px;
+        &:hover{
+          opacity: 0.4;
+        }
+      }
+    }
+  }
+  &:hover{
+    box-shadow: 0 6px 6px 1px rgba(0, 0, 0, 0.16);
+    .right-bar{
+      span{
+        display: none;
+      }
+      .action-bar{
+        display: block;
+      }
+    }
+  }
+}

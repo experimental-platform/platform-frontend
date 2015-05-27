@@ -1,0 +1,20 @@
+$hexagon-mask: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxtYXNrIG1hc2tDb250ZW50VW5pdHM9Im9iamVjdEJvdW5kaW5nQm94IiBpZD0iaGV4YWdvbiI%2BPHBvbHlnb24gcG9pbnRzPSIwLjEzIDAuNzIsIDAuMTIgMC43MSwgMC4xMiAwLjI5LCAwLjEzIDAuMjgsIDAuNDkgMC4wNywgMC41MSAwLjA3LCAwLjg3IDAuMjgsIDAuODggMC4yOSwgMC44OCAwLjcxLCAwLjg3IDAuNzIsIDAuNTEgMC45MywgMC40OSAwLjkzLCAwLjEzIDAuNzIiIGZpbGw9IiNmZmYiIC8%2BPC9tYXNrPjwvc3ZnPg%3D%3D#hexagon";
+$grayscale-mask: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxmaWx0ZXIgaWQ9ImdyYXlzY2FsZSI%2BPGZlQ29sb3JNYXRyaXggdmFsdWVzPSIwLjMzMzMgMC4zMzMzIDAuMzMzMyAwIDAgMC4zMzMzIDAuMzMzMyAwLjMzMzMgMCAwIDAuMzMzMyAwLjMzMzMgMC4zMzMzIDAgMCAwIDAgMCAxIDAiLz48L2ZpbHRlcj48L3N2Zz4%3D#grayscale";
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.hexagon {
+  -ms-transform: scale(0.75); /* IE9+ doesn't support masks, so we just decrease image size */
+  -webkit-mask-box-image-repeat: stretch;
+  -webkit-mask-box-image-source: asset-data-url("/images/hexagon.svg");
+  mask: url($hexagon-mask);
+  /*
+   * Alternative for webkit
+   * -webkit-clip-path: polygon(nonzero, 50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+   */
+}

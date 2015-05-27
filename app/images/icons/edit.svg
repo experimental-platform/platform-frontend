@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.2 (12043) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Dashboard" sketch:type="MSArtboardGroup" transform="translate(-815.000000, -430.000000)" fill="#000000">
+            <g id="app-4" sketch:type="MSLayerGroup" transform="translate(325.000000, 402.000000)">
+                <g id="actionbar" transform="translate(434.000000, 28.000000)" sketch:type="MSShapeGroup">
+                    <path d="M68.6571429,0.028 C69.9514286,0.028 71,1.07728571 71,2.37157143 C71,2.89942857 70.8257143,3.38585714 70.5307143,3.778 L69.5928571,4.71514286 L66.3128571,1.43371429 L67.2492857,0.496571429 C67.6414286,0.202285714 68.1292857,0.028 68.6571429,0.028 L68.6571429,0.028 Z M56.9371429,10.8094286 L56,15.028 L60.2185714,14.0908571 L68.8907143,5.41871429 L65.6092857,2.138 L56.9371429,10.8094286 L56.9371429,10.8094286 Z M66.4828571,5.35442857 L59.9207143,11.9165714 L59.1121429,11.108 L65.675,4.54514286 L66.4828571,5.35442857 L66.4828571,5.35442857 Z" id="Shape-Copy"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

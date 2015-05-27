@@ -10,8 +10,20 @@ body{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-   
+.container,
+.container > div{
+  height: 100%;
+}
+
 h1{
   font-size: 34px;
   color: $text-black;
+  font-weight: normal;
+  text-transform: uppercase;
+  margin: 0 0 20px;
+}
+
+
+.hidden{
+  display: none;
 }
