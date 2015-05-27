@@ -1,10 +1,12 @@
 .app{
   width: 550px;
-  padding: 5px 15px;
+  padding: 15px;
   cursor: default;
+  background-color: rgba(255,255,255,0.5);
+  will-change: background-color, transform;
   @include flexbox();
   @include align-items(center);
-  @include transition(box-shadow,ease-out,0.2s);
+  @include transition(all,ease-out,0.2s);
   
   figure{
     width: 46px;
@@ -17,6 +19,7 @@
     }
   }
   p{
+    margin: 0;
     @include flex(5 0);
     font-weight: bold;
     font-size: 20px;
@@ -50,6 +53,7 @@
     }
   }
   &:hover{
+    background-color: rgba(255,255,255,1);
     box-shadow: 0 6px 6px 1px rgba(0, 0, 0, 0.16);
     .right-bar{
       span{

@@ -1,0 +1,21 @@
+.welcome-tour{
+  height: 100%;
+  @include flexbox();
+  @include justify-content(space-between);
+  @include align-items(center);
+  font-size: 18px;
+  .welcome-box{
+    margin: 0 auto;
+    width: 700px;
+    height: 275px;
+    text-align: center;
+    textarea{
+      width: 305px;
+    }
+    .protonet-url{
+      margin-right: 10px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #9E9E9E;
+    }
+  }
+}

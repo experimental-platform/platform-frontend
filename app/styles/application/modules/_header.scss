@@ -4,6 +4,18 @@ header{
   height: 50px;
   line-height: 50px;
   color: #fff;
+  img{
+    height: 35px;
+    vertical-align: middle;
+    margin-right: 10px;
+    @include transition(all, ease-out, 0.2s);
+    &:hover{
+      transform: scale(1.1);
+    }
+    &:active{
+     transform: scale(0.9); 
+    }
+  }
   .wrapper{
     @include flexbox;
   }
