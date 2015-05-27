@@ -1,0 +1,11 @@
+.login{
+  height: 100%;
+  @include flexbox();
+  @include justify-content(space-between);
+  @include align-items(center);
+  .login-box{
+    margin: 0 auto;
+    padding: 40px;
+    text-align: center;
+  }
+}
