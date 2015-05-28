@@ -10,3 +10,14 @@
     margin: 0;
   }
 }
+
+@media only screen and (max-width: 759px){
+  .teaser{
+    height: 80px;
+    line-height: 80px;
+    margin-bottom: 20px;
+    h2{
+      font-size: 28px;
+    }
+  }
+}

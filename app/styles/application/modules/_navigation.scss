@@ -31,3 +31,16 @@ nav{
     }
   }
 }
+
+@media only screen and (max-width: 759px) {
+  nav {
+    .wrapper{
+      @include flexbox();
+      @include justify-content(space-between);
+    }
+    a{
+      font-size: 12px;
+      padding: 0 10px;
+    }
+  }
+}

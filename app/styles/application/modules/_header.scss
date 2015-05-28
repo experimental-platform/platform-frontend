@@ -4,6 +4,11 @@ header{
   height: 50px;
   line-height: 50px;
   color: #fff;
+  .wrapper{
+    @include flexbox();
+    @include justify-content(space-between);
+    @include align-items(center);
+  }
   img{
     height: 35px;
     vertical-align: middle;
@@ -19,12 +24,22 @@ header{
   .wrapper{
     @include flexbox;
   }
-  .right,
   .left{
-    display: inline-block;
-    width: 50%;
+    @include flex(5 0);
   }
   .right{
     text-align: right;
+  }
+}
+
+@media only screen and (max-width: 759px){
+  header{
+    img{
+      height: 28px;
+      margin-right: 5px;
+    }
+    .btn{
+      padding: 0 10px;
+    }
   }
 }

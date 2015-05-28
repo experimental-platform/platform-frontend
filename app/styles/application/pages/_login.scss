@@ -9,3 +9,13 @@
     text-align: center;
   }
 }
+
+@media only screen and (max-width: 759px){ 
+  .login{
+    .login-box{
+      width: 96%;
+      margin: 0 2%;
+      padding: 20px;
+    }
+  }
+}

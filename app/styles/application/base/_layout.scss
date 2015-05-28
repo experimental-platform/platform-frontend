@@ -6,3 +6,11 @@
   width: 980px;
   margin: 0 auto;
 }
+
+@media only screen and (max-width: 759px) {
+  .wrapper{
+    width: 94%;
+    margin: 0 2%;
+  }
+}
+

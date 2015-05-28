@@ -22,3 +22,11 @@ textarea{
   height: 50px;
   vertical-align: bottom
 }
+
+@media only screen and (max-width: 759px){
+  input, textarea{
+    width: 100%;
+    margin: 0 0 10px;
+    font-size: 14px;
+  }
+}

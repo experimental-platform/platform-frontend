@@ -65,3 +65,55 @@
     }
   }
 }
+
+@media only screen and (max-width: 759px){
+  .app{
+    display: block;
+    width: 94%;
+    margin: 0 2%;
+    background-color: #fff;
+    padding: 12px;
+    figure{
+      margin-right: 5px;
+      width: 40px;
+      height: 40px;
+    }
+    p{
+      font-size: 16px;
+      span{
+        font-size: 12px;
+      }
+    }
+    figure, p{
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .right-bar{
+      display: block;
+      width: 100%;
+      border-top: 1px solid #E6E6E6;
+      height: 32px;
+      margin-top: 12px;
+      span{
+        line-height: 42px;
+        font-size: 12px;
+      }
+      .action-bar{
+        float: right;
+        display: block;
+        line-height: 50px;
+        a{
+          margin-left: 10px;
+        }
+      }
+    }
+    &:hover{
+      box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.20);     
+      .right-bar{
+        span{
+          display: inline-block;
+        }
+      }
+    }
+  }
+}

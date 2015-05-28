@@ -12,6 +12,7 @@
   text-decoration: none;
   border: none;
   cursor: pointer;
+  text-align: center;
   will-change: opacity, transform;
   @include transition(all,ease-out,0.2s);
   &:focus{
@@ -32,5 +33,12 @@
     &:active{
       background: #FABC61;
     }
+  }
+}
+
+@media only screen and (max-width: 759px){
+  .btn{
+    width: 100%;
+    box-sizing: border-box;
   }
 }

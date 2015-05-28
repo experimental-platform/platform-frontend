@@ -35,3 +35,13 @@ a{
 .hidden{
   display: none!important;
 }
+
+@media only screen and (max-width: 759px){
+  h1{
+    font-size: 28px;
+  }
+  p{
+    margin: 0 0 15px;
+    font-size: 14px;
+  }
+}

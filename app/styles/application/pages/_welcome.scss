@@ -19,3 +19,22 @@
     }
   }
 }
+
+@media only screen and (max-width: 759px){
+  .welcome-tour{
+    .welcome-box{
+      width: 96%;
+      height: auto;
+      margin: 0 2%;
+      textarea{
+        width: 100%;
+      }
+      .protonet-url{
+        display: none;
+      }
+      .text-right{
+        text-align: left;
+      }
+    }
+  }
+}
