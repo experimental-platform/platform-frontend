@@ -1,6 +1,6 @@
 # ATTENTION: THIS REPO WAS MOVED
 
-Here: https://git.protorz.net/AAL/platform-frontend/import
+Here: https://git.protorz.net/AAL/platform-frontend
 
 ----
 
