@@ -1,8 +1,7 @@
 FROM dockerregistry.protorz.net/ubuntu:latest
 
-RUN apt-get update && \
-    apt-get install -y software-properties-common && \
-    add-apt-repository ppa:chris-lea/node.js && \
+
+RUN curl -sL https://deb.nodesource.com/setup | sudo bash - && \
     apt-get update && \
     apt-get install -y build-essential curl nodejs git && \
     apt-get clean && \
