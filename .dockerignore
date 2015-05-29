@@ -2,4 +2,3 @@
 .gitignore
 .git
 Dockerfile
-bower.json
