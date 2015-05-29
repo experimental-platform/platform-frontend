@@ -1,3 +1,9 @@
+# ATTENTION: THIS REPO WAS MOVED
+
+Here: https://git.protorz.net/AAL/platform-frontend/import
+
+----
+
 # aal
 
 This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
