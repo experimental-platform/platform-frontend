@@ -1,7 +1,7 @@
 FROM dockerregistry.protorz.net/ubuntu:latest
 
 
-RUN curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash - && \
+RUN curl -sL https://deb.nodesource.com/setup | sudo bash - && \
     apt-get update && \
     apt-get install -y build-essential curl nodejs git && \
     apt-get clean && \
