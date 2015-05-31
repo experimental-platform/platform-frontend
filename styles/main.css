@@ -89,6 +89,12 @@ a {
 .hidden {
   display: none !important; }
 
+.full-width {
+  box-sizing: border-box;
+  width: 100%;
+  display: block;
+  margin-bottom: 12px; }
+
 @media only screen and (max-width: 759px) {
   h1 {
     font-size: 28px; }
@@ -131,7 +137,7 @@ a {
   font-size: 14px;
   text-transform: uppercase;
   color: #fff;
-  line-height: 30px;
+  line-height: 32px;
   padding: 0 35px;
   height: 30px;
   text-decoration: none;
@@ -521,7 +527,6 @@ code {
   .welcome-tour .welcome-box {
     margin: 0 auto;
     width: 700px;
-    height: 275px;
     text-align: center; }
     .welcome-tour .welcome-box textarea {
       width: 305px; }
@@ -529,11 +534,15 @@ code {
       margin-right: 10px;
       padding-bottom: 4px;
       border-bottom: 1px solid #9E9E9E; }
+  .welcome-tour input.full-width,
+  .welcome-tour textarea.full-width {
+    width: 50%;
+    margin: 0 auto 12px;
+    min-width: 200px; }
 
 @media only screen and (max-width: 759px) {
   .welcome-tour .welcome-box {
     width: 96%;
-    height: auto;
     margin: 0 2%; }
     .welcome-tour .welcome-box textarea {
       width: 100%; }
@@ -621,3 +630,24 @@ code {
           height: auto; }
         .create-app .technologies a:hover {
           box-shadow: none; } }
+.configuration-box {
+  margin: 0 auto 30px;
+  width: 700px;
+  display: block; }
+  .configuration-box .protonet-url {
+    font-size: 18px; }
+  .configuration-box .keys {
+    padding-left: 30px; }
+  .configuration-box .key {
+    white-space: nowrap;
+    display: inline-block;
+    width: 80%;
+    overflow: hidden;
+    vertical-align: middle;
+    direction: rtl; }
+  .configuration-box .existing-keys-headline {
+    margin-top: 40px; }
+
+@media only screen and (max-width: 759px) {
+  .configuration-box {
+    width: 96%; } }

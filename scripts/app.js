@@ -43,6 +43,9 @@ angular
       .when('/dashboard', {
         templateUrl: 'views/dashboard.html'
       })
+      .when('/configuration', {
+        templateUrl: 'views/configuration.html'
+      })
       .when('/create-app-1', {
         templateUrl: 'views/create-app-1.html'
       })

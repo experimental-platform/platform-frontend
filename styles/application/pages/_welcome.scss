@@ -7,7 +7,6 @@
   .welcome-box{
     margin: 0 auto;
     width: 700px;
-    height: 275px;
     text-align: center;
     textarea{
       width: 305px;
@@ -18,13 +17,19 @@
       border-bottom: 1px solid #9E9E9E;
     }
   }
+  
+  input.full-width,
+  textarea.full-width {
+    width: 50%;
+    margin: 0 auto 12px;
+    min-width: 200px;
+  }
 }
 
 @media only screen and (max-width: 759px){
   .welcome-tour{
     .welcome-box{
       width: 96%;
-      height: auto;
       margin: 0 2%;
       textarea{
         width: 100%;
