@@ -56,7 +56,7 @@ router.post('/login', function (req, res, next) {
 
 router.post('/logout', auth, function (req, res, next) {
     // TODO: Error handling ;)
-    req.session = null;
+    req.session.destroy();
     res.json({status: "Ok"})
   }
 );

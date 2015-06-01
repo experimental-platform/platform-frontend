@@ -4,7 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var session = require('cookie-session');
+var session = require('express-session');
+var FileStore = require('session-file-store')(session);
 var HttpStatus = require('http-status-codes');
 
 var routes = require('./routes/api');
@@ -23,8 +24,10 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
 app.use(session({
-  // TODO: set secret keys for key rotation
-  keys: ['key1', 'key2']
+  store: new FileStore({}),
+  resave: false,
+  saveUninitialized: false,
+  secret: "yo-secret-dawg!Banana" // genereate Key on start
 }));
 
 app.use('/protonet', express.static(path.join(__dirname, 'public')));
