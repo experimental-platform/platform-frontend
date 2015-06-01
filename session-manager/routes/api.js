@@ -18,7 +18,6 @@ router.post('/login', function (req, res, next) {
             password.check(digest, saved_digest, function (error, match) {
               if (match === true) {
                 res.send('OKAY');
-                // TODO: set cookie
                 req.session.logged_in = true;
               } else {
                 // TODO: check for error?
