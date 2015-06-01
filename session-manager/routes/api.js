@@ -8,7 +8,6 @@ router.post('/login', function (req, res, next) {
     password.hash(secret, function (error, digest) {
       request({url: 'http://127.0.0.1:8080/password', json: true}, function (error, response, body) {
           if (response.statusCode === 404) {
-            // TODO: password not set
             var err = new Error('Not Found');
             err.status = 404;
             err.message = 'Password not set.';
@@ -20,6 +19,7 @@ router.post('/login', function (req, res, next) {
               if (match === true) {
                 res.send('OKAY');
                 // TODO: set cookie
+                req.session.logged_in = true;
               } else {
                 // TODO: check for error?
                 var err = new Error('Not Found');
@@ -36,7 +36,9 @@ router.post('/login', function (req, res, next) {
 );
 
 router.post('/logout', function (req, res, next) {
-    // TODO: destroy & disable cookie
+    // TODO: Erro handling ;)
+    req.session = null;
+    res.send('OKAY');
   }
 );
 
