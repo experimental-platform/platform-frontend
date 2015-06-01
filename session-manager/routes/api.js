@@ -10,7 +10,7 @@ if (process.env.NODE_ENV == 'development') {
   API_URL = "http://127.0.0.1:8080"
 }
 
-function error(statusCode, message) {
+function error_helper(statusCode, message) {
   statusCode = statusCode == undefined ? 500 : statusCode;
   if (message == undefined) {
     message = HttpStatus.getStatusText(statusCode);
@@ -31,7 +31,7 @@ router.post('/login', function (req, res, next) {
           json: true
         }, function (error, response, result) {
             if (response.statusCode === HttpStatus.NOT_FOUND) {
-              next(error(HttpStatus.NOT_FOUND, 'Password not set.'));
+              next(error_helper(HttpStatus.NOT_FOUND, 'Password not set.'));
             } else if (response.statusCode === HttpStatus.OK) {
               var saved_digest = result['value'];
 
@@ -41,7 +41,7 @@ router.post('/login', function (req, res, next) {
                   res.json({status: "Ok"})
                 } else {
                   // TODO: check for error?
-                  next(error(HttpStatus.FORBIDDEN, 'Wrong Password, access denied.'));
+                  next(error_helper(HttpStatus.FORBIDDEN, 'Wrong Password, access denied.'));
                 }
               });
             }
@@ -79,12 +79,12 @@ router.post('/password', function (req, res, next) {
           if (response.statusCode === HttpStatus.OK) {
             res.json({status: "Ok"})
           } else {
-            next(error(HttpStatus.INTERNAL_SERVER_ERROR, 'Password could not be set.'));
+            next(error_helper(HttpStatus.INTERNAL_SERVER_ERROR, 'Password could not be set.'));
           }
         });
       });
     } else {
-      next(error(HttpStatus.NOT_FOUND, 'No password given.'));
+      next(error_helper(HttpStatus.NOT_FOUND, 'No password given.'));
     }
   }
 );
