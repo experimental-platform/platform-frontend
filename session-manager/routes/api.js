@@ -20,6 +20,14 @@ function error_helper(statusCode, message) {
   return  err;
 }
 
+function auth(req, res, next) {
+  if (req.session.logged_in) {
+    next();
+  } else {
+    next(error_helper(HttpStatus.FORBIDDEN, 'No auth, dawg!'))
+  }
+}
+
 router.post('/login', function (req, res, next) {
     var secret = req.body['password'];
     if (secret == undefined || secret == "") {
@@ -33,8 +41,6 @@ router.post('/login', function (req, res, next) {
             next(error_helper(HttpStatus.NOT_FOUND, 'Password not set.'));
           } else if (response.statusCode === HttpStatus.OK) {
             var saved_digest = result['value'];
-            console.log(saved_digest);
-            console.log(secret)
             if (password.compareSync(secret, saved_digest)) {
               req.session.logged_in = true;
               res.json({status: "Ok"})
@@ -48,15 +54,14 @@ router.post('/login', function (req, res, next) {
   }
 );
 
-router.post('/logout', function (req, res, next) {
+router.post('/logout', auth, function (req, res, next) {
     // TODO: Error handling ;)
     req.session = null;
     res.json({status: "Ok"})
   }
 );
 
-
-router.post('/password', function (req, res, next) {
+router.post('/password', auth, function (req, res, next) {
     var secret = req.body['password'];
     if (secret != undefined && secret != "") {
       // TODO: Add more Password requirments!
