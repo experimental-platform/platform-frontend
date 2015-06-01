@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var password = require('bcrypt-password');
 var request = require('request');
+var HttpStatus = require('http-status-codes');
 
 var API_URL = "http://skvs"
 
@@ -13,12 +14,12 @@ router.post('/login', function (req, res, next) {
     var secret = req.body['password'];
     password.hash(secret, function (error, digest) {
       request({url: API_URL + '/password', json: true}, function (error, response, body) {
-          if (response.statusCode === 404) {
+          if (response.statusCode === HttpStatus.NOT_FOUND) {
             var err = new Error('Not Found');
-            err.status = 404;
+            err.status = HttpStatus.NOT_FOUND;
             err.message = 'Password not set.';
             next(err);
-          } else if (response.statusCode === 200) {
+          } else if (response.statusCode === HttpStatus.OK) {
             var saved_digest = body['value'];
 
             password.check(digest, saved_digest, function (error, match) {
@@ -28,7 +29,7 @@ router.post('/login', function (req, res, next) {
               } else {
                 // TODO: check for error?
                 var err = new Error('Not Found');
-                err.status = 403;
+                err.status = HttpStatus.FORBIDDEN;
                 err.message = 'Wrong Password, access denied.';
                 next(err);
               }
@@ -61,7 +62,7 @@ router.post('/password', function (req, res, next) {
       });
     } else {
       var err = new Error('No password given.')
-      err.status = 404
+      err.status = HttpStatus.NOT_FOUND
       err.message
       next(err)
     }
