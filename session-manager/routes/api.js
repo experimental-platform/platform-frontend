@@ -3,10 +3,16 @@ var router = express.Router();
 var password = require('bcrypt-password');
 var request = require('request');
 
+var API_URL = "http://skvs"
+
+if (process.env.NODE_ENV == 'development') {
+  API_URL = "http://127.0.0.1:8080"
+}
+
 router.post('/login', function (req, res, next) {
     var secret = req.body['password'];
     password.hash(secret, function (error, digest) {
-      request({url: 'http://127.0.0.1:8080/password', json: true}, function (error, response, body) {
+      request({url: API_URL + '/password', json: true}, function (error, response, body) {
           if (response.statusCode === 404) {
             var err = new Error('Not Found');
             err.status = 404;
@@ -43,8 +49,22 @@ router.post('/logout', function (req, res, next) {
 
 
 router.post('/password', function (req, res, next) {
+    console.log(req.body.password)
     var password = req.body['password'];
-    // TODO: Set password
+    if (password != undefined && password != "") {
+      // TODO: Add more Password requirments!
+      password.hash(secret, function (error, digest) {
+        var options = {
+          url: API_URL + '/password',
+          method: 'POST'
+        }
+      });
+    } else {
+      var err = new Error('No password given.')
+      err.status = 404
+      err.message
+      next(err)
+    }
   }
 );
 
