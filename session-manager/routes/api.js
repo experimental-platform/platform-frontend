@@ -36,7 +36,7 @@ router.post('/login', function (req, res, next) {
 );
 
 router.post('/logout', function (req, res, next) {
-    // TODO: Erro handling ;)
+    // TODO: Error handling ;)
     req.session = null;
     res.send('OKAY');
   }
