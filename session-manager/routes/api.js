@@ -26,11 +26,14 @@ router.post('/login', function (req, res, next) {
       res.json()
     } else {
       password.hash(secret, function (error, digest) {
-        request({url: API_URL + '/password', json: true}, function (error, response, body) {
+        request({
+          url: API_URL + '/password',
+          json: true
+        }, function (error, response, result) {
             if (response.statusCode === HttpStatus.NOT_FOUND) {
               next(error(HttpStatus.NOT_FOUND, 'Password not set.'));
             } else if (response.statusCode === HttpStatus.OK) {
-              var saved_digest = body['value'];
+              var saved_digest = result['value'];
 
               password.check(digest, saved_digest, function (error, match) {
                 if (match === true) {
@@ -58,21 +61,30 @@ router.post('/logout', function (req, res, next) {
 
 
 router.post('/password', function (req, res, next) {
-    console.log(req.body.password)
-    var password = req.body['password'];
-    if (password != undefined && password != "") {
+    var secret = req.body['password'];
+    if (secret != undefined && secret != "") {
       // TODO: Add more Password requirments!
+      // * Check if password was confirmed
+      // * Check if old password is correct!
       password.hash(secret, function (error, digest) {
         var options = {
           url: API_URL + '/password',
-          method: 'POST'
+          method: 'POST',
+          json: true,
+          form: {
+            value: digest
+          }
         }
+        request(options, function(err, response, result) {
+          if (response.statusCode === HttpStatus.OK) {
+            res.json({status: "Ok"})
+          } else {
+            next(error(HttpStatus.INTERNAL_SERVER_ERROR, 'Password could not be set.'));
+          }
+        });
       });
     } else {
-      var err = new Error('No password given.')
-      err.status = HttpStatus.NOT_FOUND
-      err.message
-      next(err)
+      next(error(HttpStatus.NOT_FOUND, 'No password given.'));
     }
   }
 );
