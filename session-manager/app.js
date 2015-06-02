@@ -9,7 +9,8 @@ var FileStore = require('session-file-store')(session);
 var HttpStatus = require('http-status-codes');
 
 var api_router = express.Router();
-require('./routes/api')(api_router);
+require('./routes/sessions')(api_router);
+require('./routes/ptw')(api_router);
 
 var app = express();
 
