@@ -4,6 +4,7 @@ var HttpStatus = require('http-status-codes');
 var auth = require('../helper/auth')
 var api = require('../helper/api').apiUrl
 var error_helper = require('../helper/error').errorHelper
+var request_handler = require('../helper/error').requestHandler
 
 module.exports = function(router) {
   router.post('/login', function (req, res, next) {
@@ -11,20 +12,19 @@ module.exports = function(router) {
       if (secret == undefined || secret == "") {
         next(error_helper(HttpStatus.FORBIDDEN, 'No Password given.'))
       } else {
-        request(api('/password'), function (error, response, result) {
-            if (response.statusCode === HttpStatus.NOT_FOUND) {
-              next(error_helper(HttpStatus.NOT_FOUND, 'Password not set.'));
-            } else if (response.statusCode === HttpStatus.OK) {
-              var saved_digest = result['value'];
-              if (password.compareSync(secret, saved_digest)) {
-                req.session.logged_in = true;
-                res.json({status: "Ok"})
-              } else {
-                next(error_helper(HttpStatus.FORBIDDEN, 'Wrong Password, access denied.'));
-              }
+        request(api('/password'), request_handler(function (response, result) {
+          if (response.statusCode === HttpStatus.NOT_FOUND) {
+            next(error_helper(HttpStatus.NOT_FOUND, 'Password not set.'));
+          } else if (response.statusCode === HttpStatus.OK) {
+            var saved_digest = result['value'];
+            if (password.compareSync(secret, saved_digest)) {
+              req.session.logged_in = true;
+              res.json({status: "Ok"})
+            } else {
+              next(error_helper(HttpStatus.FORBIDDEN, 'Wrong Password, access denied.'));
             }
           }
-        );
+        }, next));
       }
     }
   );
@@ -50,13 +50,13 @@ module.exports = function(router) {
             value: digest
           }
         }
-        request(options, function(err, response, result) {
+        request(options, request_handler(function(response, result) {
           if (response.statusCode === HttpStatus.OK) {
             res.json({status: "Ok"})
           } else {
             next(error_helper(HttpStatus.INTERNAL_SERVER_ERROR, 'Password could not be set.'));
           }
-        });
+        }, next));
       } else {
         next(error_helper(HttpStatus.NOT_FOUND, 'No password given.'));
       }

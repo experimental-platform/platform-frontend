@@ -4,31 +4,32 @@ var async = require('async')
 var auth = require('../helper/auth')
 var api = require('../helper/api').apiUrl
 var error_helper = require('../helper/error').errorHelper
+var request_handler = require('../helper/error').requestHandler
 
 module.exports = function(router) {
   router.get('/ptw', auth, function(req, res, next) {
     async.parallel({
       enabled: function(callback) {
-        request(api('/ptw/enabled'), function(err, res, result) {
-          if (res.statusCode == HttpStatus.OK) {
+        request(api('/ptw/enabled'), request_handler(function(response, result) {
+          if (response.statusCode == HttpStatus.OK) {
             callback(null, true)
-          } else if (res.statusCode == HttpStatus.NOT_FOUND) {
+          } else if (response.statusCode == HttpStatus.NOT_FOUND) {
             callback(null, false)
           } else {
             next(error_helper(HttpStatus.INTERNAL_SERVER_ERROR));
           }
-        });
+        }, next));
       },
       nodename: function(callback) {
-        request(api('/ptw/nodename'), function(err, res, result) {
-          if (res.statusCode == HttpStatus.OK) {
+        request(api('/ptw/nodename'), request_handler(function(response, result) {
+          if (response.statusCode == HttpStatus.OK) {
             callback(null, result.value)
-          } else if (res.statusCode == HttpStatus.NOT_FOUND) {
+          } else if (response.statusCode == HttpStatus.NOT_FOUND) {
             callback(null, null)
           } else {
             next(error_helper(HttpStatus.INTERNAL_SERVER_ERROR));
           }
-        });
+        }, next));
       }
     }, function(err, results) {
       if (err) {
@@ -51,7 +52,7 @@ module.exports = function(router) {
         }
       }
 
-      request(options, function(err, response, result) {
+      request(options, request_handler(function(response, result) {
         if (response.statusCode == HttpStatus.OK) {
           res.json({
             nodename: result.value,
@@ -60,7 +61,7 @@ module.exports = function(router) {
         } else {
           next(error_helper(HttpStatus.INTERNAL_SERVER_ERROR))
         }
-      });
+      }, next));
     } else {
       next(error_helper(HttpStatus.BAD_REQUEST));
     }
@@ -76,12 +77,12 @@ module.exports = function(router) {
     } else {
       options.method = 'DELETE';
     }
-    request(options, function(err, response, result) {
+    request(options, request_handler(function(response, result) {
       if (response.statusCode == HttpStatus.OK) {
         res.json({ success: true })
       } else {
         next(error_helper(HttpStatus.INTERNAL_SERVER_ERROR))
       }
-    });
+    }, next));
   });
 }

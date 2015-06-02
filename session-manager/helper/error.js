@@ -9,5 +9,14 @@ module.exports = {
     var err = new Error(message);
     err.status = statusCode;
     return  err;
+  },
+  requestHandler: function(success, failure) {
+    return function(err, response, result) {
+      if (!err) {
+        success(response, result);
+      } else {
+        failure(err);
+      }
+    }
   }
 }

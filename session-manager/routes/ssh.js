@@ -23,7 +23,7 @@ module.exports = function(router) {
           value: key
         }
       }
-      request(options, function(err, response, res_result) {
+      request(options, request_handler(function(response, res_result) {
         if (response.statusCode == HttpStatus.OK) {
           res.json({
             success: true
@@ -31,7 +31,7 @@ module.exports = function(router) {
         } else {
           next(error_helper(HttpStatus.BAD_REQUEST));
         }
-      });
+      }, next));
     }
   });
 
@@ -41,7 +41,7 @@ module.exports = function(router) {
       url: api('/ssh/' + key_name),
       method: 'DELETE'
     }
-    request(options, function(err, response, res_result) {
+    request(options, request_handler(function(response, res_result) {
       if (response.statusCode == HttpStatus.OK) {
         res.json({
           success: true
@@ -51,11 +51,11 @@ module.exports = function(router) {
       } else {
         next(error_helper(HttpStatus.BAD_REQUEST));
       }
-    });
+    }, next));
   });
 
   router.get('/ssh', auth, function(req, res, next) {
-    request(api('/ssh'), function(err, response, res_result) {
+    request(api('/ssh'), request_handler(function(response, res_result) {
       var result = { keys: [] }
       if (response.statusCode == HttpStatus.OK && res_result.namespace) {
         for(var index in res_result.keys) {
@@ -72,6 +72,6 @@ module.exports = function(router) {
         }
       }
       res.json(result);
-    });
+    }, next));
   });
 }
