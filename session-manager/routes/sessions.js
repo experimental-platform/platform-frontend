@@ -36,30 +36,41 @@ module.exports = function(router) {
     }
   );
 
-  router.post('/password', auth, function (req, res, next) {
-      var secret = req.body['password'];
-      if (secret != undefined && secret != "") {
-        // TODO: Add more Password requirments!
-        // * Check if password was confirmed
-        // * Check if old password is correct!
-        var digest = password.hashSync(secret);
-        var options = {
-          url: api('/password'),
-          method: 'POST',
-          form: {
-            value: digest
-          }
+  var set_password = function (req, res, next) {
+    var secret = req.body['password'];
+    if (secret != undefined && secret != "") {
+      // TODO: Add more Password requirments!
+      // * Check if password was confirmed
+      // * Check if old password is correct!
+      var digest = password.hashSync(secret);
+      var options = {
+        url: api('/password'),
+        method: 'POST',
+        form: {
+          value: digest
         }
-        request(options, request_handler(function(response, result) {
-          if (response.statusCode === HttpStatus.OK) {
-            res.json({status: "Ok"})
-          } else {
-            next(error_helper(HttpStatus.INTERNAL_SERVER_ERROR, 'Password could not be set.'));
-          }
-        }, next));
-      } else {
-        next(error_helper(HttpStatus.NOT_FOUND, 'No password given.'));
       }
+      request(options, request_handler(function(response, result) {
+        if (response.statusCode === HttpStatus.OK) {
+          res.json({status: "Ok"})
+        } else {
+          next(error_helper(HttpStatus.INTERNAL_SERVER_ERROR, 'Password could not be set.'));
+        }
+      }, next));
+    } else {
+      next(error_helper(HttpStatus.NOT_FOUND, 'No password given.'));
     }
-  );
+  }
+
+  router.post('/password', auth, set_password);
+
+  router.post('/password/initial', function (req, res, next) {
+    request(api('/password'), request_handler(function(response, result) {
+      if (response.statusCode === HttpStatus.NOT_FOUND) {
+        set_password(req, res, next);
+      } else {
+        next(error_helper(HttpStatus.FORBIDDEN, 'Initial password already set!'));
+      }
+    }, next));
+  });
 }
