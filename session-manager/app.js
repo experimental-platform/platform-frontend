@@ -8,7 +8,8 @@ var session = require('express-session');
 var FileStore = require('session-file-store')(session);
 var HttpStatus = require('http-status-codes');
 
-var routes = require('./routes/api');
+var api_router = express.Router();
+require('./routes/api')(api_router);
 
 var app = express();
 
@@ -32,7 +33,7 @@ app.use(session({
 
 app.use('/protonet', express.static(path.join(__dirname, 'public')));
 
-app.use('/protonet/api', routes);
+app.use('/protonet/api', api_router);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
