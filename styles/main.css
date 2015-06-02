@@ -638,13 +638,6 @@ code {
     font-size: 18px; }
   .configuration-box .keys {
     padding-left: 30px; }
-  .configuration-box .key {
-    white-space: nowrap;
-    display: inline-block;
-    width: 80%;
-    overflow: hidden;
-    vertical-align: middle;
-    direction: rtl; }
   .configuration-box .existing-keys-headline {
     margin-top: 40px; }
 
