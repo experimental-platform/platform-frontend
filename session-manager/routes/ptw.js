@@ -52,7 +52,6 @@ module.exports = function(router) {
       }
 
       request(options, function(err, response, result) {
-        console.log(response.statusCode, HttpStatus.OK);
         if (response.statusCode == HttpStatus.OK) {
           res.json({
             nodename: result.value,
@@ -65,5 +64,24 @@ module.exports = function(router) {
     } else {
       next(error_helper(HttpStatus.BAD_REQUEST));
     }
+  });
+
+  router.post('/ptw/enabled', auth, function(req, res, next) {
+    var enabled = req.body['enabled'] == 'true' ? true : false;
+    var options = {
+      url: api('/ptw/enabled')
+    }
+    if (enabled) {
+      options.method = 'POST';
+    } else {
+      options.method = 'DELETE';
+    }
+    request(options, function(err, response, result) {
+      if (response.statusCode == HttpStatus.OK) {
+        res.json({ success: true })
+      } else {
+        next(error_helper(HttpStatus.INTERNAL_SERVER_ERROR))
+      }
+    });
   });
 }
