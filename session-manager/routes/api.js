@@ -1,13 +1,18 @@
 var express = require('express');
 var router = express.Router();
 var password = require('bcrypt-nodejs');
-var request = require('request');
+var request = require('request').defaults({ json: true });
+var urljoin = require('url-join');
 var HttpStatus = require('http-status-codes');
 
 var API_URL = "http://skvs"
 
 if (process.env.NODE_ENV == 'development') {
   API_URL = "http://127.0.0.1:8080"
+}
+
+function api(path) {
+  return urljoin(API_URL, path);
 }
 
 function error_helper(statusCode, message) {
@@ -33,10 +38,7 @@ router.post('/login', function (req, res, next) {
     if (secret == undefined || secret == "") {
       next(error_helper(HttpStatus.FORBIDDEN, 'No Password given.'))
     } else {
-      request({
-        url: API_URL + '/password',
-        json: true
-      }, function (error, response, result) {
+      request(api('/password'), function (error, response, result) {
           if (response.statusCode === HttpStatus.NOT_FOUND) {
             next(error_helper(HttpStatus.NOT_FOUND, 'Password not set.'));
           } else if (response.statusCode === HttpStatus.OK) {
@@ -69,9 +71,8 @@ router.post('/password', auth, function (req, res, next) {
       // * Check if old password is correct!
       var digest = password.hashSync(secret);
       var options = {
-        url: API_URL + '/password',
+        url: api('/password'),
         method: 'POST',
-        json: true,
         form: {
           value: digest
         }
@@ -88,6 +89,11 @@ router.post('/password', auth, function (req, res, next) {
     }
   }
 );
+
+router.get('/ptw', auth, function() {
+  var r = request(api('/ptw'));
+  console.log(r);
+});
 
 
 module.exports = router;

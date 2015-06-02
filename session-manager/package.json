@@ -27,6 +27,7 @@
     "morgan": "~1.5.3",
     "request": "^2.57.0",
     "serve-favicon": "~2.2.1",
-    "session-file-store": "0.0.11"
+    "session-file-store": "0.0.11",
+    "url-join": "0.0.1"
   }
 }
