@@ -4,6 +4,7 @@ var password = require('bcrypt-nodejs');
 var request = require('request').defaults({ json: true });
 var urljoin = require('url-join');
 var HttpStatus = require('http-status-codes');
+var async = require('async')
 
 var API_URL = "http://skvs"
 
@@ -90,9 +91,37 @@ router.post('/password', auth, function (req, res, next) {
   }
 );
 
-router.get('/ptw', auth, function() {
-  var r = request(api('/ptw'));
-  console.log(r);
+router.get('/ptw', auth, function(req, res, next) {
+  async.parallel({
+    enabled: function(callback) {
+      request(api('/ptw/enabled'), function(err, res, result) {
+        if (res.statusCode == HttpStatus.Ok) {
+          callback(null, true)
+        } else if (res.statusCode == HttpStatus.NOT_FOUND) {
+          callback(null, false)
+        } else {
+          next(error_helper(HttpStatus.INTERNAL_SERVER_ERROR));
+        }
+      });
+    },
+    nodename: function(callback) {
+      request(api('/ptw/nodename'), function(err, res, result) {
+        if (res.statusCode == HttpStatus.Ok) {
+          callback(null, result.value)
+        } else if (res.statusCode == HttpStatus.NOT_FOUND) {
+          callback(null, null)
+        } else {
+          next(error_helper(HttpStatus.INTERNAL_SERVER_ERROR));
+        }
+      });
+    }
+  }, function(err, results) {
+    if (err) {
+      next(error_helper(HttpStatus.INTERNAL_SERVER_ERROR));
+    } else {
+      res.json(results);
+    }
+  });
 });
 
 
