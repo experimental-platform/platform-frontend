@@ -4,13 +4,14 @@ var auth = require('../helper/auth')
 var api = require('../helper/api').apiUrl
 var fingerprint = require('ssh-fingerprint');
 var error_helper = require('../helper/error').errorHelper
+var request_handler = require('../helper/error').requestHandler
 
 module.exports = function(router) {
 
   router.post('/ssh/add', auth, function(req, res, next) {
     var key = req.body['key'];
     if (key != undefined && key != "") {
-      var description = key.split(' ')[1];
+      var description = key.split(' ')[2];
       if (description == undefined) {
         description = '';
       }
