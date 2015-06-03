@@ -46,7 +46,7 @@ module.exports = function(router) {
       // make more checks and if name is really avaible! We need some kind of own service to do this..
       var options = {
         url: api('/ptw/nodename'),
-        method: 'POST',
+        method: 'PUT',
         form: {
           value: nodename
         }
@@ -73,7 +73,7 @@ module.exports = function(router) {
       url: api('/ptw/enabled')
     }
     if (enabled) {
-      options.method = 'POST';
+      options.method = 'PUT';
     } else {
       options.method = 'DELETE';
     }

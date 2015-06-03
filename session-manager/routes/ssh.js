@@ -19,7 +19,7 @@ module.exports = function(router) {
 
       var options = {
         url: api('/ssh/' + key_name),
-        method: 'POST',
+        method: 'PUT',
         form: {
           value: key
         }
