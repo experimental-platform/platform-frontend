@@ -2,17 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name aalApp
+ * @name protonet.platform
  * @description
- * # aalApp
  *
  * Main module of the application.
  */
 angular
-  .module('aalApp', [
+  .module('protonet.platform', [
     'ngAnimate',
-    'ngCookies',
-    'ngResource',
     'ngRoute',
     'ngSanitize',
     'ngTouch'
@@ -20,13 +17,14 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/index.html'
+        templateUrl: 'views/dashboard.html'
       })
       .when('/styleguide', {
         templateUrl: 'views/styleguide.html'
       })
       .when('/login', {
-        templateUrl: 'views/login.html'
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl'
       })
       .when('/welcome-1', {
         templateUrl: 'views/welcome-1.html'
@@ -39,9 +37,6 @@ angular
       })
       .when('/welcome-4', {
         templateUrl: 'views/welcome-4.html'
-      })
-      .when('/dashboard', {
-        templateUrl: 'views/dashboard.html'
       })
       .when('/configuration', {
         templateUrl: 'views/configuration.html'
@@ -56,6 +51,6 @@ angular
         templateUrl: 'views/create-app-3.html'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/dashboard'
       });
   });

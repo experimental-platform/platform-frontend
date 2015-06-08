@@ -1,8 +1,9 @@
 <div class="login">
   <div class="login-box material-box">
     <h1>Experimental Platform</h1>
-    <form>
-      <input type="password" placeholder="Password"> <a href="#/welcome-1" class="btn cta">Login</a>
+    <form ng-submit="login()">
+      <input type="password" placeholder="Password" ng-model="password" ng-disabled="loading">
+      <button class="btn cta" type="submit">Login</button>
     </form>
   </div>
 </div>

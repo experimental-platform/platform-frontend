@@ -14,5 +14,5 @@
     "angular-mocks": "^1.3.0"
   },
   "appPath": "app",
-  "moduleName": "aalApp"
+  "moduleName": "protonet-platform"
 }
