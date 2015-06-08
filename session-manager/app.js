@@ -12,6 +12,7 @@ var api_router = express.Router();
 require('./routes/sessions')(api_router);
 require('./routes/ptw')(api_router);
 require('./routes/ssh')(api_router);
+require('./routes/apps')(api_router);
 
 var app = express();
 
