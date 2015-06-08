@@ -19,8 +19,10 @@
       Choose a password that allows access to the administration interface. This will also be your SSH root password. Make sure you don’t forget it.
     </p>
 
-    <input type="password" placeholder="Set a password" class="full-width" autofocus>
-    <input type="password" placeholder="Repeat password" class="full-width">
-    <a href="#/welcome-3" class="btn cta">Next Step</a>
+    <form ng-submit="setPassword()">
+      <input type="password" placeholder="Set a password" class="full-width" autofocus ng-model="password" ng-disabled="loading">
+      <input type="password" placeholder="Repeat password" class="full-width" ng-model="passwordConfirmation" ng-disabled="loading">
+      <button class="btn cta" type="submit">Next Step</button>
+    </form>
   </div>
 </div>

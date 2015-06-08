@@ -6,7 +6,7 @@ angular.module("protonet.platform")
     }
     return {
       post: function(path, params) {
-        return $http.post(apiHost + path, params);
+        return $http.post(apiHost + path, params, { withCredentials: true });
       }
     }
   });

@@ -16,10 +16,12 @@
     </ul>
 
     <p>
-      The system needs your <a href="">public key</a> to let you deploy apps.
+      The system needs your <a href="https://help.github.com/articles/generating-ssh-keys/" target="_blank">public key</a> to let you deploy apps.
     </p>
 
-    <textarea placeholder="Paste your SSH public key" autofocus class="full-width"></textarea>
-    <a href="#/welcome-4" class="btn cta">Next Step</a>
+    <form ng-submit="setPublicKey()">
+      <textarea placeholder="Paste your SSH public key" autofocus class="full-width" ng-model="publicKey"></textarea>
+      <button class="btn cta" type="submit">Next Step</button>
+    </form>
   </div>
 </div>

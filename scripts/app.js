@@ -27,16 +27,20 @@ angular
         controller: 'LoginCtrl'
       })
       .when('/welcome-1', {
-        templateUrl: 'views/welcome-1.html'
+        templateUrl: 'views/welcome-1.html',
+        controller: "WelcomeCtrl"
       })
       .when('/welcome-2', {
-        templateUrl: 'views/welcome-2.html'
+        templateUrl: 'views/welcome-2.html',
+        controller: "WelcomeCtrl"
       })
       .when('/welcome-3', {
-        templateUrl: 'views/welcome-3.html'
+        templateUrl: 'views/welcome-3.html',
+        controller: "WelcomeCtrl"
       })
       .when('/welcome-4', {
-        templateUrl: 'views/welcome-4.html'
+        templateUrl: 'views/welcome-4.html',
+        controller: "WelcomeCtrl"
       })
       .when('/configuration', {
         templateUrl: 'views/configuration.html'

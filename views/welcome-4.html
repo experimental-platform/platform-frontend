@@ -19,7 +19,9 @@
       Choose an address under which you can publicly access all your apps.<br><br>
     </p>
 
-    <div class="full-width"><input type="text" class="text-right" placeholder="your-box-name" autofocus><span class="protonet-url">.protonet.info</span></div>
-    <a href="#/dashboard" class="btn cta">Finish Setup</a>
+    <form ng-submit="setPublishToWeb()">
+      <div class="full-width"><input type="text" class="text-right" placeholder="your-box-name" ng-model="nodename" autofocus><span class="protonet-url" ng-model="nodename">.protonet.info</span></div>
+      <button class="btn cta" type="submit">Finish Setup</button>
+    </form>
   </div>
 </div>
