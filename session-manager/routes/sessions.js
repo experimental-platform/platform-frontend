@@ -2,7 +2,7 @@ var password = require('bcrypt-nodejs');
 var request = require('request').defaults({ json: true });
 var HttpStatus = require('http-status-codes');
 var auth = require('../helper/auth');
-var api = require('../helper/api').apiUrl;
+var api = require('../helper/api').skvsApiUrl;
 var error_helper = require('../helper/error').errorHelper;
 var request_handler = require('../helper/error').requestHandler;
 
