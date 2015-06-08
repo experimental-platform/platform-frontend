@@ -79,6 +79,53 @@ router.post('/start', function (req, res, next) {
     res.json({name: name});
   } else {
     res.status(HttpStatus.NOT_FOUND)
+    res.json({err: "not found"})
+  }
+});
+
+router.post('/stop', function (req, res, next) {
+  var name = req.body['name'];
+  var app = _.find(list_result, function(elem) { return elem.name == name })
+  if(app != undefined) {
+    app['state'] = 'stopped';
+    res.json({name: name});
+  } else {
+    res.status(HttpStatus.NOT_FOUND)
+    res.json({err: "not found"})
+  }
+});
+
+router.post('/restart', function (req, res, next) {
+  var name = req.body['name'];
+  var app = _.find(list_result, function(elem) { return elem.name == name })
+  if(app != undefined) {
+    res.json({name: name});
+  } else {
+    res.status(HttpStatus.NOT_FOUND)
+    res.json({err: "not found"})
+  }
+});
+
+router.post('/rebuild', function (req, res, next) {
+  var name = req.body['name'];
+  var app = _.find(list_result, function(elem) { return elem.name == name })
+  if(app != undefined) {
+    res.json({name: name});
+  } else {
+    res.status(HttpStatus.NOT_FOUND)
+    res.json({err: "not found"})
+  }
+});
+
+router.post('/destroy', function (req, res, next) {
+  var name = req.body['name'];
+  var findIndex = _.findIndex(list_result, function(elem) { return elem.name == name })
+  if(findIndex != -1) {
+    delete list_result[findIndex]
+    res.json({name: name});
+  } else {
+    res.status(HttpStatus.NOT_FOUND)
+    res.json({err: "not found"})
   }
 });
 
