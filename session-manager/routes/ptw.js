@@ -1,10 +1,10 @@
 var request = require('request').defaults({ json: true });
 var HttpStatus = require('http-status-codes');
-var async = require('async')
-var auth = require('../helper/auth')
-var api = require('../helper/api').apiUrl
-var error_helper = require('../helper/error').errorHelper
-var request_handler = require('../helper/error').requestHandler
+var async = require('async');
+var auth = require('../helper/auth');
+var api = require('../helper/api').apiUrl;
+var error_helper = require('../helper/error').errorHelper;
+var request_handler = require('../helper/error').requestHandler;
 
 module.exports = function(router) {
   router.get('/ptw', auth, function(req, res, next) {
@@ -50,7 +50,7 @@ module.exports = function(router) {
         form: {
           value: nodename
         }
-      }
+      };
 
       request(options, request_handler(function(response, result) {
         if (response.statusCode == HttpStatus.OK) {
@@ -68,10 +68,10 @@ module.exports = function(router) {
   });
 
   router.post('/ptw/enabled', auth, function(req, res, next) {
-    var enabled = req.body['enabled'] == 'true' ? true : false;
+    var enabled = req.body['enabled'] == 'true';
     var options = {
       url: api('/ptw/enabled')
-    }
+    };
     if (enabled) {
       options.method = 'PUT';
     } else {
@@ -85,4 +85,4 @@ module.exports = function(router) {
       }
     }, next));
   });
-}
+};

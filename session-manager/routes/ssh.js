@@ -1,10 +1,10 @@
 var request = require('request').defaults({ json: true });
 var HttpStatus = require('http-status-codes');
-var auth = require('../helper/auth')
-var api = require('../helper/api').apiUrl
+var auth = require('../helper/auth');
+var api = require('../helper/api').apiUrl;
 var fingerprint = require('ssh-fingerprint');
-var error_helper = require('../helper/error').errorHelper
-var request_handler = require('../helper/error').requestHandler
+var error_helper = require('../helper/error').errorHelper;
+var request_handler = require('../helper/error').requestHandler;
 
 module.exports = function(router) {
 
@@ -23,7 +23,7 @@ module.exports = function(router) {
         form: {
           value: key
         }
-      }
+      };
       request(options, request_handler(function(response, res_result) {
         if (response.statusCode == HttpStatus.OK) {
           res.json({
@@ -41,7 +41,7 @@ module.exports = function(router) {
     var options = {
       url: api('/ssh/' + key_name),
       method: 'DELETE'
-    }
+    };
     request(options, request_handler(function(response, res_result) {
       if (response.statusCode == HttpStatus.OK) {
         res.json({
@@ -57,7 +57,7 @@ module.exports = function(router) {
 
   router.get('/ssh', auth, function(req, res, next) {
     request(api('/ssh'), request_handler(function(response, res_result) {
-      var result = { keys: [] }
+      var result = { keys: [] };
       if (response.statusCode == HttpStatus.OK && res_result.namespace) {
         for(var index in res_result.keys) {
           try {
@@ -75,4 +75,4 @@ module.exports = function(router) {
       res.json(result);
     }, next));
   });
-}
+};

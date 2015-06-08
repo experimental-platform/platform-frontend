@@ -1,10 +1,10 @@
 var password = require('bcrypt-nodejs');
 var request = require('request').defaults({ json: true });
 var HttpStatus = require('http-status-codes');
-var auth = require('../helper/auth')
-var api = require('../helper/api').apiUrl
-var error_helper = require('../helper/error').errorHelper
-var request_handler = require('../helper/error').requestHandler
+var auth = require('../helper/auth');
+var api = require('../helper/api').apiUrl;
+var error_helper = require('../helper/error').errorHelper;
+var request_handler = require('../helper/error').requestHandler;
 
 module.exports = function(router) {
   router.post('/login', function (req, res, next) {
@@ -49,7 +49,7 @@ module.exports = function(router) {
         form: {
           value: digest
         }
-      }
+      };
       request(options, request_handler(function(response, result) {
         if (response.statusCode === HttpStatus.OK) {
           res.json({status: "Ok"})
@@ -60,7 +60,7 @@ module.exports = function(router) {
     } else {
       next(error_helper(HttpStatus.NOT_FOUND, 'No password given.'));
     }
-  }
+  };
 
   router.post('/password', auth, set_password);
 
@@ -73,4 +73,4 @@ module.exports = function(router) {
       }
     }, next));
   });
-}
+};
