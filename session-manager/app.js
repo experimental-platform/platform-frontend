@@ -29,13 +29,11 @@ app.use(cookieParser());
 
 if (process.env.NODE_ENV == "development") {
   console.log("Warning: Enabling cors because of dev environment.");
-  var corsOptions = {
+  app.use(cors({
     credentials: true,
-    origin: "*",
+    origin: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
-  };
-  app.use(cors(corsOptions));
-  // app.options('*', cors(corsOptions));
+  }));
 }
 
 app.use(session({
