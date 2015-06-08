@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var FileStore = require('session-file-store')(session);
 var HttpStatus = require('http-status-codes');
+var cors = require('cors');
 
 var api_router = express.Router();
 require('./routes/sessions')(api_router);
@@ -15,7 +16,6 @@ require('./routes/ssh')(api_router);
 require('./routes/apps')(api_router);
 
 var app = express();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -26,6 +26,17 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
+
+if (process.env.NODE_ENV == "development") {
+  console.log("Warning: Enabling cors because of dev environment.");
+  var corsOptions = {
+    credentials: true,
+    origin: "*",
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
+  };
+  app.use(cors(corsOptions));
+  // app.options('*', cors(corsOptions));
+}
 
 app.use(session({
   store: new FileStore({}),
