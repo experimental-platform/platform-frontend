@@ -1,4 +1,4 @@
-FROM dockerregistry.protorz.net/session-manager:latest
+FROM dockerregistry.protorz.net/management-proxy:latest
 
 ADD . /build
 WORKDIR /build
