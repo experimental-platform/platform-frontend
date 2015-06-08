@@ -1,0 +1,91 @@
+#!/usr/bin/env node
+var http = require('http');
+var express = require('express');
+var bodyParser = require('body-parser')
+var HttpStatus = require('http-status-codes');
+var error_helper = require('../helper/error').errorHelper
+var _ = require('lodash')
+
+var app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+var router = express.Router();
+
+var list_result = [
+  {
+    "name":"hello-world",
+    "container_type":"web",
+    "container_id":"3f0578826783",
+    "state":"stopped",
+    "urls":[
+      "https://mauerblume.protonet.info/hello-world",
+      "http://innocence.protonet.info/hello-world"
+    ]
+  },
+  {
+    "name":"node-js-example",
+    "container_type":"web",
+    "container_id":"aad3617af671",
+    "state":"stopped",
+    "urls":[
+      "https://mauerblume.protonet.info/node-js-example",
+      "http://innocence.protonet.info/node-js-example"
+    ]
+  },
+  {
+    "name":"node-js-sample",
+    "container_type":"web",
+    "container_id":"5d266908e1ee",
+    "state":"stopped",
+    "urls":[
+      "https://mauerblume.protonet.info/node-js-sample",
+      "http://innocence.protonet.info/node-js-sample"
+    ]
+  },
+  {
+    "name":"test1",
+    "container_type":"web",
+    "container_id":"c6be11f53afb",
+    "state":"stopped",
+    "urls":[
+      "https://mauerblume.protonet.info/test1",
+      "http://innocence.protonet.info/test1"
+    ]
+  },
+  {
+    "name":"test2",
+    "container_type":"web",
+    "container_id":"fc0097e4e122",
+    "state":"stopped",
+    "urls":[
+      "https://mauerblume.protonet.info/test2",
+      "http://innocence.protonet.info/test2"
+    ]
+  }
+];
+
+router.get('/list', function (req, res, next) {
+  res.json(list_result)
+});
+
+router.post('/start', function (req, res, next) {
+  var name = req.body['name'];
+  var app = _.find(list_result, function(elem) { return elem.name == name })
+  if(app != undefined) {
+    app['state'] = 'started';
+    res.json({name: name});
+  } else {
+    res.status(HttpStatus.NOT_FOUND)
+  }
+});
+
+var port = 8081
+app.set('port', port);
+app.use('/', router);
+
+var server = http.createServer(app);
+server.listen(port);
+console.log("Listening on Port: " + port)
