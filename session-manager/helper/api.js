@@ -11,7 +11,7 @@ if (process.env.NODE_ENV == 'development') {
 module.exports = {
   skvsApiUrl: function(path) {
     return urljoin(SKVS_API_URL, path);
-  }
+  },
 
   appsApiUrl: function(path) {
     return urljoin(APPS_API_URL, path)
