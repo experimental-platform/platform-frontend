@@ -25,6 +25,7 @@
     "express-session": "^1.11.2",
     "http-status-codes": "^1.0.5",
     "jade": "~1.9.2",
+    "lodash": "^3.9.3",
     "morgan": "~1.5.3",
     "request": "^2.57.0",
     "serve-favicon": "~2.2.1",
