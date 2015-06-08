@@ -68,6 +68,7 @@ var list_result = [
 ];
 
 router.get('/list', function (req, res, next) {
+  _.remove(list_result, function(n) { return n == null; })
   res.json(list_result)
 });
 
