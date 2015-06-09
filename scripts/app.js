@@ -18,7 +18,14 @@ angular
     $stateProvider
       .state('dashboard', {
         templateUrl: 'views/layout.html',
-        controller: "LayoutCtrl"
+        controller: "LayoutCtrl",
+        resolve: {
+          ptw: function($state, API) {
+            return API.get("/protonet/api/ptw").catch(function() {
+              $state.go("login");
+            });
+          }
+        }
       })
       .state('dashboard.index', {
         url: "/dashboard",
