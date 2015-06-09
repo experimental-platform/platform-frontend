@@ -1,66 +1,42 @@
-<header>
+<div class="teaser">
   <div class="wrapper">
-    <div class="left">
-      <img src="images/hexagon.png">
-      <span>my-box.protonet.info</span>
-    </div>
-    <div class="right">
-      <a href="" class="btn cta">Button CTA</a>      
-    </div>
+    <h2>Create An App</h2>
   </div>
-</header>
+</div>
 
-<div class="dashboard">
-  <nav>
-    <div class="wrapper">
-      <a href="" class="active">Dashboard</a>
-      <a href="">Configuration</a>
-      <a href="">Github</a>
-      <a href="">Docs</a>
-    </div>
-  </nav>
+<div class="create-app material-box step-2">
+  <ul class="step-bar">
+    <li class="done">
+      <span>Technology</span>
+    </li>
+    <li class="active">
+      <span>Basic Setup</span>
+    </li>
+    <li>
+      <span>Deploy</span>
+    </li>
+  </ul>
 
-  <div class="teaser">
-    <div class="wrapper">
-      <h2>Create An App</h2>
-    </div>
-  </div>
+  <p>Get the node.js hello world example:</p>
 
-  <div class="create-app material-box step-2">
-    <ul class="step-bar">
-      <li class="done">
-        <span>Technology</span>
-      </li>
-      <li class="active">
-        <span>Basic Setup</span>
-      </li>
-      <li>
-        <span>Deploy</span>
-      </li>
-    </ul>
+  <p>
+    <code>
+      git clone https://github.com/heroku/node-js-sample.git
+      <br>
+      cd node-js-sample
+    </code>
+  </p>
 
-    <p>Get the node.js hello world example:</p>
+  <p>Choose a name and add git remote:</p>
 
-    <p>
-      <code>
-        git clone https://github.com/heroku/node-js-sample.git
-        <br>
-        cd node-js-sample
-      </code>
-    </p>
+  <p>
+    <code>
+      git remote add pep ssh://dokku@172.20.100.230:8022/app-name
+    </code>
+  </p>
 
-    <p>Choose a name and add git remote:</p>
-
-    <p>
-      <code>
-        git remote add pep ssh://dokku@172.20.100.230:8022/app-name
-      </code>
-    </p>
-
-    <a class="btn cta" href="#/create-app-3">Next Step</a>
+  <a class="btn cta" href="#/create-app-3">Next Step</a>
 
 
-    
-  </div>
-
+  
 </div>

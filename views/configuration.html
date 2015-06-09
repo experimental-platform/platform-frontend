@@ -1,62 +1,38 @@
-<header>
+<div class="teaser">
   <div class="wrapper">
-    <div class="left">
-      <img src="images/hexagon.png">
-      <span>my-box.protonet.info</span>
-    </div>
-    <div class="right">
-      <a href="#/create-app-1" class="btn cta">New App</a>
-    </div>
+    <h2>Configuration</h2>
   </div>
-</header>
+</div>
 
-<div class="dashboard">
-  <nav>
-    <div class="wrapper">
-      <a href="" class="active">Dashboard</a>
-      <a href="">Configuration</a>
-      <a href="">Github</a>
-      <a href="">Docs</a>
-    </div>
-  </nav>
+<div class="configuration">
 
-  <div class="teaser">
-    <div class="wrapper">
-      <h2>Configuration</h2>
-    </div>
+  <div class="configuration-box material-box">
+    <h3>Internet Address</h3>
+    <p>Choose an address under which you can publicly access all your apps.</p>
+    <div class="full-width"><input type="text" class="text-right" placeholder="your-box-name" value="spongebob" autofocus><span class="protonet-url">.protonet.info</span></div>
+  <a href="" class="btn cta">Save</a>
   </div>
+  
 
-  <div class="configuration">
-
-    <div class="configuration-box material-box">
-      <h3>Internet Address</h3>
-      <p>Choose an address under which you can publicly access all your apps.</p>
-      <div class="full-width"><input type="text" class="text-right" placeholder="your-box-name" value="spongebob" autofocus><span class="protonet-url">.protonet.info</span></div>
+  <div class="configuration-box material-box">
+    <h3>Password</h3>
+    <p>Choose a password that allows access to the administration interface. This will also be your SSH root password. Make sure you don’t forget it.</p>
+    <input type="password" placeholder="Old password" class="full-width">
+    <input type="password" placeholder="New password" class="full-width">
+    <input type="password" placeholder="Repeat password" class="full-width">
     <a href="" class="btn cta">Save</a>
-    </div>
-    
+  </div>
 
-    <div class="configuration-box material-box">
-      <h3>Password</h3>
-      <p>Choose a password that allows access to the administration interface. This will also be your SSH root password. Make sure you don’t forget it.</p>
-      <input type="password" placeholder="Old password" class="full-width">
-      <input type="password" placeholder="New password" class="full-width">
-      <input type="password" placeholder="Repeat password" class="full-width">
-      <a href="" class="btn cta">Save</a>
-    </div>
-
-    <div class="configuration-box material-box">
-      <h3>SSH Public Keys</h3>
-      <p>SSH Keys are needed to deploy apps.</p>
-      <textarea placeholder="Paste new public key" class="full-width"></textarea>
-      <a href="" class="btn cta">Add</a>
-      <h3 class="existing-keys-headline">Existing Keys</h3>
-      <ul class="keys">
-        <li><span class="key">54:48:4d:10:12:8c:b6:b5:0d:fa:3e:6c:ba:df:26:22 christopher.blum@protonet.info</span> <a href="">Remove</a></li>
-        <li><span class="key">ec:a5:d2:fe:83:cc:72:a8:81:de:f8:e4:a8:77:f1:7c christopher.blum@pc-cblum.hh</span> <a href="">Remove</a></li>
-      </ul>
-    </div>
-
+  <div class="configuration-box material-box">
+    <h3>SSH Public Keys</h3>
+    <p>SSH Keys are needed to deploy apps.</p>
+    <textarea placeholder="Paste new public key" class="full-width"></textarea>
+    <a href="" class="btn cta">Add</a>
+    <h3 class="existing-keys-headline">Existing Keys</h3>
+    <ul class="keys">
+      <li><span class="key">54:48:4d:10:12:8c:b6:b5:0d:fa:3e:6c:ba:df:26:22 christopher.blum@protonet.info</span> <a href="">Remove</a></li>
+      <li><span class="key">ec:a5:d2:fe:83:cc:72:a8:81:de:f8:e4:a8:77:f1:7c christopher.blum@pc-cblum.hh</span> <a href="">Remove</a></li>
+    </ul>
   </div>
 
 </div>
