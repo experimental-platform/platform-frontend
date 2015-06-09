@@ -18,6 +18,7 @@ angular
     $stateProvider
       .state('dashboard', {
         templateUrl: 'views/layout.html',
+        controller: "LayoutCtrl"
       })
       .state('dashboard.index', {
         url: "/dashboard",

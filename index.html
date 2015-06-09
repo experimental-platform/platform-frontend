@@ -5,36 +5,23 @@
     <title>Experimental Platform</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild -->
   </head>
   <body ng-app="protonet.platform">
 
-    <div class="container">
-      <div ui-view></div>
-    </div>
+    <div class="container" ui-view></div>
 
-
-    <!-- build:js(.) scripts/vendor.js -->
-    <!-- bower:js -->
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/ui-router/release/angular-ui-router.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
 
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/login_ctrl.js"></script>
     <script src="scripts/controllers/welcome_ctrl.js"></script>
     <script src="scripts/controllers/dashboard_ctrl.js"></script>
+    <script src="scripts/controllers/layout_ctrl.js"></script>
     <script src="scripts/lib/api.js"></script>
   </body>
 </html>
