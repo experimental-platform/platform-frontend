@@ -1,4 +1,4 @@
-var request = require('request').defaults({ json: true });
+var request = require('request').defaults({json: true});
 var HttpStatus = require('http-status-codes');
 var auth = require('../helper/auth');
 var api = require('../helper/api').skvsApiUrl;
@@ -6,9 +6,9 @@ var fingerprint = require('ssh-fingerprint');
 var error_helper = require('../helper/error').errorHelper;
 var request_handler = require('../helper/error').requestHandler;
 
-module.exports = function(router) {
+module.exports = function (router) {
 
-  router.post('/ssh/add', auth, function(req, res, next) {
+  router.post('/ssh/add', auth, function (req, res, next) {
     var key = req.body['key'];
     if (key != undefined && key != "") {
       var description = key.split(' ')[2];
@@ -24,7 +24,7 @@ module.exports = function(router) {
           value: key
         }
       };
-      request(options, request_handler(function(response, res_result) {
+      request(options, request_handler(function (response, res_result) {
         if (response.statusCode == HttpStatus.OK) {
           res.json({
             success: true
@@ -36,18 +36,18 @@ module.exports = function(router) {
     }
   });
 
-  router.post('/ssh/delete', auth, function(req, res, next) {
+  router.post('/ssh/delete', auth, function (req, res, next) {
     var key_name = req.body['id'];
     var options = {
       url: api('/ssh/' + key_name),
       method: 'DELETE'
     };
-    request(options, request_handler(function(response, res_result) {
+    request(options, request_handler(function (response, res_result) {
       if (response.statusCode == HttpStatus.OK) {
         res.json({
           success: true
         });
-      } else if(response.statusCode == HttpStatus.NOT_FOUND) {
+      } else if (response.statusCode == HttpStatus.NOT_FOUND) {
         next(error_helper(HttpStatus.NOT_FOUND, 'Key with id ' + key_name + ' does not exists!'));
       } else {
         next(error_helper(HttpStatus.BAD_REQUEST));
@@ -55,9 +55,9 @@ module.exports = function(router) {
     }, next));
   });
 
-  router.get('/ssh', auth, function(req, res, next) {
-    request(api('/ssh'), request_handler(function(response, res_result) {
-      var result = { keys: [] };
+  router.get('/ssh', auth, function (req, res, next) {
+    request(api('/ssh'), request_handler(function (response, res_result) {
+      var result = {keys: []};
       if (response.statusCode == HttpStatus.OK && res_result.namespace) {
         for(var index in res_result.keys) {
           try {
