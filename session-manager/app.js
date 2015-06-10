@@ -15,6 +15,7 @@ require('./routes/ptw')(api_router);
 require('./routes/ssh')(api_router);
 require('./routes/apps')(api_router);
 require('./routes/system')(api_router);
+require('./routes/logs')(api_router);
 
 var app = express();
 // view engine setup
