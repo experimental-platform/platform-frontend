@@ -27,12 +27,12 @@ module.exports = function(router) {
     }, next));
   });
 
-  var valid_actions = ['start', 'stop', 'restart', 'destroy', 'rebuild']
+  var valid_post_actions = ['start', 'stop', 'restart', 'destroy', 'rebuild'];
   router.post('/apps/:action', auth, function(req, res, next) {
     var name = req.body['name'];
     if(name != undefined && name != "") {
       var action = req.params["action"];
-      if(valid_actions.indexOf(action) != -1) {
+      if(valid_post_actions.indexOf(action) != -1) {
         var options = {
           url: api('/' + action),
           method: 'POST',
@@ -50,6 +50,23 @@ module.exports = function(router) {
       } else {
         next(error_helper(HttpStatus.BAD_REQUEST));
       }
+    } else {
+      next(error_helper(HttpStatus.BAD_REQUEST));
+    }
+  });
+
+  var valid_get_actions = ['urls', 'logs'];
+  router.get('/apps/:action/:appname', auth, function(req, res, next) {
+    var action = req.params["action"];
+    var appname = req.params["appname"];
+    if(valid_get_actions.indexOf(action) != -1) {
+      request(api('/' + action + '/' + appname), request_handler(function(response, res_result) {
+        if(response.statusCode == HttpStatus.OK) {
+          res.json(res_result);
+        } else {
+          next(error_helper(HttpStatus.NOT_FOUND));
+        }
+      }, next));
     } else {
       next(error_helper(HttpStatus.BAD_REQUEST));
     }

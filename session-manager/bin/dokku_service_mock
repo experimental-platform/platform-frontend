@@ -130,6 +130,15 @@ router.post('/destroy', function (req, res, next) {
   }
 });
 
+router.get('/logs/:appname', function (req, res, next) {
+  res.json({msg: "\n\u003e node-js-sample@0.2.0 start /app\n\u003e node index.js\n\nNode app is running at localhost:5000\n"})
+});
+
+router.get('/urls/:appname', function (req, res, next) {
+  var appname = req.params["appname"];
+  res.json(["https://carlwurst1338.protonet.info/" + appname, "http://core-01/" + appname])
+});
+
 var port = 8081
 app.set('port', port);
 app.use('/', router);
