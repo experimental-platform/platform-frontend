@@ -59,16 +59,18 @@ module.exports = function (router) {
     request(api('/ssh'), request_handler(function (response, res_result) {
       var result = {keys: []};
       if (response.statusCode == HttpStatus.OK && res_result.namespace) {
-        for(var index in res_result.keys) {
-          try {
-            var key_name = res_result.keys[index];
-            result.keys.push({
-              id: key_name,
-              description: new Buffer(key_name, 'hex').toString('utf8')
-            });
-          } catch(err) {
-            // do nothing, looks like there are dirty entries in skvs
-            console.log("Error", err);
+        for (var index in res_result.keys) {
+          if (res_result.keys.hasOwnProperty(index)) {
+            try {
+              var key_name = res_result.keys[index];
+              result.keys.push({
+                id: key_name,
+                description: new Buffer(key_name, 'hex').toString('utf8')
+              });
+            } catch (err) {
+              // do nothing, looks like there are dirty entries in skvs
+              console.log("Error", err);
+            }
           }
         }
       }
