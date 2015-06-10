@@ -139,6 +139,15 @@ router.get('/urls/:appname', function (req, res, next) {
   res.json(["https://carlwurst1338.protonet.info/" + appname, "http://core-01/" + appname])
 });
 
+router.get('/monitoring', function (req, res, next) {
+  res.json({"name":"system","cpu_percent":4.311097799164576,"mem_used":951500,"mem_total":1021844})
+});
+
+router.get('/monitoring/:appname', function (req, res, next) {
+  var appname = req.params["appname"];
+  res.json({"name":appname,"mem_used":30142464,"mem_total":1046368256})
+});
+
 var port = 8081
 app.set('port', port);
 app.use('/', router);
