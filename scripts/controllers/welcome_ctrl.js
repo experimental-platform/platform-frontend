@@ -1,11 +1,11 @@
-angular.module("protonet.platform").controller("WelcomeCtrl", function($scope, API, $location) {
+angular.module("protonet.platform").controller("WelcomeCtrl", function($scope, API, $location, Notification) {
   $scope.setPassword = function() {
     if (!$scope.password) {
       return;
     }
 
     if ($scope.password !== $scope.passwordConfirmation) {
-      alert("The passwords you entered are not the same.");
+      Notification.error("The passwords you entered are not the same.");
       return;
     }
 
@@ -19,7 +19,7 @@ angular.module("protonet.platform").controller("WelcomeCtrl", function($scope, A
     }).then(function() {
       $location.path("/welcome-3");
     }).catch(function() {
-      alert("An error occured while setting the password. Please try again.");
+      Notification.error("An error occured while setting the password. Please try again.");
     }).finally(function() {
       $scope.loading = false;
     });
@@ -37,7 +37,7 @@ angular.module("protonet.platform").controller("WelcomeCtrl", function($scope, A
     }).then(function() {
       $location.path("/welcome-4");
     }).catch(function() {
-      alert("An error occured while setting the public key. Please try again.");
+      Notification.error("An error occured while setting the public key. Please try again.");
     }).finally(function() {
       $scope.loading = false;
     });
@@ -49,7 +49,7 @@ angular.module("protonet.platform").controller("WelcomeCtrl", function($scope, A
     }
 
     if (!$scope.nodename.match(/^[a-z0-9\-]+$/i)) {
-      alert("The address cannot contain special characters or white spaces.");
+      Notification.error("The address cannot contain special characters or white spaces.");
       return;
     }
 
@@ -59,7 +59,7 @@ angular.module("protonet.platform").controller("WelcomeCtrl", function($scope, A
     }).then(function() {
       $location.path("/dashboard");
     }).catch(function() {
-      alert("An error occured while setting the internet address. Please try again.");
+      Notification.error("An error occured while setting the internet address. Please try again.");
     }).finally(function() {
       $scope.loading = false;
     });

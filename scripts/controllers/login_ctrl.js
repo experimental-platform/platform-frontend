@@ -1,4 +1,4 @@
-angular.module("protonet.platform").controller("LoginCtrl", function($scope, API, $location) {
+angular.module("protonet.platform").controller("LoginCtrl", function($scope, API, $location, Notification) {
   $scope.login = function() {
     if (!$scope.password || $scope.loading) {
       return;
@@ -10,7 +10,7 @@ angular.module("protonet.platform").controller("LoginCtrl", function($scope, API
     }).then(function() {
       $location.path("/dashboard");
     }).catch(function() {
-      alert("The password is not correct.");
+      Notification.error("The password is not correct.");
     }).finally(function() {
       $scope.loading = false;
     });

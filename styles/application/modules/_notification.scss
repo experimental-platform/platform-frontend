@@ -1,0 +1,28 @@
+.notification {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  text-align: center;
+  box-sizing: border-box;
+  z-index: 10;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 12px;
+  min-height: 50px;
+}
+
+.success {
+  background-color: rgba(64, 143, 40, 0.9);
+}
+
+.error {
+  background-color: rgba(203, 57, 57, 0.9);
+}
+
+@media only screen and (max-width: 759px){
+  .notification {
+    font-size: 14px;
+  }
+}

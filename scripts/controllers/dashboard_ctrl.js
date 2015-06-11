@@ -1,4 +1,4 @@
-angular.module("protonet.platform").controller("DashboardCtrl", function($scope, $timeout, $q, API) {
+angular.module("protonet.platform").controller("DashboardCtrl", function($scope, $timeout, $q, API, Notification) {
   function updateApps() {
     API.get("/admin/api/apps").then(function(arr) {
       $scope.apps = arr;
@@ -16,7 +16,7 @@ angular.module("protonet.platform").controller("DashboardCtrl", function($scope,
       }, timeout);
     }).catch(function() {
       deferred.reject(1);
-      alert("Could not " + action + " app. Please try again.");
+      Notification.error("Could not " + action + " app. Please try again.");
     }).finally(function() {
       app.loading = false;
     });
