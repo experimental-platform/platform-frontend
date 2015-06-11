@@ -67,7 +67,7 @@ var list_result = [
   }
 ];
 
-router.get('/list', function (req, res, next) {
+router.get('/apps/list', function (req, res, next) {
   _.remove(list_result, function(n) { return n == null; })
   res.json(list_result)
 });
@@ -84,7 +84,7 @@ router.post('/start', function (req, res, next) {
   }
 });
 
-router.post('/stop', function (req, res, next) {
+router.post('/apps/stop', function (req, res, next) {
   var name = req.body['name'];
   var app = _.find(list_result, function(elem) { return elem.name == name })
   if(app != undefined) {
@@ -96,7 +96,7 @@ router.post('/stop', function (req, res, next) {
   }
 });
 
-router.post('/restart', function (req, res, next) {
+router.post('/apps/restart', function (req, res, next) {
   var name = req.body['name'];
   var app = _.find(list_result, function(elem) { return elem.name == name })
   if(app != undefined) {
@@ -107,7 +107,7 @@ router.post('/restart', function (req, res, next) {
   }
 });
 
-router.post('/rebuild', function (req, res, next) {
+router.post('/apps/rebuild', function (req, res, next) {
   var name = req.body['name'];
   var app = _.find(list_result, function(elem) { return elem.name == name })
   if(app != undefined) {
@@ -118,7 +118,7 @@ router.post('/rebuild', function (req, res, next) {
   }
 });
 
-router.post('/destroy', function (req, res, next) {
+router.post('/apps/destroy', function (req, res, next) {
   var name = req.body['name'];
   var findIndex = _.findIndex(list_result, function(elem) { return elem.name == name })
   if(findIndex != -1) {
@@ -130,11 +130,11 @@ router.post('/destroy', function (req, res, next) {
   }
 });
 
-router.get('/logs/:appname', function (req, res, next) {
+router.get('/apps/logs/:appname', function (req, res, next) {
   res.json({msg: "\n\u003e node-js-sample@0.2.0 start /app\n\u003e node index.js\n\nNode app is running at localhost:5000\n"})
 });
 
-router.get('/urls/:appname', function (req, res, next) {
+router.get('/apps/urls/:appname', function (req, res, next) {
   var appname = req.params["appname"];
   res.json(["https://carlwurst1338.protonet.info/" + appname, "http://core-01/" + appname])
 });
