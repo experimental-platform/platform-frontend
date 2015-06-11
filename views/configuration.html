@@ -28,10 +28,12 @@
     <p>SSH Keys are needed to deploy apps.</p>
     <textarea placeholder="Paste new public key" class="full-width" ng-model="key" ng-disabled="loading"></textarea>
     <button class="btn cta" type="submit" ng-disabled="loading">Add</button>
-    <h3 class="existing-keys-headline">Existing Keys</h3>
-    <ul class="keys">
-      <li ng-repeat="key in keys"><span class="key">{{key.description}}</span> <a ng-click="removeKey(key)">Remove</a></li>
-    </ul>
+    <div ng-if="keys.length">
+      <h3 class="existing-keys-headline">Existing Keys</h3>
+      <ul class="keys">
+        <li ng-repeat="key in keys"><span class="key">{{key.description}}</span> <a ng-click="removeKey(key)">Remove</a></li>
+      </ul>
+    </div>
   </form>
 
 </div>
