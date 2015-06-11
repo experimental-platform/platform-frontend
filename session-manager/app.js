@@ -46,9 +46,9 @@ app.use(session({
   secret: "yo-secret-dawg!Banana" // genereate Key on start
 }));
 
-app.use('/protonet', express.static(path.join(__dirname, 'public')));
+app.use('/admin', express.static(path.join(__dirname, 'public')));
 
-app.use('/protonet/api', api_router);
+app.use('/admin/api', api_router);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
