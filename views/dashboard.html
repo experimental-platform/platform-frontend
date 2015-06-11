@@ -1,129 +1,30 @@
 <div class="teaser">
   <div class="wrapper">
-    <h2>Your Apps</h2>
+    <h2>My Apps</h2>
   </div>
 </div>
 
 <div class="apps">
-
-  <div class="app material-box">
+  <div class="no-apps" ng-if="!apps.length">You don't have any apps, yet. It only takes 3 minutes to <a href="#/create-app-1">create</a> one.</div>
+  
+  <div class="app material-box" ng-repeat="app in apps track by app.name" ng-class="{ loading: app.loading }">
     <figure>
       <img src="images/technology-logos/nodejs.png" alt="nodejs logo">
     </figure>
     <p>
-      My-App
+      {{app.name}}
       <span>Node.js</span>
     </p>
     <div class="right-bar">
-      <span class="green">Running for 234 hours</span>
+      <span class="status" ng-class="{ green: app.state == 'started', red: app.state == 'error' }">{{app.state}}</span>
       <div class="action-bar">
-        <a title="open app" href="" class="icon icon-open"></a>
-        <a title="pause app" href="" class="icon icon-pause"></a>
-        <a title="start app" href="" class="icon icon-start hidden"></a>
-        <a title="edit app" href="" class="icon icon-edit"></a>
-        <a title="delete app" href="" class="icon icon-delete"></a>
+        <a title="Open" ng-click="openApp(app)" class="icon icon-open"></a>
+        <a title="Stop" ng-if="app.state == 'started'" ng-click="stopApp(app)" class="icon icon-pause"></a>
+        <a title="Start" ng-if="app.state == 'stopped'" ng-click="startApp(app)" class="icon icon-start"></a>
+        <a title="Delete" ng-click="deleteApp(app)" class="icon icon-delete"></a>
       </div>
     </div>
   </div>
 
-  <div class="app material-box">
-    <figure>
-      <img src="images/technology-logos/docker.png" alt="html logo">
-    </figure>
-    <p>
-      Pandora
-      <span>Docker</span>
-    </p>
-    <div class="right-bar">
-      <span class="orange">Warning!</span>
-      <div class="action-bar">
-        <a title="open app" href="" class="icon icon-open"></a>
-        <a title="pause app" href="" class="icon icon-pause"></a>
-        <a title="start app" href="" class="icon icon-start hidden"></a>
-        <a title="edit app" href="" class="icon icon-edit"></a>
-        <a title="delete app" href="" class="icon icon-delete"></a>
-      </div>
-    </div>
-  </div>
-
-  <div class="app material-box">
-    <figure>
-      <img src="images/technology-logos/ruby.png" alt="ruby logo">
-    </figure>
-    <p>
-      Something-strange
-      <span>Ruby</span>
-    </p>
-    <div class="right-bar">
-      <span class="red">Alert!</span>
-      <div class="action-bar">
-        <a title="open app" href="" class="icon icon-open"></a>
-        <a title="pause app" href="" class="icon icon-pause"></a>
-        <a title="start app" href="" class="icon icon-start hidden"></a>
-        <a title="edit app" href="" class="icon icon-edit"></a>
-        <a title="delete app" href="" class="icon icon-delete"></a>
-      </div>
-    </div>
-  </div>
-
-  <div class="app material-box">
-    <figure>
-      <img src="images/technology-logos/html.png" alt="html logo">
-    </figure>
-    <p>
-      Hello-world
-      <span>HTML5</span>
-    </p>
-    <div class="right-bar">
-      <span>stopped</span>
-      <div class="action-bar">
-        <a title="open app" href="" class="icon icon-open"></a>
-        <a title="pause app" href="" class="icon icon-pause hidden"></a>
-        <a title="start app" href="" class="icon icon-start"></a>
-        <a title="edit app" href="" class="icon icon-edit"></a>
-        <a title="delete app" href="" class="icon icon-delete"></a>
-      </div>
-    </div>
-  </div>
-
-  <div class="app material-box">
-    <figure>
-      <img src="images/technology-logos/php.png" alt="php logo">
-    </figure>
-    <p>
-      Test-app
-      <span>PHP</span>
-    </p>
-    <div class="right-bar">
-      <span>stopped</span>
-      <div class="action-bar">
-        <a title="open app" href="" class="icon icon-open"></a>
-        <a title="pause app" href="" class="icon icon-pause hidden"></a>
-        <a title="start app" href="" class="icon icon-start"></a>
-        <a title="edit app" href="" class="icon icon-edit"></a>
-        <a title="delete app" href="" class="icon icon-delete"></a>
-      </div>
-    </div>
-  </div>
-
-  <div class="app material-box">
-    <figure>
-      <img src="images/technology-logos/python.png" alt="php logo">
-    </figure>
-    <p>
-      Test-app-2
-      <span>Python</span>
-    </p>
-    <div class="right-bar">
-      <span>stopped</span>
-      <div class="action-bar">
-        <a title="open app" href="" class="icon icon-open"></a>
-        <a title="pause app" href="" class="icon icon-pause hidden"></a>
-        <a title="start app" href="" class="icon icon-start"></a>
-        <a title="edit app" href="" class="icon icon-edit"></a>
-        <a title="delete app" href="" class="icon icon-delete"></a>
-      </div>
-    </div>
-  </div>
 
 </div>

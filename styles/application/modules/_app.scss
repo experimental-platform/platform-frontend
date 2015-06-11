@@ -7,7 +7,7 @@
   @include flexbox();
   @include align-items(center);
   @include transition(all,ease-out,0.2s);
-  
+
   figure{
     width: 46px;
     height: 46px;
@@ -29,7 +29,7 @@
     }
   }
   .right-bar{
-    span{
+    .status {
       font-size: 14px;
       &.green{
         color: #44AF47;
@@ -41,7 +41,7 @@
         color: #FF1A0E;
       }
     }
-    .action-bar{
+    .action-bar {
       display: none;
       margin-bottom: -5px;
       a{
@@ -52,15 +52,38 @@
       }
     }
   }
-  &:hover{
+  &:hover {
     background-color: rgba(255,255,255,1);
     box-shadow: 0 6px 6px 1px rgba(0, 0, 0, 0.16);
-    .right-bar{
-      span{
+    .right-bar {
+      .status {
         display: none;
       }
-      .action-bar{
+      .action-bar {
         display: block;
+      }
+    }
+  }
+  
+  &.loading {
+    .right-bar {
+      .status {
+        display: inline-block !important;
+      }
+      .status:before {
+        content: "";
+        margin-right: 5px;
+        margin-top: -2px;
+        display: inline-block;
+        background-image: url(../images/spinner.gif);
+        background-repeat: no-repeat;
+        background-size: 100%;
+        width: 16px;
+        height: 16px;
+        vertical-align: middle;
+      }
+      .action-bar {
+        display: none !important;
       }
     }
   }
@@ -115,5 +138,18 @@
         }
       }
     }
+  }
+}
+
+.no-apps {
+  width: 550px;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 759px){
+  .no-apps {
+    display: block;
+    width: 94%;
+    
   }
 }

@@ -84,6 +84,7 @@ p {
   font-size: 18px; }
 
 a {
+  cursor: pointer;
   color: #57A4F9; }
 
 .hidden {
@@ -409,13 +410,13 @@ textarea {
     .app p span {
       font-weight: normal;
       font-size: 14px; }
-  .app .right-bar span {
+  .app .right-bar .status {
     font-size: 14px; }
-    .app .right-bar span.green {
+    .app .right-bar .status.green {
       color: #44AF47; }
-    .app .right-bar span.orange {
+    .app .right-bar .status.orange {
       color: #FF980E; }
-    .app .right-bar span.red {
+    .app .right-bar .status.red {
       color: #FF1A0E; }
   .app .right-bar .action-bar {
     display: none;
@@ -427,10 +428,25 @@ textarea {
   .app:hover {
     background-color: white;
     box-shadow: 0 6px 6px 1px rgba(0, 0, 0, 0.16); }
-    .app:hover .right-bar span {
+    .app:hover .right-bar .status {
       display: none; }
     .app:hover .right-bar .action-bar {
       display: block; }
+  .app.loading .right-bar .status {
+    display: inline-block !important; }
+  .app.loading .right-bar .status:before {
+    content: "";
+    margin-right: 5px;
+    margin-top: -2px;
+    display: inline-block;
+    background-image: url(../images/spinner.gif);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle; }
+  .app.loading .right-bar .action-bar {
+    display: none !important; }
 
 @media only screen and (max-width: 759px) {
   .app {
@@ -469,6 +485,14 @@ textarea {
       box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2); }
       .app:hover .right-bar span {
         display: inline-block; } }
+.no-apps {
+  width: 550px;
+  margin: 0 auto; }
+
+@media only screen and (max-width: 759px) {
+  .no-apps {
+    display: block;
+    width: 94%; } }
 code {
   border-left: 3px solid #5892FC;
   font-size: 14px;

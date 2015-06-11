@@ -1,7 +1,7 @@
 angular.module("protonet.platform")
   .factory("API", function($http) {
     var apiHost = "";
-    options = {};
+    var options = {};
     if (location.href.indexOf("http://localhost") !== -1) {
       apiHost = "http://localhost:3000";
       options.withCredentials = true;
@@ -12,7 +12,7 @@ angular.module("protonet.platform")
           return response.data;
         });
       },
-      get: function(path, params) {
+      get: function(path) {
         return $http.get(apiHost + path, options).then(function(response) {
           return response.data;
         });
