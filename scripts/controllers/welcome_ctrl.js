@@ -10,10 +10,10 @@ angular.module("protonet.platform").controller("WelcomeCtrl", function($scope, A
     }
 
     $scope.loading = true;
-    API.post("/protonet/api/password/initial", {
+    API.post("/admin/api/password/initial", {
       password: $scope.password
     }).then(function() {
-      return API.post("/protonet/api/login", {
+      return API.post("/admin/api/login", {
         password: $scope.password
       });
     }).then(function() {
@@ -32,7 +32,7 @@ angular.module("protonet.platform").controller("WelcomeCtrl", function($scope, A
     }
 
     $scope.loading = true;
-    API.post("/protonet/api/ssh/add", {
+    API.post("/admin/api/ssh/add", {
       key: $scope.publicKey
     }).then(function() {
       $location.path("/welcome-4");
@@ -54,7 +54,7 @@ angular.module("protonet.platform").controller("WelcomeCtrl", function($scope, A
     }
 
     $scope.loading = true;
-    API.post("/protonet/api/ptw/nodename", {
+    API.post("/admin/api/ptw/nodename", {
       nodename: $scope.nodename
     }).then(function() {
       $location.path("/dashboard");

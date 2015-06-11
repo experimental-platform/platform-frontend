@@ -9,7 +9,7 @@ angular.module("protonet.platform").controller("LayoutCtrl", function($scope, $s
   }
 
   function updatePTW() {
-    API.get("/protonet/api/ptw").then(setPTW);
+    API.get("/admin/api/ptw").then(setPTW);
   }
 
   setPTW(ptw);

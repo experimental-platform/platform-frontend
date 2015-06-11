@@ -21,7 +21,7 @@ angular
         controller: "LayoutCtrl",
         resolve: {
           ptw: function($state, API) {
-            return API.get("/protonet/api/ptw").catch(function() {
+            return API.get("/admin/api/ptw").catch(function() {
               $state.go("login");
             });
           }

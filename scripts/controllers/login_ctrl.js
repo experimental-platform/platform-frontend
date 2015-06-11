@@ -5,7 +5,7 @@ angular.module("protonet.platform").controller("LoginCtrl", function($scope, API
     }
 
     $scope.loading = true;
-    API.post("/protonet/api/login", {
+    API.post("/admin/api/login", {
       password: $scope.password
     }).then(function() {
       $location.path("/dashboard");
