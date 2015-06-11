@@ -33,7 +33,7 @@ angular.module("protonet.platform").controller("WelcomeCtrl", function($scope, A
 
     $scope.loading = true;
     API.post("/admin/api/ssh/add", {
-      key: $scope.publicKey
+      key: $.trim($scope.publicKey)
     }).then(function() {
       $location.path("/welcome-4");
     }).catch(function() {

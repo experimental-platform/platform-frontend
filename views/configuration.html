@@ -6,33 +6,32 @@
 
 <div class="configuration">
 
-  <div class="configuration-box material-box">
+  <form class="configuration-box material-box" ng-submit="setPublishToWeb()">
     <h3>Internet Address</h3>
     <p>Choose an address under which you can publicly access all your apps.</p>
-    <div class="full-width"><input type="text" class="text-right" placeholder="your-box-name" value="spongebob" autofocus><span class="protonet-url">.protonet.info</span></div>
-  <a href="" class="btn cta">Save</a>
-  </div>
+    <div class="full-width"><input type="text" class="text-right" placeholder="your-box-name" ng-model="nodename" ng-disabled="loading" autofocus><span class="protonet-url">.protonet.info</span></div>
+    <button class="btn cta" type="submit" ng-disabled="loading">Save</button>
+  </form>
   
 
-  <div class="configuration-box material-box">
+  <form class="configuration-box material-box" ng-submit="setPassword()">
     <h3>Password</h3>
     <p>Choose a password that allows access to the administration interface. This will also be your SSH root password. Make sure you don’t forget it.</p>
-    <input type="password" placeholder="Old password" class="full-width">
-    <input type="password" placeholder="New password" class="full-width">
-    <input type="password" placeholder="Repeat password" class="full-width">
-    <a href="" class="btn cta">Save</a>
-  </div>
+    <input type="password" placeholder="Old password" class="full-width" ng-disabled="loading" ng-model="currentPassword">
+    <input type="password" placeholder="New password" class="full-width" ng-disabled="loading" ng-model="newPassword">
+    <input type="password" placeholder="Repeat password" class="full-width" ng-disabled="loading" ng-model="newPasswordConfirmation">
+    <button class="btn cta" type="submit" ng-disabled="loading">Save</button>
+  </form>
 
-  <div class="configuration-box material-box">
+  <form class="configuration-box material-box" ng-submit="addKey()">
     <h3>SSH Public Keys</h3>
     <p>SSH Keys are needed to deploy apps.</p>
-    <textarea placeholder="Paste new public key" class="full-width"></textarea>
-    <a href="" class="btn cta">Add</a>
+    <textarea placeholder="Paste new public key" class="full-width" ng-model="key" ng-disabled="loading"></textarea>
+    <button class="btn cta" type="submit" ng-disabled="loading">Add</button>
     <h3 class="existing-keys-headline">Existing Keys</h3>
     <ul class="keys">
-      <li><span class="key">54:48:4d:10:12:8c:b6:b5:0d:fa:3e:6c:ba:df:26:22 christopher.blum@protonet.info</span> <a href="">Remove</a></li>
-      <li><span class="key">ec:a5:d2:fe:83:cc:72:a8:81:de:f8:e4:a8:77:f1:7c christopher.blum@pc-cblum.hh</span> <a href="">Remove</a></li>
+      <li ng-repeat="key in keys"><span class="key">{{key.description}}</span> <a ng-click="removeKey(key)">Remove</a></li>
     </ul>
-  </div>
+  </form>
 
 </div>

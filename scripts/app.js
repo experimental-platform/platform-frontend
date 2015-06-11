@@ -46,7 +46,8 @@ angular
       })
       .state("dashboard.configuration", {
         url: "/configuration",
-        templateUrl: 'views/configuration.html'
+        templateUrl: 'views/configuration.html',
+        controller: 'ConfigurationCtrl'
       })
       .state("login", {
         url: "/login",

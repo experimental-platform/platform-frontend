@@ -299,12 +299,18 @@ input, textarea {
     color: #333; }
 
 input {
+  transition: background-color 0.5s;
   height: 30px;
   line-height: 30px; }
   input.text-right {
     text-align: right; }
 
+textarea[disabled],
+input[disabled] {
+  background-color: #f2f2f2; }
+
 textarea {
+  transition: background-color 0.5s;
   height: 50px;
   vertical-align: bottom; }
 
@@ -684,7 +690,8 @@ code {
   .configuration-box .protonet-url {
     font-size: 18px; }
   .configuration-box .keys {
-    padding-left: 30px; }
+    padding-left: 20px;
+    font-size: 14px; }
   .configuration-box .existing-keys-headline {
     margin-top: 40px; }
 
