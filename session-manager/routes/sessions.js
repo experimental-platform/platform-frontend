@@ -8,40 +8,50 @@ var request_handler = require('../helper/error').requestHandler;
 
 module.exports = function(router) {
   router.post('/login', function (req, res, next) {
-      var secret = req.body['password'];
-      if (secret == undefined || secret == "") {
-        next(error_helper(HttpStatus.FORBIDDEN, 'No Password given.'))
-      } else {
-        request(api('/password'), request_handler(function (response, result) {
-          if (response.statusCode === HttpStatus.NOT_FOUND) {
-            next(error_helper(HttpStatus.NOT_FOUND, 'Password not set.'));
-          } else if (response.statusCode === HttpStatus.OK) {
-            var saved_digest = result['value'];
-            if (password.compareSync(secret, saved_digest)) {
-              req.session.logged_in = true;
-              res.json({status: "Ok"})
-            } else {
-              next(error_helper(HttpStatus.FORBIDDEN, 'Wrong Password, access denied.'));
-            }
-          }
-        }, next));
+    check_password(req.body.password, function(success) {
+      if (!success) {
+        next(error_helper(HttpStatus.FORBIDDEN, 'Wrong password or password not set yet.'));
+        return;
       }
-    }
-  );
+      req.session.logged_in = true;
+      res.json({ status: "Ok" });
+    });
+  });
 
   router.post('/logout', auth, function (req, res, next) {
-      // TODO: Error handling ;)
-      req.session.destroy();
-      res.json({status: "Ok"})
+    // TODO: Error handling ;)
+    req.session.destroy();
+    res.json({ status: "Ok" });
+  });
+
+  var check_password = function(secret, callback) {
+    if (!secret) {
+      console.log("Password empty.");
+      callback(false);
+      return;
     }
-  );
+    request(api('/password'), request_handler(function (response, result) {
+      if (response.statusCode === HttpStatus.NOT_FOUND) {
+        console.log("Password not set.");
+        callback(false);
+      } else if (response.statusCode === HttpStatus.OK) {
+        var saved_digest = result.value;
+        if (password.compareSync(secret, saved_digest)) {
+          callback(true);
+        } else {
+          console.log("Wrong password.");
+          callback(false);
+        }
+      }
+    }, function() {
+      console.log("Error checking password.");
+      callback(false);
+    }));
+  };
 
   var set_password = function (req, res, next) {
-    var secret = req.body['password'];
-    if (secret != undefined && secret != "") {
-      // TODO: Add more Password requirments!
-      // * Check if password was confirmed
-      // * Check if old password is correct!
+    var secret = req.body.password;
+    if (secret) {
       var digest = password.hashSync(secret);
       var options = {
         url: api('/password'),
@@ -62,7 +72,15 @@ module.exports = function(router) {
     }
   };
 
-  router.post('/password', auth, set_password);
+  router.post('/password', auth, function(req, res, next) {
+    check_password(req.body.current_password, function(success) {
+      if (!success) {
+        next(error_helper(HttpStatus.FORBIDDEN, 'Current password is incorrect.'));
+        return;
+      }
+      set_password(req, res, next);
+    });
+  });
 
   router.post('/password/initial', function (req, res, next) {
     request(api('/password'), request_handler(function(response, result) {
