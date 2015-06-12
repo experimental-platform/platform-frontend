@@ -3,7 +3,7 @@ FROM dockerregistry.protorz.net/ubuntu:latest
 
 RUN curl -sL https://deb.nodesource.com/setup | sudo bash - && \
     apt-get update && \
-    apt-get install -y build-essential curl nodejs git && \
+    apt-get install -y build-essential curl nodejs git systemd-services && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
