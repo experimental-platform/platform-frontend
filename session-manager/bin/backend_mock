@@ -18,51 +18,78 @@ var list_result = [
   {
     "name":"hello-world",
     "container_type":"web",
+    "app_type": "Go",
     "container_id":"3f0578826783",
     "state":"stopped",
     "urls":[
       "https://mauerblume.protonet.info/hello-world",
-      "http://innocence.protonet.info/hello-world"
+      "http://innocence/hello-world"
     ]
   },
   {
     "name":"node-js-example",
     "container_type":"web",
+    "app_type": "Node.js",
     "container_id":"aad3617af671",
     "state":"stopped",
     "urls":[
       "https://mauerblume.protonet.info/node-js-example",
-      "http://innocence.protonet.info/node-js-example"
+      "http://innocence/node-js-example"
     ]
   },
   {
     "name":"node-js-sample",
     "container_type":"web",
+    "app_type": "Node.js",
     "container_id":"5d266908e1ee",
     "state":"stopped",
     "urls":[
       "https://mauerblume.protonet.info/node-js-sample",
-      "http://innocence.protonet.info/node-js-sample"
+      "http://innocence/node-js-sample"
     ]
   },
   {
     "name":"test1",
     "container_type":"web",
+    "app_type": "Java",
     "container_id":"c6be11f53afb",
     "state":"stopped",
     "urls":[
       "https://mauerblume.protonet.info/test1",
-      "http://innocence.protonet.info/test1"
+      "http://innocence/test1"
     ]
   },
   {
     "name":"test2",
     "container_type":"web",
+    "app_type": "PHP",
     "container_id":"fc0097e4e122",
     "state":"stopped",
     "urls":[
       "https://mauerblume.protonet.info/test2",
-      "http://innocence.protonet.info/test2"
+      "http://innocence/test2"
+    ]
+  },
+  {
+    "name":"test3",
+    "container_type":"web",
+    "app_type": "Ruby",
+    "container_id":"fc0097e4f122",
+    "state":"stopped",
+    "urls":[
+      "https://mauerblume.protonet.info/test3",
+      "http://innocence/test3"
+    ]
+  },
+  {
+    "name":"test4",
+    "container_type":"web",
+    "app_type": "Python",
+    "container_id":"9c0076e4f122",
+    "state":"stopped",
+    "urls":[
+      "https://mauerblume.protonet.info/test4",
+      "http://innocence/test4"
     ]
   }
 ];
@@ -72,7 +99,7 @@ router.get('/apps/list', function (req, res, next) {
   res.json(list_result)
 });
 
-router.post('/start', function (req, res, next) {
+router.post('/apps/start', function (req, res, next) {
   var name = req.body['name'];
   var app = _.find(list_result, function(elem) { return elem.name == name })
   if(app != undefined) {
