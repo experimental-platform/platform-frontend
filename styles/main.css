@@ -8,7 +8,7 @@
   -ms-transform: scale(0.75);
   /* IE9+ doesn't support masks, so we just decrease image size */
   -webkit-mask-box-image-repeat: stretch;
-  -webkit-mask-box-image-source: asset-data-url("/images/hexagon.svg");
+  -webkit-mask-box-image-source: url("../images/hexagon.svg");
   mask: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxtYXNrIG1hc2tDb250ZW50VW5pdHM9Im9iamVjdEJvdW5kaW5nQm94IiBpZD0iaGV4YWdvbiI%2BPHBvbHlnb24gcG9pbnRzPSIwLjEzIDAuNzIsIDAuMTIgMC43MSwgMC4xMiAwLjI5LCAwLjEzIDAuMjgsIDAuNDkgMC4wNywgMC41MSAwLjA3LCAwLjg3IDAuMjgsIDAuODggMC4yOSwgMC44OCAwLjcxLCAwLjg3IDAuNzIsIDAuNTEgMC45MywgMC40OSAwLjkzLCAwLjEzIDAuNzIiIGZpbGw9IiNmZmYiIC8%2BPC9tYXNrPjwvc3ZnPg%3D%3D#hexagon");
   /*
    * Alternative for webkit
@@ -21,23 +21,23 @@
   height: 16px; }
 
 .icon-open {
-  background: url("/images/icons/open.svg") center center no-repeat transparent;
+  background: url("../images/icons/open.svg") center center no-repeat transparent;
   background-size: 100%; }
 
 .icon-pause {
-  background: url("/images/icons/pause.svg") center center no-repeat transparent;
+  background: url("../images/icons/pause.svg") center center no-repeat transparent;
   background-size: 70%; }
 
 .icon-start {
-  background: url("/images/icons/play.svg") center center no-repeat transparent;
+  background: url("../images/icons/play.svg") center center no-repeat transparent;
   background-size: 100%; }
 
 .icon-edit {
-  background: url("/images/icons/edit.svg") center center no-repeat transparent;
+  background: url("../images/icons/edit.svg") center center no-repeat transparent;
   background-size: 100%; }
 
 .icon-delete {
-  background: url("/images/icons/delete.svg") center center no-repeat transparent;
+  background: url("../images/icons/delete.svg") center center no-repeat transparent;
   background-size: 85%; }
 
 @font-face {
@@ -362,7 +362,7 @@ textarea {
       height: 17px;
       border: none;
       border-radius: 17px;
-      background: url("/images/done.svg") 40% 50% no-repeat #dddddd;
+      background: url("../images/done.svg") 40% 50% no-repeat #dddddd;
       background-size: 60%; }
     .step-bar li.active {
       background-color: #5892FC;
