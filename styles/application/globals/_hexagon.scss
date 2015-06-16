@@ -11,7 +11,7 @@ $grayscale-mask: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5v
 .hexagon {
   -ms-transform: scale(0.75); /* IE9+ doesn't support masks, so we just decrease image size */
   -webkit-mask-box-image-repeat: stretch;
-  -webkit-mask-box-image-source: asset-data-url("/images/hexagon.svg");
+  -webkit-mask-box-image-source: url("../images/hexagon.svg");
   mask: url($hexagon-mask);
   /*
    * Alternative for webkit
