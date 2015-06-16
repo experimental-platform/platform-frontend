@@ -1,4 +1,5 @@
-angular.module("protonet.platform").controller("LayoutCtrl", function($scope, $state, API, ptw) {
+angular.module("protonet.platform").controller("LayoutCtrl", function($scope, $state, API) {
+
   $scope.$on("$stateChangeSuccess", function() {
     $scope.state = $state.current.name;
   });
@@ -12,7 +13,7 @@ angular.module("protonet.platform").controller("LayoutCtrl", function($scope, $s
     API.get("/admin/api/ptw").then(setPTW);
   }
 
-  setPTW(ptw);
+  updatePTW();
 
   $scope.$on("ptw.change", updatePTW);
 });

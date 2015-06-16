@@ -20,10 +20,24 @@ angular
         templateUrl: 'views/layout.html',
         controller: "LayoutCtrl",
         resolve: {
-          ptw: function($state, API) {
-            return API.get("/admin/api/ptw").catch(function() {
+          session: function($state, $q, API) {
+            var deferred = $q.defer();
+            API.get("/admin/api/session").then(function(data) {
+              if (data.needsSetup) {
+                $state.go("welcome_1");
+                deferred.reject();
+              } else if (!data.loggedIn) {
+                $state.go("login");
+                deferred.reject();
+              } else {
+                deferred.resolve();
+              }
+            }).catch(function() {
+              // TODO: Show error page or something similar
               $state.go("login");
+              deferred.reject();
             });
+            return deferred.promise;
           }
         }
       })
