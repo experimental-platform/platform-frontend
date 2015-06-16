@@ -60,6 +60,16 @@ angular.module("protonet.platform").controller("DashboardCtrl", function($scope,
     });
   };
 
+  $scope.getTechIcon = function(app) {
+    var hasIcon = ["Node.js", "Python", "Ruby", "Go", "Java", "PHP"].indexOf(app.app_type) !== -1;
+    if (hasIcon) {
+      var normalizedName = app.app_type.toLowerCase().replace(/[^a-z0-9]/g, "");
+      return "images/technology-logos/" + normalizedName + ".png";
+    } else {
+      return "images/hexagon.svg";
+    }
+  };
+
   $scope.openApp = function(app) {
     window.open(app.urls[0]);
   };
