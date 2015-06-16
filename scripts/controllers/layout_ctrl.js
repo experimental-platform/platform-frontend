@@ -15,5 +15,11 @@ angular.module("protonet.platform").controller("LayoutCtrl", function($scope, $s
 
   updatePTW();
 
+  $scope.logout = function() {
+    API.post("/admin/api/logout").then(function() {
+      $state.go("login");
+    });
+  };
+
   $scope.$on("ptw.change", updatePTW);
 });

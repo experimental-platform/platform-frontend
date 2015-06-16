@@ -253,6 +253,11 @@ nav {
       position: absolute;
       display: block;
       background-color: #FF980E; }
+  nav .logout {
+    color: #999;
+    float: right; }
+    nav .logout:after {
+      content: none !important; }
 
 @media only screen and (max-width: 759px) {
   nav .wrapper {
