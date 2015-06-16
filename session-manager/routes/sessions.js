@@ -7,6 +7,16 @@ var error_helper = require('../helper/error').errorHelper;
 var request_handler = require('../helper/error').requestHandler;
 
 module.exports = function(router) {
+  router.get('/session', function(req, res, next) {
+    request(api('/password'), request_handler(function (response, result) {
+      if (response.statusCode === HttpStatus.NOT_FOUND) {
+        res.json({ needsSetup: true, loggedIn: false });
+      } else {
+        res.json({ needsSetup: false, loggedIn: !!req.session.logged_in });
+      }
+    }));
+  });
+
   router.post('/login', function (req, res, next) {
     check_password(req.body.password, function(success) {
       if (!success) {
@@ -62,7 +72,7 @@ module.exports = function(router) {
       };
       request(options, request_handler(function(response, result) {
         if (response.statusCode === HttpStatus.OK) {
-          res.json({status: "Ok"})
+          res.json({status: "Ok"});
         } else {
           next(error_helper(HttpStatus.INTERNAL_SERVER_ERROR, 'Password could not be set.'));
         }
