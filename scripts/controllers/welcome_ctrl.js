@@ -57,6 +57,10 @@ angular.module("protonet.platform").controller("WelcomeCtrl", function($scope, A
     API.post("/admin/api/ptw/nodename", {
       nodename: $scope.nodename
     }).then(function() {
+      return API.post("/admin/api/ptw/enabled", {
+        enabled: true
+      });
+    }).then(function() {
       $location.path("/dashboard");
     }).catch(function() {
       Notification.error("An error occured while setting the internet address. Please try again.");

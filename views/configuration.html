@@ -10,6 +10,9 @@
     <h3>Internet Address</h3>
     <p>Choose an address under which you can publicly access all your apps.</p>
     <div class="full-width"><input type="text" class="text-right" placeholder="your-box-name" ng-model="nodename" ng-disabled="loading" autofocus><span class="protonet-url">.protonet.info</span></div>
+    <div class="full-width">
+      <label><input type="checkbox" ng-model="ptwEnabled" ng-disabled="loading"> enabled</label>
+    </div>
     <button class="btn cta" type="submit" ng-disabled="loading">Save</button>
   </form>
   

@@ -319,6 +319,10 @@ textarea {
   height: 50px;
   vertical-align: bottom; }
 
+input[type=checkbox] {
+  margin: -2px 3px 0 0;
+  vertical-align: middle; }
+
 @media only screen and (max-width: 759px) {
   input, textarea {
     width: 100%;

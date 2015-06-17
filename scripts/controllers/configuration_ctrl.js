@@ -19,7 +19,11 @@ angular.module("protonet.platform").controller("ConfigurationCtrl", function($sc
     API.post("/admin/api/ptw/nodename", {
       nodename: $scope.nodename
     }).then(function() {
-      Notification.success("Successfully updated the internet address.");
+      return API.post("/admin/api/ptw/enabled", {
+        enabled: $scope.ptwEnabled
+      });
+    }).then(function() {
+      Notification.success("Successfully updated the internet publishing.");
       $scope.$emit("ptw.change");
     }).catch(function() {
       Notification.error("An error occured while setting the internet address. Please try again.");
