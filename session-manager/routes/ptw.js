@@ -21,7 +21,7 @@ module.exports = function(router) {
         }, next));
       },
       nodename: function(callback) {
-        request(api('/ptw/nodename'), request_handler(function(response, result) {
+        request(api('/hostname'), request_handler(function(response, result) {
           if (response.statusCode == HttpStatus.OK) {
             callback(null, result.value)
           } else if (response.statusCode == HttpStatus.NOT_FOUND) {
@@ -45,7 +45,7 @@ module.exports = function(router) {
     if (nodename != undefined && nodename != "") {
       // make more checks and if name is really avaible! We need some kind of own service to do this..
       var options = {
-        url: api('/ptw/nodename'),
+        url: api('/hostname'),
         method: 'PUT',
         form: {
           value: nodename
