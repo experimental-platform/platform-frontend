@@ -30,6 +30,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
+var fileStore_options = {
+  path: "/data"
+};
+
 if (process.env.NODE_ENV == "development") {
   console.log("Warning: Enabling cors because of dev environment.");
   app.use(cors({
@@ -37,10 +41,11 @@ if (process.env.NODE_ENV == "development") {
     origin: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
   }));
+  fileStore_options.path = "./sessions";
 }
 
 app.use(session({
-  store: new FileStore({}),
+  store: new FileStore(fileStore_options),
   resave: false,
   saveUninitialized: false,
   secret: "yo-secret-dawg!Banana" // genereate Key on start
