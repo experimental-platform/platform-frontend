@@ -68,7 +68,7 @@ module.exports = function(router) {
   });
 
   router.post('/ptw/enabled', auth, function(req, res, next) {
-    var enabled = req.body['enabled'] == 'true';
+    var enabled = req.body['enabled'] == true;
     var options = {
       url: api('/ptw/enabled')
     };
@@ -79,9 +79,12 @@ module.exports = function(router) {
     }
     request(options, request_handler(function(response, result) {
       if (response.statusCode == HttpStatus.OK) {
-        res.json({ success: true })
+        res.json({ success: true });
+      } else if (!enabled && response.body.error && response.body.error.indexOf("no such file") !== -1) {
+        // Hack: disabling twice will lead to an error, which actually is not an error
+        res.json({ success: true });
       } else {
-        next(error_helper(HttpStatus.INTERNAL_SERVER_ERROR))
+        next(error_helper(HttpStatus.INTERNAL_SERVER_ERROR));
       }
     }, next));
   });
