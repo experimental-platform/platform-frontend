@@ -8,16 +8,13 @@ auth = function (req, res, next) {
 
 module.exports = function (router) {
   router.get('/logs', auth, function (req, res, next) {
-      // 'journalctl --output=json --boot --utc --no-pager --unit=sshd.socket'
-      run_cmd('journalctl --output=json --boot --utc --no-pager', res, next);
+      run_cmd('bin/journalctl.sh', res, next);
     }
   );
 
   router.get('/logs/:container', auth, function (req, res, next) {
-      // 'journalctl --output=json --boot --utc --no-pager --unit=sshd.socket'
       var container = req.params["container"];
-      run_cmd('docker logs ' + container, res, next);
+      run_cmd('./bin/docker.sh ' + container, res, next);
     }
   );
-
 };
