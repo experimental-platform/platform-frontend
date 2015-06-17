@@ -5,7 +5,9 @@ var HttpStatus = require('http-status-codes');
 
 module.exports = {
   run_cmd: function (cmd_line, res, next) {
-    return exec(cmd_line,
+    return exec(
+      cmd_line,
+      {maxBuffer: 1024 * 1024 * 50},    // 50 MByte max
       function (error, stdout, stderr) {
         if (error === null) {
           res.json(stdout);
