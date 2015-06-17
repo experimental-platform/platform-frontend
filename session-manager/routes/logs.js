@@ -1,24 +1,27 @@
 var request = require('request').defaults({json: true});
-var HttpStatus = require('http-status-codes');
+
 var auth = require('../helper/auth');
 var error_helper = require('../helper/error').errorHelper;
-var request_handler = require('../helper/error').requestHandler;
+var run_cmd = require('../helper/cli').run_cmd;
+var exec = require('child_process').exec;
 
-var exec = require('child_process').exec();
+// TODO: Remove this to reenable authentication!
+auth = function (req, res, next) {
+  next();
+};
 
 module.exports = function (router) {
   router.get('/logs', auth, function (req, res, next) {
       // 'journalctl --output=json --boot --utc --no-pager --unit=sshd.socket'
-      child = exec('journalctl --output=json --boot --utc --no-pager',
-        request_handler(function (error, stdout, stderr) {
-          if (error == null && stderr == '') {
-            res.json(stdout);
-          } else {
-            console.log('exec error: ' + error);
-            console.log('stderr: ' + stderr);
-            next(error_helper(HttpStatus.BAD_REQUEST));
-          }
-        }, next));
+      run_cmd('journalctl --output=json --boot --utc --no-pager', res, next);
     }
-  )
+  );
+
+  router.get('/logs/:container', auth, function (req, res, next) {
+      // 'journalctl --output=json --boot --utc --no-pager --unit=sshd.socket'
+      var container = req.params["container"];
+      run_cmd('docker logs ' + container, res, next);
+    }
+  );
+
 };
