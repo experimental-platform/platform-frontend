@@ -1,0 +1,184 @@
+#!/usr/bin/env node
+var http = require('http');
+var express = require('express');
+var bodyParser = require('body-parser')
+var HttpStatus = require('http-status-codes');
+var error_helper = require('../helper/error').errorHelper
+var _ = require('lodash')
+
+var app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+var router = express.Router();
+
+var list_result = [
+  {
+    "name":"hello-world",
+    "container_type":"web",
+    "app_type": "Go",
+    "container_id":"3f0578826783",
+    "state":"stopped",
+    "urls":[
+      "https://mauerblume.protonet.info/hello-world",
+      "http://innocence/hello-world"
+    ]
+  },
+  {
+    "name":"node-js-example",
+    "container_type":"web",
+    "app_type": "Node.js",
+    "container_id":"aad3617af671",
+    "state":"stopped",
+    "urls":[
+      "https://mauerblume.protonet.info/node-js-example",
+      "http://innocence/node-js-example"
+    ]
+  },
+  {
+    "name":"node-js-sample",
+    "container_type":"web",
+    "app_type": "Node.js",
+    "container_id":"5d266908e1ee",
+    "state":"stopped",
+    "urls":[
+      "https://mauerblume.protonet.info/node-js-sample",
+      "http://innocence/node-js-sample"
+    ]
+  },
+  {
+    "name":"test1",
+    "container_type":"web",
+    "app_type": "Java",
+    "container_id":"c6be11f53afb",
+    "state":"stopped",
+    "urls":[
+      "https://mauerblume.protonet.info/test1",
+      "http://innocence/test1"
+    ]
+  },
+  {
+    "name":"test2",
+    "container_type":"web",
+    "app_type": "PHP",
+    "container_id":"fc0097e4e122",
+    "state":"stopped",
+    "urls":[
+      "https://mauerblume.protonet.info/test2",
+      "http://innocence/test2"
+    ]
+  },
+  {
+    "name":"test3",
+    "container_type":"web",
+    "app_type": "Ruby",
+    "container_id":"fc0097e4f122",
+    "state":"stopped",
+    "urls":[
+      "https://mauerblume.protonet.info/test3",
+      "http://innocence/test3"
+    ]
+  },
+  {
+    "name":"test4",
+    "container_type":"web",
+    "app_type": "Python",
+    "container_id":"9c0076e4f122",
+    "state":"stopped",
+    "urls":[
+      "https://mauerblume.protonet.info/test4",
+      "http://innocence/test4"
+    ]
+  }
+];
+
+router.get('/apps/list', function (req, res, next) {
+  _.remove(list_result, function(n) { return n == null; })
+  res.json(list_result)
+});
+
+router.post('/apps/start', function (req, res, next) {
+  var name = req.body['name'];
+  var app = _.find(list_result, function(elem) { return elem.name == name })
+  if(app != undefined) {
+    app['state'] = 'started';
+    res.json({name: name});
+  } else {
+    res.status(HttpStatus.NOT_FOUND)
+    res.json({err: "not found"})
+  }
+});
+
+router.post('/apps/stop', function (req, res, next) {
+  var name = req.body['name'];
+  var app = _.find(list_result, function(elem) { return elem.name == name })
+  if(app != undefined) {
+    app['state'] = 'stopped';
+    res.json({name: name});
+  } else {
+    res.status(HttpStatus.NOT_FOUND)
+    res.json({err: "not found"})
+  }
+});
+
+router.post('/apps/restart', function (req, res, next) {
+  var name = req.body['name'];
+  var app = _.find(list_result, function(elem) { return elem.name == name })
+  if(app != undefined) {
+    res.json({name: name});
+  } else {
+    res.status(HttpStatus.NOT_FOUND)
+    res.json({err: "not found"})
+  }
+});
+
+router.post('/apps/rebuild', function (req, res, next) {
+  var name = req.body['name'];
+  var app = _.find(list_result, function(elem) { return elem.name == name })
+  if(app != undefined) {
+    res.json({name: name});
+  } else {
+    res.status(HttpStatus.NOT_FOUND)
+    res.json({err: "not found"})
+  }
+});
+
+router.post('/apps/destroy', function (req, res, next) {
+  var name = req.body['name'];
+  var findIndex = _.findIndex(list_result, function(elem) { return elem.name == name })
+  if(findIndex != -1) {
+    delete list_result[findIndex]
+    res.json({name: name});
+  } else {
+    res.status(HttpStatus.NOT_FOUND)
+    res.json({err: "not found"})
+  }
+});
+
+router.get('/apps/logs/:appname', function (req, res, next) {
+  res.json({msg: "\n\u003e node-js-sample@0.2.0 start /app\n\u003e node index.js\n\nNode app is running at localhost:5000\n"})
+});
+
+router.get('/apps/urls/:appname', function (req, res, next) {
+  var appname = req.params["appname"];
+  res.json(["https://carlwurst1338.protonet.info/" + appname, "http://core-01/" + appname])
+});
+
+router.get('/monitoring', function (req, res, next) {
+  res.json({"name":"system","cpu_percent":4.311097799164576,"mem_used":951500,"mem_total":1021844})
+});
+
+router.get('/monitoring/:appname', function (req, res, next) {
+  var appname = req.params["appname"];
+  res.json({"name":appname,"mem_used":30142464,"mem_total":1046368256})
+});
+
+var port = 8081
+app.set('port', port);
+app.use('/', router);
+
+var server = http.createServer(app);
+server.listen(port);
+console.log("Listening on Port: " + port)
