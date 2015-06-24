@@ -1,4 +1,4 @@
-FROM dockerregistry.protorz.net/management-proxy:latest
+FROM experimentalplatform/management-proxy:latest
 
 ADD . /build
 WORKDIR /build
