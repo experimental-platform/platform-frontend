@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 FROM dockerregistry.protorz.net/ubuntu:latest
+=======
+FROM experimentalplatform/management-proxy:latest
+>>>>>>> 09f2b48d44808dbd2db5deb080452d72dae70486
 
 RUN curl -sL https://deb.nodesource.com/setup | sudo bash - && \
     apt-get update && \
