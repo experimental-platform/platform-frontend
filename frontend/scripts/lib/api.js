@@ -2,7 +2,7 @@ angular.module("protonet.platform")
   .factory("API", function($http) {
     var apiHost = "";
     var options = {};
-    if (location.href.indexOf("http://localhost") !== -1) {
+    if (location.href.indexOf(":8008") !== -1) {
       apiHost = "http://localhost:3000";
       options.withCredentials = true;
     }
