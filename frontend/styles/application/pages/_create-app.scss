@@ -43,6 +43,13 @@
       text-align: center;
     }
   }
+
+  .waiting {
+    background: url(../images/spinner.gif) no-repeat left center;
+    background-size: 16px 16px;
+    padding-left: 22px;
+    color: #999;
+  }
 }
 
 @media only screen and (max-width: 759px){

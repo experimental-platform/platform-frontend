@@ -61,9 +61,10 @@ angular.module("protonet.platform").controller("DashboardCtrl", function($scope,
   };
 
   $scope.getTechIcon = function(app) {
-    var hasIcon = ["Node.js", "Python", "Ruby", "Go", "Java", "PHP"].indexOf(app.app_type) !== -1;
+    var appType = app.app_type.toLowerCase();
+    var hasIcon = ["node.js", "python", "ruby", "go", "java", "php", "rails", "docker"].indexOf(appType) !== -1;
     if (hasIcon) {
-      var normalizedName = app.app_type.toLowerCase().replace(/[^a-z0-9]/g, "");
+      var normalizedName = appType.replace(/[^a-z0-9]/g, "");
       return "images/technology-logos/" + normalizedName + ".png";
     } else {
       return "images/hexagon.svg";
@@ -71,6 +72,9 @@ angular.module("protonet.platform").controller("DashboardCtrl", function($scope,
   };
 
   $scope.openApp = function(app) {
-    window.open(app.urls[0]);
+    var opener = window.open("javascript:'<html></html>'");
+    API.chooseBestURL(app.urls).then(function(url) {
+      opener.location.href = url;
+    });
   };
 });

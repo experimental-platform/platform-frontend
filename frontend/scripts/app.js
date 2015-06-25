@@ -51,12 +51,14 @@ angular
         templateUrl: 'views/create-app-1.html'
       })
       .state('dashboard.create_app_2', {
-        url: "/create-app-2",
-        templateUrl: 'views/create-app-2.html'
+        url: "/create-app-2?type",
+        templateUrl: 'views/create-app-2.html',
+        controller: "SetupAppCtrl"
       })
       .state('dashboard.create_app_3', {
-        url: "/create-app-3",
-        templateUrl: 'views/create-app-3.html'
+        url: "/create-app-3?type",
+        templateUrl: 'views/create-app-3.html',
+        controller: "DeployAppCtrl"
       })
       .state("dashboard.configuration", {
         url: "/configuration",

@@ -17,20 +17,25 @@
     </li>
   </ul>
 
-  <p>Deploy the app to this server</p>
+  <div ng-repeat="doc in docs">
+    <p>{{::doc.label}}</p>
 
-  <p>
-    <code>
-      git push pep master
-    </code>
-  </p>
+    <p>
+      <code>
+        <span class="loc" ng-repeat="loc in doc.code">{{::loc}}<br></span>
+      </code>
+    </p>
+  </div>
 
-  <p>Your app is now available at:</p>
-  <p>
-  	<a href="">http://172.20.100.230/name-of-your-app/</a><br>
-  	<a href="">https://box-name.protonet.info/name-of-your-app/</a>
-  </p>
+  <div ng-if="newApp">
+    <p>Your app is now available at:</p>
+    <a ng-repeat="url in newApp.urls" ng-href="{{::url}}">{{::url}}</a>
+    <a class="btn cta" href="#/dashboard">Finish</a>
+  </div>
+  <div ng-if="!newApp" class="waiting">
+    Waiting for your app to be deployed …
+  </div>
 
-  <a class="btn cta" href="#/dashboard">Finish</a>
+  
 
 </div>

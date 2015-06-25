@@ -17,26 +17,16 @@
     </li>
   </ul>
 
-  <p>Get the node.js hello world example:</p>
+  <div ng-repeat="doc in docs">
+    <p>{{::doc.label}}</p>
 
-  <p>
-    <code>
-      git clone https://github.com/heroku/node-js-sample.git
-      <br>
-      cd node-js-sample
-    </code>
-  </p>
+    <p>
+      <code>
+        <span class="loc" ng-repeat="loc in doc.code">{{::loc}}<br></span>
+      </code>
+    </p>
+  </div>
 
-  <p>Choose a name and add git remote:</p>
+  <a class="btn cta" href="#/create-app-3?type={{appType}}">Next Step</a>
 
-  <p>
-    <code>
-      git remote add pep ssh://dokku@172.20.100.230:8022/app-name
-    </code>
-  </p>
-
-  <a class="btn cta" href="#/create-app-3">Next Step</a>
-
-
-  
 </div>
