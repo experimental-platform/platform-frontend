@@ -330,7 +330,7 @@ input[type=checkbox] {
     font-size: 14px; } }
 .step-bar {
   width: 450px;
-  margin: 30px auto 40px;
+  margin: 30px auto 50px;
   padding: 0;
   list-style: none;
   height: 5px;
