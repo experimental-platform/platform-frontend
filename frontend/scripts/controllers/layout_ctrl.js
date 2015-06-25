@@ -4,6 +4,10 @@ angular.module("protonet.platform").controller("LayoutCtrl", function($scope, $s
     $scope.state = $state.current.name;
   });
 
+  $scope.isDashboard = function() {
+    return $scope.state === "dashboard.index" || $scope.state.match(/create_app/);
+  };
+
   function setPTW(data) {
     $scope.nodename = data.nodename;
     $scope.ptwEnabled = data.enabled;
