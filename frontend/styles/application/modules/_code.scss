@@ -5,6 +5,12 @@ code{
   display: inline-block;
   line-height: 2em;
   white-space: nowrap;
+  width: 100%;
+  transition: background-color 0.2s;
+  
+  &:hover {
+   background-color: #F1F6FF; 
+  }
 }
 
 @media only screen and (max-width: 759px){

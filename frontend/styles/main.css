@@ -514,7 +514,11 @@ code {
   padding: 7px 0 7px 15px;
   display: inline-block;
   line-height: 2em;
-  white-space: nowrap; }
+  white-space: nowrap;
+  width: 100%;
+  transition: background-color 0.2s; }
+  code:hover {
+    background-color: #F1F6FF; }
 
 @media only screen and (max-width: 759px) {
   code {
