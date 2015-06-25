@@ -516,7 +516,8 @@ code {
   line-height: 2em;
   white-space: nowrap;
   width: 100%;
-  transition: background-color 0.2s; }
+  transition: background-color 0.2s;
+  cursor: text; }
   code:hover {
     background-color: #F1F6FF; }
 
