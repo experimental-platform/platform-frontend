@@ -18,6 +18,41 @@ module.exports = function(router) {
   });
 
   router.get('/system/update', auth, function(req, res, next) {
+    /*
+                            ┌────────────────────────────┐
+                            │      Frontend Request      │
+                            │GET /admin/api/system/update│
+                            └────────────────────────────┘
+                                           │
+                                           ▼
+                             ┌──────────────────────────┐
+                             │ skvs GET /system/channel │
+                             └──────────────────────────┘
+                                           │ eg. 'development'
+                                           ▼
+                             ┌──────────────────────────┐
+                             │ skvs GET /system/images  │
+                             └──────────────────────────┘
+                                           │     Keys: key1...keyN
+       ┌──────────────────────────────┐    │    ┌──────────────────────────────┐
+    ┌──│skvs GET /system/images/<key1>│◀───┼───▶│hub GET /<key1>/tag/<channel> │──┐
+    │  └──────────────────────────────┘    │    └──────────────────────────────┘  │
+    │                   .                  │                     .                │
+    │                   .          Parallel Requests             .                │
+    │                   .                  │                     .                │
+    │  ┌──────────────────────────────┐    │    ┌──────────────────────────────┐  │
+    ├──│skvs GET /system/images/<keyN>│◀───┴───▶│hub GET /<keyN>/tag/<channel> │──┤
+    │  └──────────────────────────────┘         └──────────────────────────────┘  │
+    │                                                                             │
+    │   Local image1...imageN           ┌─────┐          Remote image1...imageN   │
+    └──────────────────────────────────▶│MERGE│◀──────────────────────────────────┘
+                                        └─────┘
+                                           │
+                                           ▼
+                                 ┌──────────────────┐
+                                 │Frontend Response │
+                                 └──────────────────┘
+    */
     request(api('/system/channel'), request_handler(function(response, result) {
       if (response.statusCode == HttpStatus.OK) {
         var channel = result.value.trim();
