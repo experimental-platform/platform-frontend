@@ -7,10 +7,6 @@ var hubApi = require('../helper/api').dockerHubApiUrl;
 var error_helper = require('../helper/error').errorHelper;
 var request_handler = require('../helper/error').requestHandler;
 
-auth = function(req, res, next) {
-  next();
-}
-
 module.exports = function(router) {
   // TODO: return system data: IP, hostname, hardware revision, software revision, etc.
   router.get('/system', auth, function(req, res, next) {
