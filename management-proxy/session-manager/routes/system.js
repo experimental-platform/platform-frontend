@@ -115,4 +115,26 @@ module.exports = function(router) {
       }
     }, next));
   });
+
+  router.post('/system/update', auth, function(req, res, next) {
+    var channel = req.body['channel'];
+    if (channel == undefined || channel == null || channel == "") {
+      next(error_helper(HttpStatus.BAD_REQUEST, "No channel given!"));
+    } else {
+      var options = {
+        url: api('/system/channel'),
+        method: 'PUT',
+        form: {
+          value: channel
+        }
+      };
+      request(options, request_handler(function(response, result) {
+        if (response.statusCode == HttpStatus.OK) {
+          res.json({ status: "okay", channel: channel });
+        } else {
+          next(error_helper(HttpStatus.INTERNAL_SERVER_ERROR));
+        }
+      }), next);
+    }
+  });
 };
