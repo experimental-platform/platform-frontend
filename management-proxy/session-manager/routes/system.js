@@ -1,8 +1,83 @@
+var request = require('request').defaults({ json: true });
+var HttpStatus = require('http-status-codes');
+var async = require('async');
 var auth = require('../helper/auth');
+var api = require('../helper/api').skvsApiUrl;
+var hubApi = require('../helper/api').dockerHubApiUrl;
+var error_helper = require('../helper/error').errorHelper;
+var request_handler = require('../helper/error').requestHandler;
+
+auth = function(req, res, next) {
+  next();
+}
 
 module.exports = function(router) {
   // TODO: return system data: IP, hostname, hardware revision, software revision, etc.
   router.get('/system', auth, function(req, res, next) {
     res.json({ status: "okay" });
+  });
+
+  router.get('/system/update', auth, function(req, res, next) {
+    request(api('/system/channel'), request_handler(function(response, result) {
+      if (response.statusCode == HttpStatus.OK) {
+        var channel = result.value.trim();
+        request(api('/system/images'), request_handler(function(response, result) {
+          if (response.statusCode == HttpStatus.OK && result.namespace) {
+            var get_image_id_for_key = result.keys.reduce(function(obj, key) {
+              obj[key] = function(callback) {
+                // Get all Image Ids via skvs/dockerhub
+                async.parallel({
+                  local: function(c) {
+                    request(api('/system/images/' + key), request_handler(function(response, result) {
+                      if (result.value == undefined || result.value == null) {
+                        result.value = ""; // always return empty string.
+                      }
+                      c(null, result.value.trim());
+                    }), function() {
+                      c(null, "") // empty string if something went wrong
+                    });
+                  },
+                  remote: function(c) {
+                    var key_splitted = key.split(":");
+                    var name = key_splitted[0];
+                    var tag = key_splitted[1];
+                    request(hubApi(name + '/tags/' + tag), request_handler(function(response, result) {
+                      var latest_layer = result[0] || { id: "" };
+                      c(null, latest_layer.id);
+                    }), function() {
+                      c(null, ""); // empty string if something went wrong
+                    });
+                  }
+                }, function(err, results) {
+                  results = results || {}; // no error handling here, if something went wrong, handle it outside.
+                  callback(null, results);
+                });
+              };
+              return obj;
+            }, {});
+            async.parallel(get_image_id_for_key, function(err, images) {
+              images = images || {};
+              var result = {};
+              result['images'] = images;
+              result['channel'] = channel;
+              var image_keys = Object.keys(images);
+              if (image_keys.length == 0) {
+                result.up_to_date = false; // No Images => update needed!
+              } else {
+                result.up_to_date = image_keys.every(function(currentKey, i, arr) {
+                  var currentImage = images[currentKey];
+                  return currentImage.local.indexOf(currentImage.remote) === 0;
+                });
+              }
+              res.json(result);
+            });
+          } else {
+            next(error_helper(HttpStatus.INTERNAL_SERVER_ERROR, "No image states found."));
+          }
+        }, next));
+      } else {
+        next(error_helper(HttpStatus.INTERNAL_SERVER_ERROR, "No channel found!"));
+      }
+    }, next));
   });
 };
