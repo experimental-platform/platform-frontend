@@ -6,10 +6,4 @@ module.exports = function (router) {
       run_cmd('bin/journalctl.sh', res, next);
     }
   );
-
-/*  router.get('/logs/:container', auth, function (req, res, next) {
-      var container = req.params["container"];
-      run_cmd('./bin/docker.sh ' + container, res, next);
-    }
-  );*/
 };
