@@ -7,9 +7,9 @@ module.exports = function (router) {
     }
   );
 
-  router.get('/logs/:container', auth, function (req, res, next) {
+/*  router.get('/logs/:container', auth, function (req, res, next) {
       var container = req.params["container"];
       run_cmd('./bin/docker.sh ' + container, res, next);
     }
-  );
+  );*/
 };
