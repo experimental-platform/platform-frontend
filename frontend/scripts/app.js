@@ -70,6 +70,11 @@ angular
         templateUrl: 'views/login.html',
         controller: "LoginCtrl"
       })
+      .state("install_update", {
+        url: "/rocket_is_launching",
+        templateUrl: "views/install_update.html",
+        controller: "InstallUpdateCtrl"
+      })
       .state('welcome_1', {
         url: "/welcome-1",
         templateUrl: 'views/welcome-1.html',

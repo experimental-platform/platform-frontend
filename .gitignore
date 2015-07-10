@@ -4,3 +4,4 @@ bower_components
 **/node_modules
 .sass-cache
 .tmp
+management-proxy/sessions/
