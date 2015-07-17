@@ -1,0 +1,41 @@
+<div class="teaser">
+  <div class="wrapper">
+    <h2>Create An App</h2>
+  </div>
+</div>
+
+<div class="create-app material-box step-2">
+  <ul class="step-bar">
+    <li class="done">
+      <span>Technology</span>
+    </li>
+    <li class="done">
+      <span>Basic Setup</span>
+    </li>
+    <li class="active">
+      <span>Deploy</span>
+    </li>
+  </ul>
+
+  <div ng-repeat="doc in docs">
+    <p>{{::doc.label}}</p>
+
+    <p>
+      <code>
+        <span class="loc" ng-repeat="loc in doc.code">{{::loc}}<br></span>
+      </code>
+    </p>
+  </div>
+
+  <div ng-if="newApp">
+    <p>Your app is now available at:</p>
+    <a ng-repeat="url in newApp.urls" ng-href="{{::url}}">{{::url}}</a>
+    <a class="btn cta" href="#/dashboard">Finish</a>
+  </div>
+  <div ng-if="!newApp" class="waiting">
+    Waiting for your app to be deployed …
+  </div>
+
+  
+
+</div>

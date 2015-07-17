@@ -1,0 +1,32 @@
+<div class="teaser">
+  <div class="wrapper">
+    <h2>Create An App</h2>
+  </div>
+</div>
+
+<div class="create-app material-box step-2">
+  <ul class="step-bar">
+    <li class="done">
+      <span>Technology</span>
+    </li>
+    <li class="active">
+      <span>Basic Setup</span>
+    </li>
+    <li>
+      <span>Deploy</span>
+    </li>
+  </ul>
+
+  <div ng-repeat="doc in docs">
+    <p>{{::doc.label}}</p>
+
+    <p>
+      <code>
+        <span class="loc" ng-repeat="loc in doc.code">{{::loc}}<br></span>
+      </code>
+    </p>
+  </div>
+
+  <a class="btn cta" href="#/create-app-3?type={{appType}}">Next Step</a>
+
+</div>

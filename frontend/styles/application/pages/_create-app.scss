@@ -1,0 +1,78 @@
+.create-app{
+  display: block;
+  width: 700px;
+  margin: 0 auto 30px;
+  .technologies{
+    @include flexbox();
+    @include justify-content(space-between);
+    text-align: center;
+    a{
+      height: 80px;
+      width: 80px;
+      text-align: center;
+      line-height: 0;
+      font-size: 0;
+      position: relative;
+      @include flexbox();
+      @include align-items(center);
+      @include transition(all,ease-out,0.2s);
+      box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.20);
+      &:hover{
+        box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.20);
+      }
+      img{
+        display: block;
+        margin: 0 auto;
+        width: 80%;
+        vertical-align: middle;
+      }
+      span{
+        font-size: 14px;
+        color: #4A4A4A;
+        position: absolute;
+        top: -15px;
+        left: 0;
+        width: 100%;        
+        text-align: center;
+      }
+    }
+  }
+  &.step-1{
+    p{
+      margin-bottom: 60px;
+      text-align: center;
+    }
+  }
+
+  .waiting {
+    background: url(../images/spinner.gif) no-repeat left center;
+    background-size: 16px 16px;
+    padding-left: 22px;
+    color: #999;
+  }
+}
+
+@media only screen and (max-width: 759px){
+  .create-app{
+    width: 96%;
+    margin: 0 2%;
+    .technologies{
+      display: block;
+      font-size: 0;
+      line-height: 0;
+      a{
+        display: inline-block;
+        width: 50%;
+        height: auto;
+        margin-bottom: 50px;
+        img{
+          width: 40%;
+          height: auto;
+        }
+        &:hover{
+          box-shadow: none;
+        }
+      }
+    }
+  } 
+}

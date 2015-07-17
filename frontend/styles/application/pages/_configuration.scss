@@ -1,0 +1,47 @@
+.configuration-box {
+  margin: 0 auto 30px;
+  width: 700px;
+  display: block;
+
+  .protonet-url {
+    font-size: 18px;
+  }
+
+  .keys {
+    padding-left: 20px;
+    font-size: 14px;
+  }
+  
+  .key {
+  }
+
+  .existing-keys-headline {
+    margin-top: 40px;
+  }
+}
+
+.system-update {
+  p {
+    font-size: 14px;
+  }
+  fieldset {
+    background: #f6f6f6;
+    border: 1px solid #ccc;
+    padding: 18px;
+    
+    p {
+      color: #666;
+      margin: 0;
+    }
+    
+    p + .btn {
+      margin-top: 10px;
+    }
+  }
+}
+
+@media only screen and (max-width: 759px){
+  .configuration-box {
+      width: 96%;
+  }
+}

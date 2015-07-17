@@ -1,0 +1,20 @@
+code{
+  border-left: 3px solid #5892FC;
+  font-size: 14px;
+  padding: 7px 0 7px 15px;
+  display: inline-block;
+  line-height: 2em;
+  white-space: nowrap;
+  width: 100%;
+  transition: background-color 0.2s;
+  cursor: text;
+  &:hover {
+   background-color: #F1F6FF; 
+  }
+}
+
+@media only screen and (max-width: 759px){
+  code{
+    font-size: 11px;
+  }
+}

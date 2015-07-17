@@ -1,0 +1,24 @@
+<header>
+  <div class="wrapper">
+    <div class="left">
+      <img src="images/hexagon.png">
+      <span class="ng-cloak publish-to-web-name">{{nodename}}.protonet.info</span>
+    </div>
+    <div class="right">
+      <a href="#/create-app-1" class="btn cta">New App</a>
+    </div>
+  </div>
+</header>
+
+<div class="dashboard">
+  <nav>
+    <div class="wrapper">
+      <a href="#/dashboard" ng-class="{ active: isDashboard() }">My Apps</a>
+      <a href="#/configuration"  ng-class="{ active: state == 'dashboard.configuration' }">Configuration</a>
+      <a href="https://github.com/experimental-platform/">GitHub</a>
+      <a ng-click="logout()" class="logout">Logout</a>
+    </div>
+  </nav>
+
+  <div ui-view></div>
+</div>
