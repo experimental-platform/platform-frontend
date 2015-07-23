@@ -1,9 +1,13 @@
-angular.module("protonet.platform").controller("ConfigurationCtrl", function($scope, API, Notification) {
+angular.module("protonet.platform").controller("ConfigurationCtrl", function($scope, $state, API, Notification) {
   function updateKeys() {
     API.get("/admin/api/ssh").then(function(data) {
       $scope.keys = data.keys;
     });
   }
+
+  API.get("/admin/api/system/update").then(function(data) {
+    $scope.release = data;
+  });
 
   $scope.setPublishToWeb = function() {
     if (!$scope.nodename) {
@@ -88,6 +92,16 @@ angular.module("protonet.platform").controller("ConfigurationCtrl", function($sc
       updateKeys();
     }).catch(function() {
       Notification.error("An error occurred while removing the key. Please try again.");
+    });
+  };
+
+  $scope.installUpdate = function() {
+    API.post("/admin/api/system/update", {
+      channel: $scope.release.channel
+    }).then(function() {
+      $state.go("install_update");
+    }).catch(function() {
+      Notification.error("Could not update. Please try again.");
     });
   };
 

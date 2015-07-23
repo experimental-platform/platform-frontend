@@ -39,4 +39,21 @@
     </div>
   </form>
 
+  <form class="configuration-box material-box system-update" ng-submit="installUpdate()">
+    <h3>System-Update</h3>
+    <p>
+      <strong>Release channel:</strong> <span class="release-channel">{{release.channel}}</span>
+    </p>
+    
+    <fieldset ng-if="release">
+      <div ng-if="!release.up_to_date">
+        <p><strong>Update available:</strong> Installing an update will download the new release and restart the machine. Usually this should be fast but depending on your internet connection and other parameters it can take up to 1 hour.</p>
+        <button class="btn cta" type="submit" ng-disabled="loading">Install update</button>
+      </div>
+      <p ng-if="release.up_to_date">
+        Your machine is up to date. There's nothing to see here.
+      </p>
+    </fieldset>
+  </form>
+
 </div>
