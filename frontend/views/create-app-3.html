@@ -27,12 +27,12 @@
     </p>
   </div>
 
-  <div ng-if="newApp">
+  <div ng-if="newApp && newApp.state == 'started'">
     <p>Your app is now available at:</p>
     <a ng-repeat="url in newApp.urls" ng-href="{{::url}}">{{::url}}</a>
     <a class="btn cta" href="#/dashboard">Finish</a>
   </div>
-  <div ng-if="!newApp" class="waiting">
+  <div ng-if="!newApp || newApp.state != 'started'" class="waiting">
     Waiting for your app to be deployed …
   </div>
 

@@ -18,7 +18,7 @@
     <div class="right-bar">
       <span class="status" ng-class="{ green: app.state == 'started', red: app.state == 'error' }">{{app.state}}</span>
       <div class="action-bar">
-        <a title="Open" ng-click="openApp(app)" class="icon icon-open"></a>
+        <a title="Open" ng-if="app.state == 'started'" ng-click="openApp(app)" class="icon icon-open"></a>
         <a title="Stop" ng-if="app.state == 'started'" ng-click="stopApp(app)" class="icon icon-pause"></a>
         <a title="Start" ng-if="app.state == 'stopped'" ng-click="startApp(app)" class="icon icon-start"></a>
         <a title="Delete" ng-click="deleteApp(app)" class="icon icon-delete"></a>
