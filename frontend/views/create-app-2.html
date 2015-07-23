@@ -22,7 +22,7 @@
 
     <p>
       <code>
-        <span class="loc" ng-repeat="loc in doc.code">{{::loc}}<br></span>
+        <span class="loc" ng-repeat="loc in doc.code">{{::interpolate(loc)}}<br></span>
       </code>
     </p>
   </div>

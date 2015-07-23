@@ -13,7 +13,7 @@ angular.module("protonet.platform")
           label: "Set a name and add git remote:",
           code: [
             "APP_NAME=my-app-name",
-            "git remote add platform ssh://dokku@192.168.178.100:8022/$APP_NAME"
+            "git remote add platform ssh://dokku@{{host}}:8022/$APP_NAME"
           ]
         }],
         deploy: [{
@@ -33,7 +33,7 @@ angular.module("protonet.platform")
           label: "Set a name and add git remote:",
           code: [
             "APP_NAME=my-app-name",
-            "git remote add platform ssh://dokku@192.168.178.100:8022/$APP_NAME"
+            "git remote add platform ssh://dokku@{{host}}:8022/$APP_NAME"
           ]
         }],
         deploy: [{
@@ -53,7 +53,7 @@ angular.module("protonet.platform")
           label: "Set a name and add git remote:",
           code: [
             "APP_NAME=my-app-name",
-            "git remote add platform ssh://dokku@192.168.178.100:8022/$APP_NAME"
+            "git remote add platform ssh://dokku@{{host}}:8022/$APP_NAME"
           ]
         }],
         deploy: [{
@@ -64,22 +64,16 @@ angular.module("protonet.platform")
 
       "rails": {
         setup: [{
-          label: "Create new rails app:",
+          label: "Get the Rails \"hello world\" example:",
           code: [
-            "rails new rails-app",
-            "cd rails-app"
-          ]
-        }, {
-          label: "Initialize git repo and commit:",
-          code: [
-            "git init",
-            "git add --all && git commit -m 'first commit'"
+            "git clone git@github.com:experimental-platform/rails-hello-world.git",
+            "cd rails-hello-world"
           ]
         }, {
           label: "Set a name and add git remote:",
           code: [
             "APP_NAME=my-app-name",
-            "git remote add platform ssh://dokku@192.168.178.100:8022/$APP_NAME"
+            "git remote add platform ssh://dokku@{{host}}:8022/$APP_NAME"
           ]
         }],
         deploy: [{
@@ -100,7 +94,7 @@ angular.module("protonet.platform")
         }, {
           label: "Then open the Dockerfile and add instructions:",
           code: [
-            "FROM scratch",
+            "FROM experimentalplatform/ubuntu:latest",
             "ADD /helloworld.sh /helloworld.sh",
             "CMD sh helloworld.sh"
           ]
@@ -108,7 +102,7 @@ angular.module("protonet.platform")
           label: "Set a name and add git remote:",
           code: [
             "APP_NAME=my-app-name",
-            "git remote add  ssh://dokku@192.168.178.100:8022/$APP_NAME"
+            "git remote add  ssh://dokku@{{host}}:8022/$APP_NAME"
           ]
         }],
         deploy: [{
