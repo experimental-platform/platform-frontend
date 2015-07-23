@@ -15,7 +15,7 @@ module.exports = {
       if (!err) {
         success(response, result);
       } else {
-        failure(err);
+        failure && failure(err);
       }
     }
   }
