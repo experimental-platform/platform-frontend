@@ -65,7 +65,7 @@ module.exports = function(router) {
                       }
                       c(null, result.value.trim());
                     }), function() {
-                      c(null, "") // empty string if something went wrong
+                      c(null, ""); // empty string if something went wrong
                     });
                   },
                   remote: function(c) {
