@@ -91,13 +91,21 @@ module.exports = function (router) {
               var result = {};
               result['images'] = images;
               result['channel'] = channel;
+              // TODO: filter images for the correct channel only
+              // TODO: # TODO: handle images w/ slashes like ibuildthecloud/systemd-docker:latest
+              // TODO: race condition in trigger-update-protonet.{service, path}
               var image_keys = Object.keys(images);
               if (image_keys.length == 0) {
                 result.up_to_date = false; // No Images => update needed!
+                console.log('Found no images, update required.');
               } else {
                 result.up_to_date = image_keys.every(function (currentKey, i, arr) {
                   var currentImage = images[currentKey];
-                  return currentImage.local.indexOf(currentImage.remote) === 0;
+                  var result = currentImage.local.indexOf(currentImage.remote) === 0;
+                  if (! result) {
+                    console.log('Remote "' + currentImage.remote + '" differs from local and will trigger an update.');
+                  }
+                  return result;
                 });
               }
               res.json(result);
