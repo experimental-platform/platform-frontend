@@ -1,4 +1,4 @@
-# Experimental Platform: BUILDSTEP
+# Experimental Platform: MANAGEMENT AND FRONTEND
 
 Login proxy and web interface for the experimental platform.
 
