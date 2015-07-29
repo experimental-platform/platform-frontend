@@ -1,11 +1,10 @@
-angular.module("protonet.platform").controller("DashboardCtrl", function($scope, $timeout, $q, API, Notification) {
-  function updateApps() {
-    API.get("/admin/api/apps").then(function(arr) {
-      $scope.apps = arr;
-    });
-  }
+angular.module("protonet.platform").controller("DashboardCtrl", function($scope, $timeout, $q, API, Notification, App) {
+  App.startFetcher();
+  $scope.apps = App.records;
 
-  updateApps();
+  $scope.$on("$destroy", function() {
+    App.stopFetcher();
+  });
 
   function post(action, app, timeout) {
     app.loading = true;
