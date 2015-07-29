@@ -49,41 +49,45 @@ module.exports = function (router) {
      │Frontend Response │
      └──────────────────┘
      */
+    // get the currently configured channel to use
     request(api('/system/channel'), request_handler(function (response, result) {
       if (response.statusCode == HttpStatus.OK) {
         var channel = result.value.trim();
+        // get a list of all installed images
         request(api('/system/images'), request_handler(function (response, result) {
           if (response.statusCode == HttpStatus.OK && result.namespace) {
             var get_image_id_for_key = result.keys.reduce(function (obj, key) {
-              obj[key] = function (callback) {
-                // Get all Image Ids via skvs/dockerhub
-                async.parallel({
-                  local: function (c) {
-                    request(api('/system/images/' + key), request_handler(function (response, result) {
-                      if (result.value == undefined || result.value == null) {
-                        result.value = ""; // always return empty string.
-                      }
-                      c(null, result.value.trim());
-                    }), function () {
-                      c(null, ""); // empty string if something went wrong
-                    });
-                  },
-                  remote: function (c) {
-                    var key_splitted = key.split(":");
-                    var name = key_splitted[0];
-                    var tag = key_splitted[1];
-                    request(hubApi(name + '/tags/' + tag), request_handler(function (response, result) {
-                      var latest_layer = result[0] || {id: ""};
-                      c(null, latest_layer.id);
-                    }), function () {
-                      c(null, ""); // empty string if something went wrong
-                    });
-                  }
-                }, function (err, results) {
-                  results = results || {}; // no error handling here, if something went wrong, handle it outside.
-                  callback(null, results);
-                });
-              };
+              if (key.indexOf(channel) >= 0) {
+                obj[key] = function (callback) {
+                  // Get all Image Ids via skvs/dockerhub
+                  async.parallel({
+                    local: function (c) {
+                      request(api('/system/images/' + key), request_handler(function (response, result) {
+                        if (result.value == undefined || result.value == null) {
+                          result.value = ""; // always return empty string.
+                        }
+                        c(null, result.value.trim());
+                      }), function () {
+                        c(null, ""); // empty string if something went wrong
+                      });
+                    },
+                    remote: function (c) {
+                      var key_splitted = key.split(":");
+                      var name = key_splitted[0];
+                      var tag = key_splitted[1];
+                      request(hubApi(name + '/tags/' + tag), request_handler(function (response, result) {
+                        var latest_layer = result[0] || {id: ""};
+                        c(null, latest_layer.id);
+                      }), function () {
+                        c(null, ""); // empty string if something went wrong
+                      });
+                    }
+                  }, function (err, results) {
+                    results = results || {}; // no error handling here, if something went wrong, handle it outside.
+                    callback(null, results);
+                  });
+                };
+              }
               return obj;
             }, {});
             async.parallel(get_image_id_for_key, function (err, images) {
@@ -91,7 +95,6 @@ module.exports = function (router) {
               var result = {};
               result['images'] = images;
               result['channel'] = channel;
-              // TODO: filter images for the correct channel only
               // TODO: # TODO: handle images w/ slashes like ibuildthecloud/systemd-docker:latest
               // TODO: race condition in trigger-update-protonet.{service, path}
               var image_keys = Object.keys(images);
@@ -102,7 +105,7 @@ module.exports = function (router) {
                 result.up_to_date = image_keys.every(function (currentKey, i, arr) {
                   var currentImage = images[currentKey];
                   var result = currentImage.local.indexOf(currentImage.remote) === 0;
-                  if (! result) {
+                  if (!result) {
                     console.log('Remote "' + currentImage.remote + '" differs from local and will trigger an update.');
                   }
                   return result;
