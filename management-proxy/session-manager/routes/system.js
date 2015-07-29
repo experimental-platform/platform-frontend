@@ -57,6 +57,7 @@ module.exports = function (router) {
         request(api('/system/images'), request_handler(function (response, result) {
           if (response.statusCode == HttpStatus.OK && result.namespace) {
             var get_image_id_for_key = result.keys.reduce(function (obj, key) {
+              // only check images belonging to the current channel
               if (key.indexOf(channel) >= 0) {
                 obj[key] = function (callback) {
                   // Get all Image Ids via skvs/dockerhub
