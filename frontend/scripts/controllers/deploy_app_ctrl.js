@@ -1,30 +1,16 @@
-angular.module("protonet.platform").controller("DeployAppCtrl", function($scope, $stateParams, $timeout, AppTutorial, API) {
+angular.module("protonet.platform").controller("DeployAppCtrl", function($scope, $stateParams, AppTutorial, App) {
   $scope.appType = $stateParams.type;
 
   $scope.docs = AppTutorial.get($scope.appType).deploy;
 
-  var oldArr;
+  function onAdd(event, app) {
+    App.off("add", onAdd);
+    $scope.newApp = app;
+  }
 
-  function getNewApp(newArr, oldArr) {
-    var newApps = _.filter(newArr, function(obj) {
-      return !_.findWhere(oldArr, { name: obj.name });
-    });
-    return _.last(newApps);
-  }
-  
-  function updateApps() {
-    return API.get("/admin/api/apps").then(function(newArr) {
-      if (oldArr) {
-        var newApp = getNewApp(newArr, oldArr);
-        if (newApp) {
-          $scope.newApp = newApp;
-          return;
-        }
-      }
-      oldArr = newArr;
-      $timeout(updateApps, 1000);
-    });
-  }
-  
-  updateApps();
+  App.on("add", onAdd);
+
+  $scope.$on("$destroy", function() {
+    App.off("add", onAdd);
+  });
 });
