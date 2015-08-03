@@ -84,25 +84,16 @@ angular.module("protonet.platform")
 
       "docker": {
         setup: [{
-          label: "Create a Dockerfile:",
+          label: "Get the Dockerfile \"hello world\" example:",
           code: [
-            "mkdir my-docker-app",
-            "cd my-docker-app",
-            "echo \"echo hello world\" > helloworld.sh",
-            "touch Dockerfile"
-          ]
-        }, {
-          label: "Then open the Dockerfile and add instructions:",
-          code: [
-            "FROM experimentalplatform/ubuntu:latest",
-            "ADD /helloworld.sh /helloworld.sh",
-            "CMD sh helloworld.sh"
+            "git clone git@github.com:experimental-platform/dockerfile-hello-world.git",
+            "cd dockerfile-hello-world"
           ]
         }, {
           label: "Set a name and add git remote:",
           code: [
             "APP_NAME=my-app-name",
-            "git remote add  ssh://dokku@{{host}}:8022/$APP_NAME"
+            "git remote add platform ssh://dokku@{{host}}:8022/$APP_NAME"
           ]
         }],
         deploy: [{
