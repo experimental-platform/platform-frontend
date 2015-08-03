@@ -2,6 +2,10 @@ angular.module("protonet.platform").controller("DashboardCtrl", function($scope,
   App.startFetcher();
   $scope.apps = App.records;
 
+  $scope.loaded = function() {
+    return App.loaded;
+  };
+
   $scope.$on("$destroy", function() {
     App.stopFetcher();
   });
