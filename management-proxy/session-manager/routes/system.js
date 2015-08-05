@@ -13,7 +13,7 @@ module.exports = function (router) {
     res.json({status: "okay"});
   });
 
-  router.get('/system/update', auth, function (req, res, next) {
+  router.get('/system/update', function (req, res, next) {
     /*
      ┌────────────────────────────┐
      │      Frontend Request      │
