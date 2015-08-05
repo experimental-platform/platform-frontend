@@ -1,18 +1,20 @@
-angular.module("protonet.platform").controller("DashboardCtrl", function($scope, $timeout, $q, API, Notification, App) {
+angular.module("protonet.platform").controller("DashboardCtrl", function($scope, $q, API, Notification, App) {
   App.startFetcher();
   $scope.apps = App.records;
+
+  $scope.loaded = function() {
+    return App.loaded;
+  };
 
   $scope.$on("$destroy", function() {
     App.stopFetcher();
   });
 
-  function post(action, app, timeout) {
+  function post(action, app) {
     app.loading = true;
     var deferred = $q.defer();
     API.post("/admin/api/apps/" + action, { name: app.name }).then(function(data) {
-      $timeout(function() {
-        deferred.resolve(data);
-      }, timeout);
+      deferred.resolve(data);
     }).catch(function() {
       deferred.reject(1);
       Notification.error("Could not " + action + " app. Please try again.");
@@ -42,7 +44,7 @@ angular.module("protonet.platform").controller("DashboardCtrl", function($scope,
   $scope.startApp = function(app) {
     var oldState = app.state;
     app.state = "starting …";
-    post("start", app, 4000).then(function() {
+    post("start", app).then(function() {
       app.state = "started";
     }).catch(function() {
       app.state = oldState;
@@ -52,7 +54,7 @@ angular.module("protonet.platform").controller("DashboardCtrl", function($scope,
   $scope.stopApp = function(app) {
     var oldState = app.state;
     app.state = "stopping …";
-    post("stop", app, 4000).then(function() {
+    post("stop", app).then(function() {
       app.state = "stopped";
     }).catch(function() {
       app.state = oldState;
