@@ -33,7 +33,7 @@
     <a class="btn cta" href="#/dashboard">Finish</a>
   </div>
   <div ng-if="!newApp || newApp.state != 'started'" class="waiting">
-    Waiting for your app <strong>{{newApp.name}} </strong>to be deployed …
+    Waiting for your app <strong ng-if="newApp">{{newApp.name}} </strong>to be deployed …
   </div>
 
   
