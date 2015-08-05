@@ -16,7 +16,7 @@
       <span>{{app.app_type}}</span>
     </p>
     <div class="right-bar">
-      <span class="status" ng-class="{ green: app.state == 'started', red: app.state == 'error' }">{{app.state}}</span>
+      <span class="status" ng-class="{ green: app.state == 'started', red: app.state == 'error' }">{{loading ? app.loadingState : app.state}}</span>
       <div class="action-bar">
         <a title="Open" ng-if="app.state == 'started'" ng-click="openApp(app)" class="icon icon-open"></a>
         <a title="Stop" ng-if="app.state == 'started'" ng-click="stopApp(app)" class="icon icon-pause"></a>
