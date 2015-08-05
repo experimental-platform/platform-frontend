@@ -66,7 +66,7 @@ angular.module("protonet.platform")
         setup: [{
           label: "Get the Rails \"hello world\" example:",
           code: [
-            "git clone git@github.com:experimental-platform/rails-hello-world.git",
+            "git clone https://github.com/experimental-platform/rails-hello-world.git",
             "cd rails-hello-world"
           ]
         }, {
@@ -86,7 +86,7 @@ angular.module("protonet.platform")
         setup: [{
           label: "Get the Dockerfile \"hello world\" example:",
           code: [
-            "git clone git@github.com:experimental-platform/dockerfile-hello-world.git",
+            "git clone https://github.com/experimental-platform/dockerfile-hello-world.git",
             "cd dockerfile-hello-world"
           ]
         }, {
