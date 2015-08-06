@@ -1,14 +1,7 @@
 angular.module("protonet.platform").controller("DashboardCtrl", function($scope, $q, API, Notification, App) {
-  App.startFetcher();
-  $scope.apps = App.records;
-
   $scope.loaded = function() {
     return App.loaded;
   };
-
-  $scope.$on("$destroy", function() {
-    App.stopFetcher();
-  });
 
   function post(action, app) {
     app.loading = true;
