@@ -1,4 +1,10 @@
 angular.module("protonet.platform").controller("LayoutCtrl", function($scope, $state, API) {
+  App.startFetcher();
+  $scope.apps = App.records;
+
+  $scope.$on("$destroy", function() {
+    App.stopFetcher();
+  });
 
   $scope.$on("$stateChangeSuccess", function() {
     $scope.state = $state.current.name;
