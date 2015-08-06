@@ -1,4 +1,4 @@
-angular.module("protonet.platform").controller("LayoutCtrl", function($scope, $state, API) {
+angular.module("protonet.platform").controller("LayoutCtrl", function($scope, $state, API, App) {
   App.startFetcher();
   $scope.apps = App.records;
 
