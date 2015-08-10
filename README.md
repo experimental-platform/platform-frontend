@@ -21,3 +21,17 @@ The frontend is now available at [http://localhost:8008](http://localhost:8008)
 If you wanna do changes to the css make sure the SASS compiler is running:
 
     sass -w frontend/styles/main.scss:frontend/styles/main.css
+
+
+
+## Branch: Development
+
+[![Circle CI](https://circleci.com/gh/experimental-platform/platform-frontend.svg?style=svg&circle-token=e1cc89e8338c8ea6824497725dc4fa8aefdfc238)](https://circleci.com/gh/experimental-platform/platform-frontend)
+
+All development branches stem from and (re-)integrate here.
+
+## Branch: Master
+
+[![Circle CI](https://circleci.com/gh/experimental-platform/platform-frontend/tree/master.svg?style=svg&circle-token=e1cc89e8338c8ea6824497725dc4fa8aefdfc238)](https://circleci.com/gh/experimental-platform/platform-frontend/tree/master)
+
+This is the base for &alpha;-channel releases.
