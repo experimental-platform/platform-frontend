@@ -1,14 +1,7 @@
 angular.module("protonet.platform").controller("DashboardCtrl", function($scope, $q, API, Notification, App) {
-  App.startFetcher();
-  $scope.apps = App.records;
-
   $scope.loaded = function() {
     return App.loaded;
   };
-
-  $scope.$on("$destroy", function() {
-    App.stopFetcher();
-  });
 
   function post(action, app) {
     app.loading = true;
@@ -29,35 +22,26 @@ angular.module("protonet.platform").controller("DashboardCtrl", function($scope,
       return;
     }
 
-    var oldState = app.state;
-    app.state = "destroying …";
+    app.loadingState = "destroying …";
     post("destroy", app).then(function() {
       var index = $scope.apps.indexOf(app);
       if (index !== -1) {
         $scope.apps.splice(index, 1);
       }
-    }).catch(function() {
-      app.state = oldState;
     });
   };
 
   $scope.startApp = function(app) {
-    var oldState = app.state;
-    app.state = "starting …";
+    app.loadingState = "starting …";
     post("start", app).then(function() {
       app.state = "started";
-    }).catch(function() {
-      app.state = oldState;
     });
   };
 
   $scope.stopApp = function(app) {
-    var oldState = app.state;
-    app.state = "stopping …";
+    app.loadingState = "stopping …";
     post("stop", app).then(function() {
       app.state = "stopped";
-    }).catch(function() {
-      app.state = oldState;
     });
   };
 
