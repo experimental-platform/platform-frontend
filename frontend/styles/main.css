@@ -460,6 +460,13 @@ input[type=checkbox] {
   .app.loading .right-bar .action-bar {
     display: none !important; }
 
+.app-links p {
+  margin-bottom: 5px; }
+.app-links .app-link {
+  display: block; }
+.app-links .cta {
+  margin-top: 30px; }
+
 @media only screen and (max-width: 759px) {
   .app {
     display: block;
