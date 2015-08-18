@@ -4,6 +4,10 @@ angular.module("protonet.platform").controller("DeployAppCtrl", function($scope,
   $scope.docs = AppTutorial.get($scope.appType).deploy;
 
   function onAdd(event, app) {
+    // Ignore this until the initial set has been loaded
+    if (!App.loaded) {
+      return;
+    }
     App.off("add", onAdd);
     $scope.newApp = app;
   }
