@@ -89,6 +89,20 @@
   }
 }
 
+.app-links {
+  p {
+    margin-bottom: 5px;
+  }
+  
+  .app-link {
+    display: block;
+  }
+  
+  .cta {
+    margin-top: 30px;
+  }
+}
+
 @media only screen and (max-width: 759px){
   .app{
     display: block;

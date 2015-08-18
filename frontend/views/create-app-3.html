@@ -27,9 +27,9 @@
     </p>
   </div>
 
-  <div ng-if="newApp && newApp.state == 'started'">
-    <p>Your app is now available at:</p>
-    <a ng-repeat="url in newApp.urls" ng-href="{{::url}}">{{::url}}</a>
+  <div ng-if="newApp && newApp.state == 'started'" class="app-links">
+    <p>Success! Your app is now available at:</p>
+    <a ng-repeat="url in newApp.urls" ng-href="{{::url}}" class="app-link">{{::url}}</a>
     <a class="btn cta" href="#/dashboard">Finish</a>
   </div>
   <div ng-if="!newApp || newApp.state != 'started'" class="waiting">
