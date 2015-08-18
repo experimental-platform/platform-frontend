@@ -34,7 +34,7 @@ angular.module("protonet.platform")
           defer.reject();
         }, 1000);
 
-        img.src = this.getProtocolAndHost(url) + "/experimental-platform-detection.png";
+        img.src = this.getProtocolAndHost(url) + "/admin/experimental-platform-detection.png";
 
         return defer.promise;
       },
