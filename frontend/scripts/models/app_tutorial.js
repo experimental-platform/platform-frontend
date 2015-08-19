@@ -6,8 +6,8 @@ angular.module("protonet.platform")
         setup: [{
           label: "Get the node.js \"hello world\" example:",
           code: [
-            "git clone https://github.com/heroku/node-js-sample.git",
-            "cd node-js-sample"
+            "git clone https://github.com/experimental-platform/nodejs-hello-world.git",
+            "cd nodejs-hello-world"
           ]
         }, {
           label: "Set a name and add git remote:",
