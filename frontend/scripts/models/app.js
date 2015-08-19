@@ -53,7 +53,7 @@ angular.module("protonet.platform")
       _.each(this.records, function(record) {
         if (!_.findWhere(arr, { name: record.name })) {
           this.remove(record.name);
-        };
+        }
       }.bind(this));
 
       App.loaded = true;
@@ -73,9 +73,8 @@ angular.module("protonet.platform")
       var index = _.findIndex(this.records, function(record) {
         return record.name === name;
       });
-
       if (index !== -1) {
-        var app = this.records.splice(index, 0);
+        var app = this.records.splice(index, 1);
         this.trigger("remove", [app]);
       }
     };
