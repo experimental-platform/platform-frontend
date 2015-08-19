@@ -93,6 +93,26 @@ a {
   display: block;
   margin-bottom: 12px; }
 
+.loading-indicator {
+  display: inline-block;
+  vertical-align: middle;
+  width: 24px;
+  height: 24px;
+  background: url(../images/spinner.gif) no-repeat center center;
+  background-size: 100% auto; }
+
+.loading-indicator.ng-leave {
+  transition: transform 0.3s, opacity 0.3s; }
+
+.loading-indicator.ng-leave.ng-leave-active {
+  transform: scale(0);
+  opacity: 0; }
+
+.loading-indicator.small {
+  margin-top: -3px;
+  width: 18px;
+  height: 18px; }
+
 @media only screen and (max-width: 759px) {
   h1 {
     font-size: 28px; }
@@ -508,21 +528,6 @@ input[type=checkbox] {
   width: 550px;
   margin: 0 auto; }
 
-.loading-indicator {
-  display: inline-block;
-  vertical-align: middle;
-  width: 24px;
-  height: 24px;
-  background: url(../images/spinner.gif) no-repeat center center;
-  background-size: 100% auto; }
-
-.loading-indicator.ng-leave {
-  transition: transform 0.3s, opacity 0.3s; }
-
-.loading-indicator.ng-leave.ng-leave-active {
-  transform: scale(0);
-  opacity: 0; }
-
 @media only screen and (max-width: 759px) {
   .no-apps {
     display: block;
@@ -736,9 +741,12 @@ code {
 
 .system-update p {
   font-size: 14px; }
+.system-update > p {
+  margin-bottom: 12px; }
 .system-update fieldset {
   background: #f6f6f6;
   border: 1px solid #ccc;
+  margin: 0 -1px;
   padding: 18px; }
   .system-update fieldset p {
     color: #666;

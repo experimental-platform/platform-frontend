@@ -160,23 +160,6 @@
   margin: 0 auto;
 }
 
-.loading-indicator {
-  display: inline-block;
-  vertical-align: middle;
-  width: 24px;
-  height: 24px;
-  background: url(../images/spinner.gif) no-repeat center center;
-  background-size: 100% auto;
-}
-
-.loading-indicator.ng-leave {
-  transition: transform 0.3s, opacity 0.3s;
-}
-
-.loading-indicator.ng-leave.ng-leave-active {
-  transform: scale(0);
-  opacity: 0;
-}
 
 @media only screen and (max-width: 759px){
   .no-apps {

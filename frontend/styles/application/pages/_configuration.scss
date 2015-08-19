@@ -24,9 +24,15 @@
   p {
     font-size: 14px;
   }
+
+  > p {
+    margin-bottom: 12px;
+  }
+
   fieldset {
     background: #f6f6f6;
     border: 1px solid #ccc;
+    margin: 0 -1px;
     padding: 18px;
     
     p {
