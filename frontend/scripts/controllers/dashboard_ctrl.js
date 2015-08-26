@@ -23,12 +23,7 @@ angular.module("protonet.platform").controller("DashboardCtrl", function($scope,
     }
 
     app.loadingState = "destroying …";
-    post("destroy", app).then(function() {
-      var index = $scope.apps.indexOf(app);
-      if (index !== -1) {
-        $scope.apps.splice(index, 1);
-      }
-    });
+    post("destroy", app);
   };
 
   $scope.startApp = function(app) {
