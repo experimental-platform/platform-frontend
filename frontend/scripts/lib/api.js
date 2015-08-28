@@ -52,7 +52,7 @@ angular.module("protonet.platform")
         });
 
         this.loadDetectionImage(localURL).then(function() {
-          defer.resolve(ptwURL);
+          defer.resolve(localURL);
         }).catch(function() {
           defer.resolve(ptwURL);
         });
