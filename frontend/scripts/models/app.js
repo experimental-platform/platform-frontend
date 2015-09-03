@@ -51,7 +51,7 @@ angular.module("protonet.platform")
       }.bind(this));
 
       _.each(this.records, function(record) {
-        if (!_.findWhere(arr, { name: record.name })) {
+        if (record && !_.findWhere(arr, { name: record.name })) {
           this.remove(record.name);
         }
       }.bind(this));

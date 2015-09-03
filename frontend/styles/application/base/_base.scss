@@ -3,9 +3,13 @@ html,body{
   padding: 0;
   height: 100%;
 }
-body{
+
+body {
   background-color: #F3F3F3;
   font-size: 100%;
+}
+
+body, textarea, select, input, button {
   font-family: "Protonet Text", Verdana, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
