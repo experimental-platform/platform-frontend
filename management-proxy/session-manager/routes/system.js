@@ -59,7 +59,7 @@ module.exports = function (router) {
             var get_image_id_for_key = result.keys.reduce(function (obj, key) {
               // only compare images belonging to the current channel
               // exclude buildstep as it's currently only available w/ tag :latest.
-              if (key.match(channel + "$") == channel && key.indexOf('buildstep:') === -1) {
+              if (key.match(channel + "$") && key.indexOf('buildstep:') === -1) {
                 obj[key] = function (callback) {
                   // Get all Image Ids via skvs/dockerhub
                   async.parallel({
