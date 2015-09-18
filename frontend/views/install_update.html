@@ -2,5 +2,26 @@
   <div class="install-update-box">
     <img src="images/spinner.gif">
     <p>Installing update, this can take a while …</p>
+    <div class="install-update-status" ng-show="statusAvailable">
+      <button class="btn" ng-click="toggleDetailedUpdateStatus()">{{showDetailedUpdateStatus ? 'hide' : 'show'}} details</button>
+      <table class="install-update-status-table" ng-show="showDetailedUpdateStatus">
+        <thead>
+          <tr>
+            <td>Image</td>
+            <td>Local</td>
+            <td>Remote</td>
+            <td>up to date?</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="(imageName, image) in status">
+            <td>{{imageName}}</td>
+            <td>{{image.local}}</td>
+            <td>{{image.remote}}</td>
+            <td>{{image.upToDate ? 'yes' : 'no'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
