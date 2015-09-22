@@ -13,4 +13,14 @@
     padding: 40px;
     text-align: center;
   }
+
+  .install-update-status-table {
+    margin-top: 30px;
+    tbody td {
+      padding: 10px;
+      &:first-child {
+        text-align: left;
+      }
+    }
+  }
 }
