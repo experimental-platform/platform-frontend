@@ -23,7 +23,7 @@ angular.module("protonet.platform")
     };
 
     App.fetchNext = function() {
-      this.fetch().then(function() {
+      this.fetch().finally(function() {
         if (!this._started) {
           return;
         }
