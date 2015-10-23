@@ -7,14 +7,11 @@ RUN curl -sL https://deb.nodesource.com/setup | sudo bash - && \
     rm -rf /var/lib/apt/lists/*
 
 COPY management-proxy/session-manager /app
-WORKDIR /app
-RUN npm install
+RUN cd /app && npm install
 
-WORKDIR /
-ADD frontend /build
-WORKDIR /build
-RUN npm install -g bower
-RUN bower --allow-root install && mv * /app/public/
+COPY frontend /app/public
+RUN cd /app/public && npm install -g bower
+RUN cd /app/public && bower --allow-root install
 
 WORKDIR /app
 EXPOSE 3000
