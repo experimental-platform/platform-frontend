@@ -24,7 +24,7 @@ angular.module("protonet.platform").controller("InstallUpdateCtrl", function($sc
     $timeout(function() {
       API.get("/admin/api/system/update").then(function(data) {
         if (data.up_to_date) {
-          Notification.notice("Update successfully installed");
+          Notification.success("Update successfully installed");
           $state.go("dashboard.index");
         } else {
           updateDetailedStatus(data.images);
