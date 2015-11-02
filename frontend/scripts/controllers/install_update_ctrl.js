@@ -10,11 +10,13 @@ angular.module("protonet.platform").controller("InstallUpdateCtrl", function($sc
     for (var property in images) {
       if (images.hasOwnProperty(property)) {
         var image = images[property];
+        var local = image.local.substr(0, 8);
+        var remote = image.remote.substr(0, 8);
         $scope.status[property] = {
-          local: image.local,
-          remote: image.remote,
-          upToDate: image.local.indexOf(image.remote) === 0
-        }
+          local: local,
+          remote: remote,
+          upToDate: local === remote
+        };
       }
     }
     $scope.statusAvailable = !$.isEmptyObject($scope.status);
