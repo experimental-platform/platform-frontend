@@ -13,7 +13,7 @@ angular.module("protonet.platform").controller("InstallUpdateCtrl", function($sc
         $scope.status[property] = {
           local: image.local,
           remote: image.remote,
-          upToDate: image.local === image.remote
+          upToDate: image.local.indexOf(image.remote) === 0
         }
       }
     }
