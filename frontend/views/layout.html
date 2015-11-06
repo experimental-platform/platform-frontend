@@ -14,8 +14,8 @@
   <nav>
     <div class="wrapper">
       <a href="#/dashboard" ng-class="{ active: isDashboard() }">My Apps</a>
+      <a href="#/devices"  ng-class="{ active: state == 'dashboard.devices' }">Devices</a>
       <a href="#/configuration"  ng-class="{ active: state == 'dashboard.configuration' }">Configuration</a>
-      <a href="https://github.com/experimental-platform/" target="_blank">GitHub</a>
       <a href="https://github.com/experimental-platform/platform-configure-script/wiki" target="_blank">Docs</a>
       <a ng-click="logout()" class="logout">Logout</a>
     </div>
