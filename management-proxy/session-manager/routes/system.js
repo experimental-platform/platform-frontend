@@ -5,7 +5,8 @@ var auth = require('../helper/auth');
 var api = require('../helper/api').skvsApiUrl;
 var hubApi = require('../helper/api').dockerHubApiUrl;
 var error_helper = require('../helper/error').errorHelper;
-var request_handler = require('../helper/error').requestHandler;
+var request_handler = require('../helper/error').requestHandler,
+  drc = require('docker-registry-client');
 
 module.exports = function (router) {
   // TODO: return system data: IP, hostname, hardware revision, software revision, etc.
@@ -77,6 +78,27 @@ module.exports = function (router) {
                       var key_splitted = key.split(":");
                       var name = key_splitted[0];
                       var tag = key_splitted[1];
+                      // TODO: FIX NEW API
+                      var client = drc.createClientV2({name: 'experimentalplatform/' + name});
+                      client.getManifest({
+                        name: 'experimentalplatform/' + name,
+                        ref: tag
+                      }, function (err, result) {
+
+                        console.log(err, result);
+
+                        request_handler(function (response, result) {
+                          var latest_layer = result[0] || {id: ""};
+                          c(null, latest_layer.id);
+                        }), function () {
+                          c(null, ""); // empty string if something went wrong
+                        }
+
+
+
+
+                      });
+                      // TODO: REMOVE THE OLDE SHIT
                       request(hubApi(name + '/tags/' + tag), request_handler(function (response, result) {
                         var latest_layer = result[0] || {id: ""};
                         c(null, latest_layer.id);

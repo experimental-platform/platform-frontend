@@ -3,7 +3,7 @@ var urljoin = require('url-join');
 var SKVS_API_URL = "http://skvs";
 var APPS_API_URL = "http://app-manager";
 var MONITORING_API_URL = "http://monitoring";
-var DOCKERHUB_API_URL = "https://index.docker.io/v1/repositories/experimentalplatform";
+var DOCKERHUB_API_URL = "https://registry.hub.docker.com/v2/repositories/experimentalplatform";
 
 if (process.env.NODE_ENV == 'development') {
   SKVS_API_URL = "http://127.0.0.1:8080";
