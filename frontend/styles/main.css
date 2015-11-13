@@ -43,17 +43,14 @@
 @font-face {
   font-family: "Protonet Text";
   src: url("../fonts/proxima_nova_cond_reg.woff") format("woff"); }
-
 @font-face {
   font-family: "Protonet Text";
   src: url("../fonts/proxima_nova_cond_light.woff") format("woff");
   font-weight: 100; }
-
 @font-face {
   font-family: "Protonet Text";
   src: url("../fonts/proxima_nova_cond_bold.woff") format("woff");
   font-weight: bold; }
-
 .code {
   font-family: Monaco, Menlo, Consolas, "Courier New", monospace; }
 
@@ -77,7 +74,7 @@ body, textarea, select, input, button {
 
 h1 {
   font-size: 34px;
-  color: #4a4a4a;
+  color: #4A4A4A;
   font-weight: normal;
   margin: 0 0 20px; }
 
@@ -140,7 +137,7 @@ a {
   .wrapper {
     width: 550px; } }
 .material-box {
-  background-color: white;
+  background-color: #ffffff;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
   display: inline-block;
   padding: 50px;
@@ -179,7 +176,7 @@ a {
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
   .btn.cta {
     opacity: 1;
-    background: #ff9800; }
+    background: #FF9800; }
     .btn.cta:hover {
       background: #FFA72E; }
     .btn.cta:active {
@@ -321,7 +318,7 @@ input, textarea {
   color: #9E9E9E; }
   input:focus, textarea:focus {
     outline: none;
-    border-bottom: 1px solid #ff9800;
+    border-bottom: 1px solid #FF9800;
     color: #333; }
 
 input {
@@ -392,7 +389,7 @@ input[type=checkbox] {
       height: 17px;
       border: none;
       border-radius: 17px;
-      background: url("../images/done.svg") 40% 50% no-repeat #dddddd;
+      background: url("../images/done.svg") 40% 50% no-repeat #DDDDDD;
       background-size: 60%; }
     .step-bar li.active {
       background-color: #5892FC;
@@ -530,7 +527,7 @@ input[type=checkbox] {
         display: inline-block; } }
 .no-apps {
   width: 550px;
-  margin: 0 auto; }
+  margin: 0 auto 30px; }
 
 @media only screen and (max-width: 759px) {
   .no-apps {
@@ -646,9 +643,9 @@ code {
       display: none; }
     .welcome-tour .welcome-box .text-right {
       text-align: left; } }
-.dashboard .apps {
+.dashboard .apps, .dashboard .devices {
   margin-bottom: 30px; }
-  .dashboard .apps .app {
+  .dashboard .apps .app, .dashboard .devices .app {
     margin: 0 auto 10px; }
 
 .create-app {
@@ -790,3 +787,5 @@ code {
       padding: 10px; }
       .install-update .install-update-status-table tbody td:first-child {
         text-align: left; }
+
+/*# sourceMappingURL=main.css.map */
