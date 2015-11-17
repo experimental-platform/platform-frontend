@@ -3,31 +3,4 @@ services:
   - docker
 
 script:
-  - docker build -t experimentalplatform/frontend:$TRAVIS_BRANCH .
-  - >
-    if [ "${TRAVIS_BRANCH}" == "master" ]; then
-      echo -e "\n\nWe're not uploading master anywhere."
-    else
-      docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      docker push experimentalplatform/frontend:$TRAVIS_BRANCH
-      if [ "$TRAVIS_BRANCH" != "development" ]; then
-        BODY="{ \"request\": {
-          \"message\": \"Triggered by '$TRAVIS_REPO_SLUG'\",
-          \"config\": {
-            \"env\": {
-              \"SERVICE_TAG\": \"$TRAVIS_BRANCH\",
-              \"SERVICE_NAME\": \"frontend\"
-        }}}}"
-        URL="https://api.travis-ci.org/repo/experimental-platform%2Fplatform-configure/requests"
-        echo "URL: $URL"
-        echo "BODY: $BODY"
-        curl -f -s -X POST \
-          -H "Content-Type: application/json" \
-          -H "Accept: application/json" \
-          -H "Travis-API-Version: 3" \
-          -H "Authorization: token $TRAVIS_TOKEN" \
-          -d "$BODY" \
-          $URL
-      fi
-    fi
-
+  - ./buildimg.sh
