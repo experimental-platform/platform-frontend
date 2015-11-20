@@ -26,6 +26,11 @@ module.exports = function (router) {
      └──────────────────────────┘
      │ eg. 'development'
      ▼
+     ┌───────────────────────────────────────┐
+     │ skvs GET /system/update-engine-status │
+     └───────────────────────────────────────┘
+     │
+     ▼
      ┌──────────────────────────┐
      │ skvs GET /system/images  │
      └──────────────────────────┘
@@ -53,71 +58,81 @@ module.exports = function (router) {
     request(api('/system/channel'), request_handler(function (response, result) {
       if (response.statusCode == HttpStatus.OK) {
         var channel = result.value.trim();
-        // get a list of all installed images
-        request(api('/system/images'), request_handler(function (response, result) {
-          if (response.statusCode == HttpStatus.OK && result.namespace) {
-            var get_image_id_for_key = result.keys.reduce(function (obj, key) {
-              // only compare images belonging to the current channel
-              // exclude buildstep as it's currently only available w/ tag :latest.
-              if (key.match(channel + "$") && key.indexOf('buildstep:') === -1) {
-                obj[key] = function (callback) {
-                  // Get all Image Ids via skvs/dockerhub
-                  async.parallel({
-                    local: function (c) {
-                      request(api('/system/images/' + key), request_handler(function (response, result) {
-                        if (result.value == undefined || result.value == null) {
-                          result.value = ""; // always return empty string.
-                        }
-                        c(null, result.value.trim());
-                      }), function () {
-                        c(null, ""); // empty string if something went wrong
-                      });
-                    },
-                    remote: function (c) {
-                      var key_splitted = key.split(":");
-                      var name = key_splitted[0];
-                      var tag = key_splitted[1];
-                      request(hubApi(name + '/tags/' + tag), request_handler(function (response, result) {
-                        var latest_layer = result[0] || {id: ""};
-                        c(null, latest_layer.id);
-                      }), function () {
-                        c(null, ""); // empty string if something went wrong
-                      });
-                    }
-                  }, function (err, results) {
-                    results = results || {}; // no error handling here, if something went wrong, handle it outside.
-                    callback(null, results);
-                  });
-                };
-              }
-              return obj;
-            }, {});
-            async.parallel(get_image_id_for_key, function (err, images) {
-              images = images || {};
-              var result = {};
-              result['images'] = images;
-              result['channel'] = channel;
-              // TODO: # TODO: handle images w/ slashes like ibuildthecloud/systemd-docker:latest
-              // TODO: race condition in trigger-update-protonet.{service, path}
-              var image_keys = Object.keys(images);
-              if (image_keys.length == 0) {
-                result.up_to_date = false; // No Images => update needed!
-                console.log('Found no images, update required.');
-              } else {
-                result.up_to_date = image_keys.every(function (currentKey, i, arr) {
-                  var currentImage = images[currentKey];
-                  var result = currentImage.local.indexOf(currentImage.remote) === 0;
-                  if (!result) {
-                    console.log('Remote "' + currentImage.remote + '" differs from local and will trigger an update.');
-                  }
-                  return result;
-                });
-              }
-              res.json(result);
-            });
+        request(api('/system/update-engine-status'), request_handler(function (response, result) {
+          var status = result.value.trim();
+          var needs_reboot = {};
+          if(status.indexOf("UPDATE_STATUS_UPDATED_NEED_REBOOT") > -1) {
+            needs_reboot = true;
           } else {
-            next(error_helper(HttpStatus.INTERNAL_SERVER_ERROR, "No image states found."));
+            needs_reboot = false;
           }
+          // get a list of all installed images
+          request(api('/system/images'), request_handler(function (response, result) {
+            if (response.statusCode == HttpStatus.OK && result.namespace) {
+              var get_image_id_for_key = result.keys.reduce(function (obj, key) {
+                // only compare images belonging to the current channel
+                // exclude buildstep as it's currently only available w/ tag :latest.
+                if (key.match(channel + "$") && key.indexOf('buildstep:') === -1) {
+                  obj[key] = function (callback) {
+                    // Get all Image Ids via skvs/dockerhub
+                    async.parallel({
+                      local: function (c) {
+                        request(api('/system/images/' + key), request_handler(function (response, result) {
+                          if (result.value == undefined || result.value == null) {
+                            result.value = ""; // always return empty string.
+                          }
+                          c(null, result.value.trim());
+                        }), function () {
+                          c(null, ""); // empty string if something went wrong
+                        });
+                      },
+                      remote: function (c) {
+                        var key_splitted = key.split(":");
+                        var name = key_splitted[0];
+                        var tag = key_splitted[1];
+                        request(hubApi(name + '/tags/' + tag), request_handler(function (response, result) {
+                          var latest_layer = result[0] || {id: ""};
+                          c(null, latest_layer.id);
+                        }), function () {
+                          c(null, ""); // empty string if something went wrong
+                        });
+                      }
+                    }, function (err, results) {
+                      results = results || {}; // no error handling here, if something went wrong, handle it outside.
+                      callback(null, results);
+                    });
+                  };
+                }
+                return obj;
+              }, {});
+              async.parallel(get_image_id_for_key, function (err, images) {
+                images = images || {};
+                var result = {};
+                result.needs_reboot = needs_reboot;
+                result['images'] = images;
+                result['channel'] = channel;
+                // TODO: # TODO: handle images w/ slashes like ibuildthecloud/systemd-docker:latest
+                // TODO: race condition in trigger-update-protonet.{service, path}
+                var image_keys = Object.keys(images);
+                if (image_keys.length == 0) {
+                  result.up_to_date = false; // No Images => update needed!
+                  console.log('Found no images, update required.');
+                } else {
+                  result.up_to_date = image_keys.every(function (currentKey, i, arr) {
+                    var currentImage = images[currentKey];
+                    var result = currentImage.local.indexOf(currentImage.remote) === 0;
+                    if (!result) {
+                      console.log('Remote "' + currentImage.remote + '" differs from local and will trigger an update.');
+                    }
+                    return result;
+                  });
+                }
+                res.json(result);
+              });
+            } else {
+              next(error_helper(HttpStatus.INTERNAL_SERVER_ERROR, "No image states found."));
+            }
+          }, next));
         }, next));
       } else {
         next(error_helper(HttpStatus.INTERNAL_SERVER_ERROR, "No channel found!"));
