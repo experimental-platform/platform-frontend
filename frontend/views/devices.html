@@ -7,13 +7,13 @@
 <div class="devices">
   <div class="no-apps">Either plug in a device (eg. USB-Webcam, Speaker, Microphone, ...) to see it's abilities listed here or <a href="https://github.com/experimental-platform/platform-configure-script/wiki#examples-with-connected-hardware" target="_blank">poke through our examples</a>.</div>
   
-  <div class="app material-box" ng-repeat="device in devices track by device.name">
+  <div class="app material-box" ng-repeat="device in devices track by device.identifier">
     <figure>
       <img ng-src="{{getIcon(device)}}" alt="logo">
     </figure>
     <p>
-      {{device.name}}
-      <span>{{device.path}}</span>
+      {{getName(device)}}
+      <span>{{getPath(device)}}</span>
     </p>
     <div class="right-bar">
       <a ng-href="{{getExample(device)}}" target="_blank">Example App</a>
