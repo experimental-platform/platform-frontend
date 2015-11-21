@@ -46,7 +46,7 @@ angular.module("protonet.platform")
         setup: [{
           label: "Get the PHP \"hello world\" example:",
           code: [
-            "git clone https://github.com/heroku/php-getting-started.git",
+            "git clone https://github.com/experimental-platform/php-hello-world.git",
             "cd php-getting-started"
           ]
         }, {
