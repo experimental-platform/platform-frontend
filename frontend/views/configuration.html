@@ -50,7 +50,11 @@
         <p><strong>Update available:</strong> Installing an update will download the new release and restart the machine. Usually this should be fast but depending on your internet connection and other parameters it can take up to 1 hour.</p>
         <button class="btn cta" type="submit" ng-disabled="loading">Install update</button>
       </div>
-      <p ng-if="release.up_to_date">
+      <div ng-if="release.up_to_date && release.needs_reboot">
+        <p><strong>Operating system updated:</strong> An update for the underlying operating system has been installed and the machine needs to reboot</p>
+        <button class="btn cta" type="submit" ng-disabled="loading">Reboot</button>
+      </div>
+      <p ng-if="release.up_to_date && !release.needs_reboot">
         Your machine is up to date. There's nothing to see here.
       </p>
     </fieldset>
