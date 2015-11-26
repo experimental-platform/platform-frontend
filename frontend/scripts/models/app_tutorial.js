@@ -46,7 +46,7 @@ angular.module("protonet.platform")
         setup: [{
           label: "Get the PHP \"hello world\" example:",
           code: [
-            "git clone https://github.com/heroku/php-getting-started.git",
+            "git clone https://github.com/experimental-platform/php-hello-world.git",
             "cd php-getting-started"
           ]
         }, {
@@ -68,6 +68,26 @@ angular.module("protonet.platform")
           code: [
             "git clone https://github.com/experimental-platform/rails-hello-world.git",
             "cd rails-hello-world"
+          ]
+        }, {
+          label: "Set a name and add git remote:",
+          code: [
+            "APP_NAME=my-app-name",
+            "git remote add platform ssh://dokku@{{host}}:8022/$APP_NAME"
+          ]
+        }],
+        deploy: [{
+          label: "Deploy the app on this server:",
+          code: ["git push platform master"]
+        }]
+      },
+
+      "html5": {
+        setup: [{
+          label: "Get the HTML5 \"hello world\" example:",
+          code: [
+            "git clone https://github.com/experimental-platform/html5-hello-world.git",
+            "cd html5-hello-world"
           ]
         }, {
           label: "Set a name and add git remote:",
