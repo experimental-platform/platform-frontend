@@ -82,6 +82,26 @@ angular.module("protonet.platform")
         }]
       },
 
+      "html5": {
+        setup: [{
+          label: "Get the HTML5 \"hello world\" example:",
+          code: [
+            "git clone https://github.com/experimental-platform/html5-hello-world.git",
+            "cd html5-hello-world"
+          ]
+        }, {
+          label: "Set a name and add git remote:",
+          code: [
+            "APP_NAME=my-app-name",
+            "git remote add platform ssh://dokku@{{host}}:8022/$APP_NAME"
+          ]
+        }],
+        deploy: [{
+          label: "Deploy the app on this server:",
+          code: ["git push platform master"]
+        }]
+      },
+
       "docker": {
         setup: [{
           label: "Get the Dockerfile \"hello world\" example:",
