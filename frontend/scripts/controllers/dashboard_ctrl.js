@@ -40,9 +40,10 @@ angular.module("protonet.platform").controller("DashboardCtrl", function($scope,
     });
   };
 
+  var ICON_APPS = ["node.js", "python", "ruby", "go", "java", "php", "rails", "docker", "nginx"];
   $scope.getTechIcon = function(app) {
     var appType = app.app_type.toLowerCase();
-    var hasIcon = ["node.js", "python", "ruby", "go", "java", "php", "rails", "docker"].indexOf(appType) !== -1;
+    var hasIcon = ICON_APPS.indexOf(appType) !== -1;
     if (hasIcon) {
       var normalizedName = appType.replace(/[^a-z0-9]/g, "");
       return "images/technology-logos/" + normalizedName + ".png";
