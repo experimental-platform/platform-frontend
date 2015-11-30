@@ -35,7 +35,7 @@ module.exports = function(router) {
   });
 
   var check_password = function(secret, callback) {
-    if (!secret) {
+    if (!secret || typeof(secret) !== "string") {
       console.log("Password empty.");
       callback(false);
       return;
