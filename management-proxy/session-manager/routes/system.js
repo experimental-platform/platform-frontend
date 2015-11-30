@@ -59,13 +59,8 @@ module.exports = function (router) {
       if (response.statusCode == HttpStatus.OK) {
         var channel = result.value.trim();
         request(api('/system/update-engine-status'), request_handler(function (response, result) {
-          var status = result.value.trim();
-          var needs_reboot = {};
-          if(status.indexOf("UPDATE_STATUS_UPDATED_NEED_REBOOT") > -1) {
-            needs_reboot = true;
-          } else {
-            needs_reboot = false;
-          }
+          var status = result.value.trim(),
+            needs_reboot = status.indexOf("UPDATE_STATUS_UPDATED_NEED_REBOOT") > -1;
           // get a list of all installed images
           request(api('/system/images'), request_handler(function (response, result) {
             if (response.statusCode == HttpStatus.OK && result.namespace) {
@@ -112,7 +107,6 @@ module.exports = function (router) {
                 result['images'] = images;
                 result['channel'] = channel;
                 // TODO: # TODO: handle images w/ slashes like ibuildthecloud/systemd-docker:latest
-                // TODO: race condition in trigger-update-protonet.{service, path}
                 var image_keys = Object.keys(images);
                 if (image_keys.length == 0) {
                   result.up_to_date = false; // No Images => update needed!

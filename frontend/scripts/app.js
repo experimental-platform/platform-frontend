@@ -60,6 +60,11 @@ angular
         templateUrl: 'views/create-app-3.html',
         controller: "DeployAppCtrl"
       })
+      .state("dashboard.devices", {
+        url: "/devices",
+        templateUrl: 'views/devices.html',
+        controller: 'DevicesCtrl'
+      })
       .state("dashboard.configuration", {
         url: "/configuration",
         templateUrl: 'views/configuration.html',

@@ -6,11 +6,12 @@ RUN curl -sL https://deb.nodesource.com/setup | sudo bash - && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+RUN npm install -g bower
+
 COPY management-proxy/session-manager /app
 RUN cd /app && npm install
 
 COPY frontend /app/public
-RUN cd /app/public && npm install -g bower
 RUN cd /app/public && bower --allow-root install
 
 WORKDIR /app
