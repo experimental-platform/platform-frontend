@@ -120,6 +120,26 @@ angular.module("protonet.platform")
           label: "Deploy the app on this server:",
           code: ["git push platform master"]
         }]
+      },
+
+      "golang": {
+        setup: [{
+          label: "Get the Go \"hello world\" example:",
+          code: [
+            "git clone https://github.com/experimental-platform/golang-hello-world.git",
+            "cd golang-hello-world"
+          ]
+        }, {
+          label: "Set a name and add git remote:",
+          code: [
+            "APP_NAME=my-app-name",
+            "git remote add platform ssh://dokku@{{host}}:8022/$APP_NAME"
+          ]
+        }],
+        deploy: [{
+          label: "Deploy the app on this server:",
+          code: ["git push platform master"]
+        }]
       }
     };
 
