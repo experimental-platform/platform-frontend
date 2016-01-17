@@ -61,7 +61,7 @@ angular.module("protonet.platform").controller("WelcomeCtrl", function($scope, A
         enabled: true
       });
     }).then(function() {
-      $location.path("/dashboard");
+      window.location = "http://" + $scope.nodename + ".local/dashboard";
     }).catch(function() {
       Notification.error("An error occured while setting the internet address. Please try again.");
     }).finally(function() {
