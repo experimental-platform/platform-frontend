@@ -3,4 +3,4 @@ services:
   - docker
 
 script:
-  - ./buildimg.sh
+  - curl -L https://raw.githubusercontent.com/experimental-platform/build-scripts/master/buildimg.sh | bash
