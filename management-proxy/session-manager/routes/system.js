@@ -106,7 +106,6 @@ module.exports = function (router) {
                 result.needs_reboot = needs_reboot;
                 result['images'] = images;
                 result['channel'] = channel;
-                // TODO: # TODO: handle images w/ slashes like ibuildthecloud/systemd-docker:latest
                 var image_keys = Object.keys(images);
                 if (image_keys.length == 0) {
                   result.up_to_date = false; // No Images => update needed!
