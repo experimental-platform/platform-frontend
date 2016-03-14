@@ -17,4 +17,4 @@ RUN cd /app/public && bower --allow-root install
 WORKDIR /app
 EXPOSE 3000
 ENV NODE_ENV production
-CMD node bin/www
+CMD ["dumb-init", "node", "bin/www"]
