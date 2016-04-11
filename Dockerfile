@@ -6,6 +6,9 @@ RUN curl -sL https://deb.nodesource.com/setup | sudo bash - && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+# on ubuntu names are random and sometimes they change.
+RUN ln -s /usr/bin/nodejs /usr/bin/node
+
 RUN npm install -g bower
 
 COPY management-proxy/session-manager /app
