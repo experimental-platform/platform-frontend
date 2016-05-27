@@ -1,4 +1,4 @@
-FROM experimentalplatform/ubuntu:latest
+FROM quay.io/experimentalplatform/ubuntu:latest
 
 RUN curl -sL https://deb.nodesource.com/setup | sudo bash - && \
     apt-get update && \
